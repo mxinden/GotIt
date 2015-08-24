@@ -8,5 +8,5 @@ meteor-platform
 autopublish
 insecure
 less
-bootstrap
 iron:router
+twbs:bootstrap
