@@ -1,9 +1,6 @@
 <template name="layout">
-  <nav class="navbar navbar-default">
-   <div class="container-fluid">
-    <div class="navbar-header">
-      <h3>rewind</h3>
-    </div>
-   </div>
-  </nav>
+  <div class="container">
+    {{> header}}
+    {{> yield}}
+  </div>
 </template>
