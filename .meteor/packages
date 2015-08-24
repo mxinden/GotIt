@@ -9,3 +9,4 @@ autopublish
 insecure
 less
 bootstrap
+iron:router
