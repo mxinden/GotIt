@@ -1,4 +1,19 @@
 <template name="landingPage">
-  <input class="btn btn-default" type="button" value="Create new lecture (teacher)">
-  <input class="btn btn-default" type="button" value="Join a lecture (student)">
+  <div class="site-wrapper">
+    <div class="site-wrapper-inner">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+            <div class="form-group">
+              <input type="email" id="inputEmail" class="form-control input-lg text-center" placeholder="Classroom Code" required autofocus>
+              <button id="btn-enter-class" class="btn btn-lg btn-success btn-block" type="submit">Enter Class</button>
+            </div>
+            <div class="form-group">
+             <button class="btn btn-lg btn-primary btn-block" type="submit">Create Classroom</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
