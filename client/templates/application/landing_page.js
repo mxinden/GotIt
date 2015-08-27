@@ -3,9 +3,9 @@ Template.landingPage.events({
   /* Go to lecture page */
   'submit form': function(e) {
     e.preventDefault();
-    lectureID = $(e.target).find('#lectureID').val();
+    lectureCode = $(e.target).find('#lectureID').val();
 
-    Router.go('lecturePage', {_id: lectureID});
+    Router.go('lecturePage', {lectureCode: lectureCode});
   },
 
   /* Create new lecture */
@@ -17,7 +17,7 @@ Template.landingPage.events({
       if(error)
         return alert(error.reason);
       
-      Router.go('lecturePage', {_id: result._id});
+      Router.go('lecturePage', {lectureCode: result.lectureCode});
     });
   }
 
