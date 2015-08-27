@@ -1,0 +1,6 @@
+{
+  "glob": ["./*.js","./*.md", 
+    "client/*.js", "client/stylesheets/*.less", "client/templates/*.js", "client/templates/application/*.js", "client/templates/includes/*.js", "client/templates/lectures/*.js", 
+    "lib/*.js", "lib/collections/*.js",
+    "/public/*.js", "server/*.js"]
+}
