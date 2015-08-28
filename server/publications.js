@@ -3,5 +3,9 @@ Meteor.publish('lectures', function() {
 });
 
 Meteor.publish('questions', function(lectureCode) {
-  return Questions.find({lectureCode: lectureCode});
+  return Questions.find({'lectureCode': lectureCode});
+});
+
+Meteor.publish('votes', function(lectureCode) {
+  return Votes.find({'lectureCode': lectureCode});
 });
