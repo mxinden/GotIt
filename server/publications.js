@@ -1,7 +1,7 @@
-Meteor.publish('lectures', function(){
+Meteor.publish('lectures', function() {
   return Lectures.find();
-})
+});
 
-Meteor.publish('questions', function(){
-  return Questions.find();
-})
+Meteor.publish('questions', function(lectureCode) {
+  return Questions.find({lectureCode: lectureCode});
+});

@@ -1,4 +1,9 @@
 <template name="lecturePage">
   {{> lecturePageHeader}}
   {{> lecturePageFooter}}
+  <ul class="list-group">
+    {{#each questions}}
+      {{> singleQuestion}}
+    {{/each}}
+  </ul>
 </template>
