@@ -1,10 +1,18 @@
 Template.singleQuestion.helpers({
+
   isQuestionVoted: function() {
     return Votes.findOne({
       author: Meteor.userId(),
       questionId: this._id,
     }) !== undefined;
+  },
+
+  numberOfVotes: function(){
+    return Votes.find({
+      questionId: this._id
+    }).count(); 
   }
+
 });
 
 Template.singleQuestion.events({
