@@ -11,6 +11,17 @@ Template.singleQuestion.helpers({
     return Votes.find({
       questionId: this._id
     }).count(); 
+  },
+
+  numberOfUsersInLecture: function() {
+    /** Client is only subscribed to presence information of current lecture */
+    return Presences.find().count();
+  },
+
+  /** Return percentage of users in the current classroom who have voted on this question */ 
+  percentageUserVote: function(){
+    console.log("Function calles");
+    return (Votes.find({questionId: this._id}).count() / Presences.find().count()) * 100; 
   }
 
 });
@@ -39,5 +50,3 @@ Template.singleQuestion.events({
     });
   }
 });
-
-

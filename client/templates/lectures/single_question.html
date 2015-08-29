@@ -1,11 +1,16 @@
 <template name="singleQuestion">
-  <li class="list-group-item">
-    {{questionText}}
-    <span class="badge">{{numberOfVotes}}</span>
-    {{#if isQuestionVoted}}
-      <button class="btn btn-default btn-success btn-unvote"> Got it!</button>
-    {{else}}
-      <button class="btn btn-default btn-vote">Same here</button>
-    {{/if}} 
-  </li>
+<li class="list-group-item">
+  {{questionText}}
+  <span class="badge">{{numberOfVotes}}/{{numberOfUsersInLecture}}</span>
+  {{#if isQuestionVoted}}
+  <button class="btn btn-default btn-success btn-unvote"> Got it!</button>
+  {{else}}
+  <button class="btn btn-default btn-vote">Same here</button>
+  {{/if}} 
+</li>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="{{percentageUserVote}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentageUserVote}}%;">
+    {{percentageUserVote}}%
+  </div>
+</div>
 </template>
