@@ -1,7 +1,7 @@
 <template name="singleQuestion">
 <li class="list-group-item">
   {{questionText}}
-  <span class="badge">{{numberOfVotes}}/{{numberOfUsersInLecture}}</span>
+  <span class="badge">{{numberOfVotes}}/{{numberMembers}}</span>
   {{#if isQuestionVoted}}
   <button class="btn btn-default btn-success btn-unvote"> Got it!</button>
   {{else}}
