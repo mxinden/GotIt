@@ -1,8 +1,8 @@
 Template.lecturePageHeader.helpers({
 
-    /** Client is only subscribed to presence information of current lecture */
-    numberOfUsersInLecture: function() {
-    return Presences.find().count();
+  numberOfUsersInLecture : function() {
+    members = Lectures.find({lectureCode: this.lectureCode}, {members: true}).fetch();
+    return members.length;
   }
 
 }); 
