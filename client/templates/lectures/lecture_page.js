@@ -7,6 +7,6 @@ Template.lecturePage.helpers({
 });
 
 getNumberOfMembersInLecture =  function(lectureCode) {
-  members = Lectures.find({lectureCode: lectureCode}, {members: true}).fetch();
-  return members.length;
+  return Lectures.findOne({lectureCode: lectureCode}, {members: true}).members.length;
 };
+
