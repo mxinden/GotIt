@@ -1,6 +1,6 @@
 Template.singleQuestion.helpers({
 
-  isQuestionVoted: function() {
+  votedByMe: function() {
     return Votes.findOne({
       author: Meteor.userId(),
       questionId: this._id,
@@ -12,19 +12,19 @@ Template.singleQuestion.helpers({
       questionId: this._id
     }).count(); 
   },
-
-  numberOfUsersInLecture: function() {
-    /** Client is only subscribed to presence information of current lecture */
-    return Presences.find().count();
-  },
+  
+  numberMembers: function() {
+   return getNumberOfMembersInLecture(this.lectureCode);
+  }, 
 
   /** Return percentage of users in the current classroom who have voted on this question */ 
   percentageUserVote: function(){
-    console.log("Function calles");
-    return (Votes.find({questionId: this._id}).count() / Presences.find().count()) * 100; 
+    var p = (Votes.find({questionId: this._id}).count() / getNumberOfMembersInLecture(this.lectureCode)) *100; 
+    return Math.round(p);
   }
 
 });
+
 
 Template.singleQuestion.events({
 
