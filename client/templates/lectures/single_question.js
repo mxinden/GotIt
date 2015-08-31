@@ -19,7 +19,7 @@ Template.singleQuestion.helpers({
 
   /** Return percentage of users in the current classroom who have voted on this question */ 
   percentageUserVote: function(){
-    p = (Votes.find({questionId: this._id}).count() / getNumberOfMembersInLecture(this.lectureCode)) *100; 
+    var p = (Votes.find({questionId: this._id}).count() / getNumberOfMembersInLecture(this.lectureCode)) *100; 
     return Math.round(p);
   }
 
