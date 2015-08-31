@@ -2,7 +2,7 @@
 <li class="list-group-item">
   {{questionText}}
   <span class="badge">{{numberOfVotes}}/{{numberMembers}}</span>
-  {{#if isQuestionVoted}}
+  {{#if votedByMe}}
   <button class="btn btn-default btn-success btn-unvote"> Got it!</button>
   {{else}}
   <button class="btn btn-default btn-vote">Same here</button>

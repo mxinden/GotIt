@@ -1,6 +1,6 @@
 Template.singleQuestion.helpers({
 
-  isQuestionVoted: function() {
+  votedByMe: function() {
     return Votes.findOne({
       author: Meteor.userId(),
       questionId: this._id,
@@ -23,6 +23,7 @@ Template.singleQuestion.helpers({
   }
 
 });
+
 
 Template.singleQuestion.events({
 
