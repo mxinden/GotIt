@@ -12,3 +12,4 @@ twbs:bootstrap
 accounts-base
 artwells:accounts-guest
 accounts-ui
+sacha:spin
