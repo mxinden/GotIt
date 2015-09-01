@@ -13,3 +13,5 @@ accounts-base
 artwells:accounts-guest
 accounts-ui
 sacha:spin
+sanjo:jasmine
+velocity:html-reporter
