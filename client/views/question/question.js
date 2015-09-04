@@ -1,5 +1,4 @@
-Template.singleQuestion.helpers({
-
+Template.question.helpers({
   votedByMe: function() {
     return Votes.findOne({
       author: Meteor.userId(),
@@ -7,32 +6,32 @@ Template.singleQuestion.helpers({
     }) !== undefined;
   },
 
-  numberOfVotes: function(){
+  numberOfVotes: function() {
     return Votes.find({
       questionId: this._id
-    }).count(); 
+    }).count();
   },
-  
+
   numberMembers: function() {
    return getNumberOfMembersInLecture(this.lectureCode);
-  }, 
+  },
 
   /** Return percentage of users in the current classroom who have voted on this question */ 
-  percentageUserVote: function(){
-    var p = (Votes.find({questionId: this._id}).count() / getNumberOfMembersInLecture(this.lectureCode)) *100; 
-    return Math.round(p);
+  percentageUserVote: function() {
+    var questionCount = Votes.find({questionId: this._id}).count();
+    var memberCount = getNumberOfMembersInLecture(this.lectureCode);
+    var percent = (questionCount / memberCount) * 100;
+    return Math.round(percent);
   }
-
 });
 
-
-Template.singleQuestion.events({
-
+Template.question.events({
   /** Vote a question */
   'click .btn-vote': function () {
     var vote = {
-     'questionId': this._id
-    }
+      questionId: this._id,
+      lectureCode: this.lectureCode
+    };
 
     Meteor.call('voteInsert', vote, function(error, result){
       /** Display error */
@@ -42,7 +41,7 @@ Template.singleQuestion.events({
   },
 
   /** Unvote a question */
-  'click .btn-unvote': function () { 
+  'click .btn-unvote': function () {
     Meteor.call('voteDelete', this._id, function(error, result){
       /** Display error */
       if(error)
