@@ -10,7 +10,7 @@ describe("landingPage", function(){
     beforeEach(waitForRouter);
 
 
-    it("landing_page", function(){
+    it("is the landing_page", function(){
       expect(Router.current().route.getName()).toEqual('landing_page');
     });
 
@@ -39,10 +39,9 @@ describe("landingPage", function(){
 
       });
 
-      it("creates an new lecture document in the lectures collection", function(done) {
+      it("creates an new lecture document in the lectures collection", function() {
         var amountLecturesAfter = Lectures.find().count();
         expect(amountLecturesAfter).toBeGreaterThan(amountLecturesBefore);
-        done();
       });
 
     });
