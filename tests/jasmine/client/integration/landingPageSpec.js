@@ -32,7 +32,7 @@ describe("landingPage", function(){
 
       it("routes to a lecture", function(done){
         $('#createClassroom').click();
-        waitForElement('#questionText', function(){
+        waitForElement('#question-text', function(){
           expect(Router.current().route.getName()).toEqual('lecturePage');
           done();
         });
@@ -52,7 +52,7 @@ describe("landingPage", function(){
         var lectureCode = '00000';
         $('#lectureID').val(lectureCode);
         $('#btn-enter-class').trigger("click");
-        waitForElement('#questionText', function() {
+        waitForElement('#question-text', function() {
           expect(Router._currentRoute.getName()).toEqual('lecturePage');
           done();
         });

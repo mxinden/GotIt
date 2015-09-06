@@ -6,7 +6,7 @@ Template.lecturePageFooter.events({
 
     var question = {
       'lectureCode': this.lectureCode, 
-      'questionText': $(event.target).find('#questionText').val()
+      'questionText': $(event.target).find('#question-text').val()
     };
 
     Meteor.call('questionInsert',question, function(error, result){

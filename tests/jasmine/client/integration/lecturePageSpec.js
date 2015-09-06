@@ -24,7 +24,7 @@ describe("lecturePage", function() {
       it("shows at least one present user", function() {
         /** return everything after a colon and a space */
         var reg = new RegExp(/\:\s(.*)/);
-        var htmlString = $('div > div > a#numberMembers')[0].innerHTML;
+        var htmlString = $('div > div > a#number-members')[0].innerHTML;
         numberMembers = reg.exec(htmlString)[1];
         expect(numberMembers).toBeGreaterThan(0);
       });
@@ -34,11 +34,11 @@ describe("lecturePage", function() {
     describe("footer", function() {
 
       it("shows the 'Your question ...' input field", function() {
-        expect($('input#questionText')).toExist();
+        expect($('input#question-text')).toExist();
       });
 
       it("shows the 'Send' button", function() {
-        expect($('button#createQuestion')).toExist();
+        expect($('button#create-question')).toExist();
       });
 
       describe("'Send' button", function() {
@@ -47,8 +47,8 @@ describe("lecturePage", function() {
 
         beforeAll(function() {
           amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
-          $('#questionText').val(testQuestion);
-          $('#createQuestion').click();
+          $('#question-text').val(testQuestion);
+          $('#create-question').click();
         });
 
         it("creates a new question in the questions collection", function() {
@@ -57,7 +57,7 @@ describe("lecturePage", function() {
         });
 
         it("adds a new question template with the right title that is not voted yet by the user", function() {
-          expect($('li.list-group-item > span#questionText').html()).toEqual(testQuestion);
+          expect($('li.list-group-item > span#question-text').html()).toEqual(testQuestion);
           expect($('.btn-unvote')).not.toExist();
         });
 
@@ -82,7 +82,7 @@ describe("lecturePage", function() {
         });
 
         it("replaces the 'Same here' button with the 'Got it!' button", function(done) {
-          waitForElement('#questionText', function() {
+          waitForElement('#question-text', function() {
             expect($('.btn-unvote')).toExist();
             expect($('.btn-vote')).not.toExist();
             done();
@@ -105,7 +105,7 @@ describe("lecturePage", function() {
         });
 
         it("replaces the 'Got it!' button with the 'Same here' button", function() {
-          waitForElement('#questionText', function(done) {
+          waitForElement('#question-text', function(done) {
             expect($('btn-vote')).toExist();
             expect($('btn-unvote')).not.toExist();
             done();
