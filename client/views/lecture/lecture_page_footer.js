@@ -14,6 +14,7 @@ Template.lecturePageFooter.events({
         if(error){
             return alert(error.reason);
         }else{
+            /** Add a vote to the newly created question */ 
             questionId = result; 
 
             var vote = {
