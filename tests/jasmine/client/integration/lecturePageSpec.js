@@ -66,7 +66,7 @@ describe("lecturePage", function() {
     });
 
 
-    describe("main", function(){
+    describe("main", function() {
 
       describe("'Same here' button", function() {
 

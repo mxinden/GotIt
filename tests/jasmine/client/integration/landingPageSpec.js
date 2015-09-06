@@ -1,6 +1,6 @@
-describe("landingPage", function(){
+describe("landingPage", function() {
 
-  describe("template", function(){
+  describe("template", function() {
 
     beforeEach(function(done) {
       Router.go('landing_page');
@@ -10,7 +10,7 @@ describe("landingPage", function(){
     beforeEach(waitForRouter);
 
 
-    it("is the landing_page", function(){
+    it("is the landing_page", function() {
       expect(Router.current().route.getName()).toEqual('landing_page');
     });
 
@@ -18,11 +18,11 @@ describe("landingPage", function(){
       expect($('input#lectureID')).toExist();
     });
 
-    it("shows the 'Enter Class' button", function(){
+    it("shows the 'Enter Class' button", function() {
       expect($('button#btn-enter-class')).toExist();
     });
 
-    it("shows the 'Create Classroom' button", function(){
+    it("shows the 'Create Classroom' button", function() {
       expect($('button#createClassroom')).toExist();
     });
 
@@ -32,7 +32,7 @@ describe("landingPage", function(){
 
       it("routes to a lecture", function(done){
         $('#createClassroom').click();
-        waitForElement('#question-text', function(){
+        waitForElement('#question-text', function() {
           expect(Router.current().route.getName()).toEqual('lecturePage');
           done();
         });
