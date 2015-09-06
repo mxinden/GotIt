@@ -18,7 +18,7 @@ describe("lecturePage", function() {
 
       it("shows the right title", function() {
         lectureTitle = Router.current().data().title;
-        expect($('div > div > a#title')[0].innerHTML).toEqual(lectureTitle);
+        expect($('div > div > span#title')[0].innerHTML).toEqual(lectureTitle);
       });
 
       it("shows at least one present user", function() {
