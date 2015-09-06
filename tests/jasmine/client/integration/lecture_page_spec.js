@@ -105,7 +105,7 @@ describe("lecturePage", function() {
         });
 
         it("replaces the 'Got it!' button with the 'Same here' button", function(done) {
-          waitForElement('#question-text', function(done) {
+          waitForElement('span.question-text', function() {
             expect($('.btn-vote')).toExist();
             expect($('.btn-unvote')).not.toExist();
             done();
