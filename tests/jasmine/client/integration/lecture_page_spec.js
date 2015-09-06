@@ -18,13 +18,13 @@ describe("lecturePage", function() {
 
       it("shows the right title", function() {
         lectureTitle = Router.current().data().title;
-        expect($('div > div > span#title')[0].innerHTML).toEqual(lectureTitle);
+        expect($('#title')[0].innerHTML).toEqual(lectureTitle);
       });
 
       it("shows at least one present user", function() {
         /** return everything after a colon and a space */
         var reg = new RegExp(/\:\s(.*)/);
-        var htmlString = $('div > div > a#number-members')[0].innerHTML;
+        var htmlString = $('#number-members')[0].innerHTML;
         numberMembers = reg.exec(htmlString)[1];
         expect(numberMembers).toBeGreaterThan(0);
       });
@@ -57,7 +57,7 @@ describe("lecturePage", function() {
         });
 
         it("adds a new question template with the right title that is not voted yet by the user", function() {
-          expect($('li.list-group-item > span#question-text').html()).toEqual(testQuestion);
+          expect($('span.question-text').html()).toEqual(testQuestion);
           expect($('.btn-unvote')).not.toExist();
         });
 
