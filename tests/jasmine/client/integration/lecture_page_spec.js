@@ -104,7 +104,7 @@ describe("lecturePage", function() {
           expect(amountVotesBefore).toBeGreaterThan(amountVotesAfter);
         });
 
-        it("replaces the 'Got it!' button with the 'Same here' button", function() {
+        it("replaces the 'Got it!' button with the 'Same here' button", function(done) {
           waitForElement('#question-text', function(done) {
             expect($('btn-vote')).toExist();
             expect($('btn-unvote')).not.toExist();
