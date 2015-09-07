@@ -9,26 +9,11 @@ Template.lecturePageFooter.events({
       'questionText': $(event.target).find('#question-text').val()
     };
 
-    Meteor.call('questionInsert',question, function(error, result){
+    Meteor.call('questionInsertAddVote',question, function(error, result){
     
-        if(error){
+        if(error)
             return alert(error.reason);
-        }else{
-            /** Add a vote to the newly created question */ 
-            questionId = result; 
-
-            var vote = {
-                questionId: questionId,
-                lectureCode: lectureCode
-            };
-
-            Meteor.call('voteInsert', vote, function(error, result){
-                /** Display error */
-                if(error)
-                    return alert(error.reason);
-            });
-
-        }
+  
         
     });
       
