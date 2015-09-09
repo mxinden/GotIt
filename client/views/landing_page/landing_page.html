@@ -1,4 +1,13 @@
 <template name="landingPage">
+<span id="landing-page">
+  <nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <form class="navbar-form navbar-right">
+        <button class="btn btn-primary btn-block" id="createClassroom"  type="submit">Create Classroom</button>
+      </form>
+    </div>
+  </nav>
+
   <div class="site-wrapper">
     <div class="site-wrapper-inner">
       <div class="container-fluid">
@@ -8,12 +17,10 @@
               <input class="form-control input-lg text-center" id="lectureID" placeholder="Classroom Code" required autofocus>
               <button id="btn-enter-class" class="btn btn-lg btn-primary btn-block" type="submit">Enter Class</button>
             </form>
-            <div class="form-group">
-             <button class="btn btn-lg btn-primary btn-block" id="createClassroom"  type="submit">Create Classroom</button>
-            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</span>
 </template>
