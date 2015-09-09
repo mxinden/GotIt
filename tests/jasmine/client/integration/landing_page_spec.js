@@ -15,7 +15,7 @@ describe("landingPage", function() {
     });
 
     it("shows the 'Classroom Code' input field", function() {
-      expect($('input#lectureID')).toExist();
+      expect($('input#lecture-id')).toExist();
     });
 
     it("shows the 'Enter Class' button", function() {
@@ -50,7 +50,7 @@ describe("landingPage", function() {
 
       it("routes to a lecture page", function(done){
         var lectureCode = '00000';
-        $('#lectureID').val(lectureCode);
+        $('#lecture-id').val(lectureCode);
         $('#btn-enter-class').trigger("click");
         waitForElement('#question-text', function() {
           expect(Router._currentRoute.getName()).toEqual('lecturePage');
