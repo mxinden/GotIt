@@ -1,14 +1,14 @@
 Template.landingPage.events({
 
-  /* Go to lecture page */
+  /** Go to lecture page */
   'submit form': function(e) {
     e.preventDefault();
-    lectureCode = $(e.target).find('#lecture-id').val();
+    lectureCode = $(e.target).find('#lecture-code-input').val();
 
     Router.go('lecturePage', {lectureCode: lectureCode});
   },
 
-  /* Create new lecture */
+  /** Create new lecture */
   'click #createClassroom': function (event) {
     event.preventDefault();
 
@@ -21,27 +21,18 @@ Template.landingPage.events({
     });
   },
 
-    'keyup #lecture-id' : function() {
-      console.log("Something changed");
-      var possibleLectureID = $('#lecture-id').val();
-      console.log("possibleLectureID: " + possibleLectureID);
-      var possibleLecture = Lectures.findOne({lectureCode: possibleLectureID});
-      if(possibleLecture){
-        $('#btn-enter-lecture').removeClass('btn-danger');
-        $('#btn-enter-lecture').removeClass('btn-default');
-        $('#btn-enter-lecture').addClass('btn-success');
-        $('button').prop('disabled',false); 
-        console.log("FOUND");
-      }
-      else {
-        $('#btn-enter-lecture').removeClass('btn-success');
-        $('#btn-enter-lecture').removeClass('btn-default');
-        $('#btn-enter-lecture').addClass('btn-danger');
-        $('button').prop('disabled',true);
-        console.log("Not FOUND");
-      }
-    },
-
-
+  /** Make enter button turn green on right lecture code input */
+  'keyup #lecture-code-input' : function() {
+    var possibleLectureID = $('#lecture-code-input').val();
+    var possibleLecture = Lectures.findOne({lectureCode: possibleLectureID});
+    if(possibleLecture){
+      $('#btn-enter-class').addClass('btn-success');
+      $('#btn-enter-class').removeClass('disabled');
+    }
+    else {
+      $('#btn-enter-class').removeClass('btn-success');
+      $('#btn-enter-class').addClass('disabled');
+    }
+  }
 
 });
