@@ -1,13 +1,22 @@
 <template name="lecturePageHeader">
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid text-center">
-    <div>
-      <span id="title">{{title}}</span>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container text-center">
+      {{#if isChangingTitle}}
+        {{> lecturePageHeaderTitleChange}}
+      {{else}}
+        {{> lecturePageHeaderTitle}}
+      {{/if}}
     </div>
-    <div>
-      <a id="number-members">Number of present users: {{numberMembers}}</a>
-    </div>
-  </div>
-</nav>
+  </nav>
 </template>
 
+<template name="lecturePageHeaderTitleChange">
+  <input id="title-input" value="{{title}}" class="form-control">
+</template>
+
+<template name="lecturePageHeaderTitle">
+  <h4>
+    <span id="title">{{title}}</span>
+    <small id="number-members">{{numberOfMembers}}</small>
+  </h4>
+</template>
