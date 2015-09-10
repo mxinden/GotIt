@@ -31,41 +31,7 @@ describe("lecturePage", function() {
 
     });
 
-    describe("footer", function() {
-
-      it("shows the 'Your question ...' input field", function() {
-        expect($('input#question-text')).toExist();
-      });
-
-      it("shows the 'Send' button", function() {
-        expect($('button#create-question')).toExist();
-      });
-
-      describe("'Send' button", function() {
-        var amountQuestionsBefore;
-        var testQuestion = "What is Open Source?";
-
-        beforeAll(function() {
-          amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
-          $('#question-text').val(testQuestion);
-          $('#create-question').click();
-        });
-
-        it("creates a new question in the questions collection", function() {
-          var amountQuestionsAfter = Questions.find({lectureCode: lectureCode}).count();
-          expect(amountQuestionsAfter).toBeGreaterThan(amountQuestionsBefore);
-        });
-
-        it("adds a new question template with the right title that is not voted yet by the user", function() {
-          expect($('span.question-text').html()).toEqual(testQuestion);
-          expect($('.btn-unvote')).not.toExist();
-        });
-
-      });
-
-    });
-
-
+    /** Vote the question from fixtures */
     describe("main", function() {
 
       describe("'Same here' button", function() {
@@ -91,6 +57,7 @@ describe("lecturePage", function() {
 
       });
 
+      /** Unvote the question from fixtures */
       describe("'Got it!' button", function() {
 
         var amountVotesBefore;
@@ -110,6 +77,51 @@ describe("lecturePage", function() {
             expect($('.btn-unvote')).not.toExist();
             done();
           });
+        });
+
+      });
+
+    });
+
+    describe("footer", function() {
+
+      it("shows the 'Your question ...' input field", function() {
+        expect($('input#question-text')).toExist();
+      });
+
+      it("shows the 'Send' button", function() {
+        expect($('button#create-question')).toExist();
+      });
+
+      /** Insert a new question */
+      describe("'Send' button", function() {
+        var amountQuestionsBefore;
+        var amountVotesBefore;
+        var testQuestion = "What is a micro kernel?";
+
+        beforeAll(function(done) {
+          amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
+          amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
+          $('#question-text').val(testQuestion);
+          $('#create-question').click();
+          waitForElement('.list-group-item:eq(1) > .btn-unvote', function(){
+            done();
+          });
+        });
+
+        it("creates a new question in the questions collection", function() {
+          var amountQuestionsAfter = Questions.find({lectureCode: lectureCode}).count();
+          expect(amountQuestionsAfter).toBeGreaterThan(amountQuestionsBefore);
+        });
+
+        it("creates a new vote in the votes collection", function() {
+          var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
+          expect(amountVotesAfter).toBeGreaterThan(amountVotesBefore);
+        });
+
+        it("adds a new question template with the right title that is voted by the user", function() {
+          expect($('span.question-text:contains("'+ testQuestion + '")')).toExist();
+          expect($('.list-group-item:eq(1) > .btn-unvote').text()).toEqual("Got it!");
         });
 
       });
