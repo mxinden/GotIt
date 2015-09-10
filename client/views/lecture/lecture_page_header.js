@@ -1,41 +1,40 @@
 Template.lecturePageHeader.helpers({
-
-
-  numberMembers: function(){
-    return getNumberOfMembersInLecture(this.lectureCode);
+  isChangingTitle: function() {
+    return Session.get('landingPage.changingTitle');
   }
-}); 
+});
+
+Template.lecturePageHeaderTitle.helpers({
+  numberOfMembers: function() {
+    var number = getNumberOfMembersInLecture(this.lectureCode);
+    var result = number + ' member';
+
+    if (number > 1) 
+      result += 's';
+
+    return result;
+  }
+});
 
 Template.lecturePageHeader.events({
-  
   //Handle Click event
-  'click #title': function(e){
-    $(e.target).attr('contentEditable', true);  
+  'click #title': function(e) {
+    if (this.author == Meteor.userId())
+      Session.set('landingPage.changingTitle', true);
   },
   //Handle the <RETURN> key event
-   'keydown #title': function(e){
-     if(e.keyCode == 13) {
-       $(e.target).attr('contentEditable', false);
-       //Update Title in DB
-       Meteor.call('setTitleOfLecture', this.lectureCode, $(e.target).text());
-     }
-  },
-  //When user clicks outside control
-  'blur': function(e){
-
-    //Update Title in DB
-    Meteor.call('setTitleOfLecture', this.lectureCode, $('#title').text());
-  }
-});
-
-Template.lecturePageHeader.onRendered(function(){ 
-  if(!this._rendered){ 
-    //console.log(this.title);
-    //if(typeof this.title === 'undefined'){
-    if( $('#title').text() === ''){
-      $('#title').text("Undefined Title");
-      //this.title = "Undefined?";
-      this._rendered=true;
+  'keypress #title-input': function(e) {
+    if (e.which == 13) {
+      Meteor.call('setTitleOfLecture', this.lectureCode, $('#title-input').val());
+      Session.set('landingPage.changingTitle', false);
     }
+  },
+  'blur #title-input': function() {
+    Meteor.call('setTitleOfLecture', this.lectureCode, $('#title-input').val());
+    Session.set('landingPage.changingTitle', false);
   }
 });
+
+Template.lecturePageHeaderTitleChange.rendered = function() {
+  $('#title-input').focus();
+};
