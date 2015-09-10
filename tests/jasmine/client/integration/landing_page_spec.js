@@ -15,7 +15,7 @@ describe("landingPage", function() {
     });
 
     it("shows the 'Classroom Code' input field", function() {
-      expect($('input#lecture-id')).toExist();
+      expect($('input#lecture-code-input')).toExist();
     });
 
     it("shows the 'Enter Class' button", function() {
@@ -23,7 +23,7 @@ describe("landingPage", function() {
     });
 
     it("shows the 'Create Classroom' button", function() {
-      expect($('button#createClassroom')).toExist();
+      expect($('button#create-lecture')).toExist();
     });
 
     describe("'Create Classroom' button", function(done) {
@@ -31,7 +31,7 @@ describe("landingPage", function() {
       var amountLecturesBefore = Lectures.find().count();
 
       it("routes to a lecture", function(done){
-        $('#createClassroom').click();
+        $('#create-lecture').click();
         waitForElement('#question-text', function() {
           expect(Router.current().route.getName()).toEqual('lecturePage');
           done();
@@ -50,7 +50,7 @@ describe("landingPage", function() {
 
       it("routes to a lecture page", function(done){
         var lectureCode = '00000';
-        $('#lecture-id').val(lectureCode);
+        $('#lecture-code-input').val(lectureCode);
         $('#btn-enter-class').trigger("click");
         waitForElement('#question-text', function() {
           expect(Router._currentRoute.getName()).toEqual('lecturePage');

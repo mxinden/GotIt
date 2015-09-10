@@ -9,7 +9,7 @@ Template.landingPage.events({
   },
 
   /** Create new lecture */
-  'click #createClassroom': function (event) {
+  'click #create-lecture': function (event) {
     event.preventDefault();
 
     Meteor.call('lectureInsert', function(error, result){
