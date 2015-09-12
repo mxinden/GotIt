@@ -1,4 +1,4 @@
-if (process.env.IS_MIRROR) {
+if (Meteor.isServer && process.env.IS_MIRROR) {
   Meteor.methods({
     'loadFixtures': function(){
       console.log('Loading default fixtures');
