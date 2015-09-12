@@ -1,14 +1,15 @@
 Template.lecturePageFooter.events({
 
   /** Create new question */
-  'submit form': function (event) { 
+  'submit form': function (event) {
+    var lectureCode = this.lectureCode;
+    var question = {
+      lectureCode: lectureCode,
+      questionText: $(event.target).find('#question-text').val()
+    };
+
     event.preventDefault();
-    var lectureCode = this.lectureCode
-      var question = {
-        'lectureCode': lectureCode, 
-        'questionText': $(event.target).find('#question-text').val()
-      };
-    Meteor.call('questionInsertAddVote',question, function(error, result){
+    Meteor.call('questionInsertAddVote', question, function(error, result){
       if(error)
         return alert(error.reason);
     });

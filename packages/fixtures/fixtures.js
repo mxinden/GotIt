@@ -8,11 +8,11 @@ if (process.env.IS_MIRROR) {
         title: 'OpenSource150904'
       });
       Questions.insert({
-        "lectureCode" : "00000",
-        "questionText" : "What is a monolithic kernel?\"",
-        "author" : "arrizdwR4Y57H8HFP",
-        "submitted" : new Date("2015-09-10T14:37:23.036Z")
-      }); 
+        lectureCode: "00000",
+        questionText: "What is a monolithic kernel?",
+        author: "arrizdwR4Y57H8HFP",
+        submitted: new Date("2015-09-10T14:37:23.036Z")
+      });
 
       console.log('Finished loading default fixtures');
     },
