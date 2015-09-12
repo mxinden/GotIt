@@ -3,15 +3,15 @@ describe("landingPage", function() {
   describe("template", function() {
 
     beforeEach(function(done) {
-      Router.go('landing_page');
+      Router.go('landingPage');
       Tracker.afterFlush(done);
     });
 
     beforeEach(waitForRouter);
 
 
-    it("is the landing_page", function() {
-      expect(Router.current().route.getName()).toEqual('landing_page');
+    it("is the landingPage", function() {
+      expect(Router.current().route.getName()).toEqual('landingPage');
     });
 
     it("shows the 'Classroom Code' input field", function() {
