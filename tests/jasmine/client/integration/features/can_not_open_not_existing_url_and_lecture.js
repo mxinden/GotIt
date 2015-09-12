@@ -1,8 +1,13 @@
 describe("Routing to a not existing url", function() {
 
-  beforeAll(function(done) {  
+  beforeAll(function() {  
     Router.go('/invalidURL');
-    Tracker.afterFlush(done);
+  });
+
+  beforeAll(function(done) {
+    waitForElement('div#not-found-template', function() {
+      done();
+    });
   });
 
   it("routes to the notFound template", function() {
