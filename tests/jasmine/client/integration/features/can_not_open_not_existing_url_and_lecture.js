@@ -27,3 +27,26 @@ describe("Routing to a not existing lecture", function() {
     expect($('div#not-found-template')).toExist();
   });
 });
+
+describe("notFound template", function() {
+  describe("link to landing page", function() {
+    beforeAll(function(done) {
+      Router.go('lecturePage', {lectureCode: 'invalidLectureCode'});
+      Tracker.afterFlush(done);
+    });
+    beforeAll(waitForRouter);
+
+    beforeAll(function(done) {
+      $('a').click();
+      waitForElement('span#landing-page', function() {
+        done();
+      });
+    });
+
+    it("links back to the landing page", function() {
+      expect($('span#landing-page')).toExist();
+    });
+  });
+});
+
+
