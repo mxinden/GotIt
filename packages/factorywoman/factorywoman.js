@@ -11,7 +11,7 @@ Factories.prototype.begin = function(func, callback) {
 };
 
 Factories.prototype.define = function(name, collection, attr) {
-  if (this._factories[name] !== undefined)
+  if (this._factories[name])
     throw new Error('Factory ' + name + ' already exists.');
 
   this._factories[name] = new Factory(name, collection, attr);
@@ -22,7 +22,7 @@ Factories.prototype.create = function(name, changes, traits) {
   var factory = this._factories[name];
   var attr, insertId;
 
-  if (factory === undefined)
+  if (!factory)
     throw new Error('Factory ' + name + ' does not exist.');
 
   attr = _.clone(factory._attr);
@@ -61,7 +61,7 @@ var Factory = function(name, collection, attr) {
 };
 
 Factory.prototype.afterTrait = function(name, func) {
-  if (this._afterTraits[name] !== undefined)
+  if (this._afterTraits[name])
     throw new Error('After Trait ' + name + ' already exists.');
 
   this._afterTraits[name] = func;
@@ -69,7 +69,7 @@ Factory.prototype.afterTrait = function(name, func) {
 };
 
 Factory.prototype.trait = function(name, attr) {
-  if (this._traits[name] !== undefined)
+  if (this._traits[name])
     throw new Error('Trait ' + name + ' already exists.');
 
   this._traits[name] = attr;
