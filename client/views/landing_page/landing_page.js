@@ -4,8 +4,9 @@ Template.landingPage.events({
   'submit form': function(e) {
     e.preventDefault();
     lectureCode = $(e.target).find('#lecture-code-input').val();
-
-    Router.go('lecturePage', {lectureCode: lectureCode});
+    if(possibleLecture(lectureCode)){
+      Router.go('lecturePage', {lectureCode: lectureCode});
+    }
   },
 
   /** Create new lecture */
@@ -23,9 +24,9 @@ Template.landingPage.events({
 
   /** Make enter button turn green on right lecture code input */
   'keyup #lecture-code-input' : function() {
-    var possibleLectureID = $('#lecture-code-input').val();
-    var possibleLecture = Lectures.findOne({lectureCode: possibleLectureID});
-    if(possibleLecture){
+    var lectureCode = $('#lecture-code-input').val();
+    var pLecture = possibleLecture(lectureCode);
+    if(pLecture){
       $('#btn-enter-class').addClass('btn-success');
       $('#btn-enter-class').removeClass('disabled');
     }
@@ -36,3 +37,11 @@ Template.landingPage.events({
   }
 
 });
+
+/** Check weather a lecture with this lecture code exists in the Lectures collection */
+var possibleLecture = function(lectureCode) { 
+  return Lectures.findOne({lectureCode: lectureCode});
+}
+
+
+
