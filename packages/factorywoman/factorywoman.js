@@ -1,84 +1,90 @@
-var Factories = function() {
-  this._factories = {};
-  this._collections = {};
-};
+if (Meteor.isClient) {
+  var Factories, Factory;
 
-Factories.prototype.begin = function(func, callback) {
-  setTimeout(function() {
-    func();
-    callback();
-  }, 1);
-};
+  Factories = function() {
+    this._factories = {};
+  };
 
-Factories.prototype.define = function(name, collection, attr) {
-  if (this._factories[name])
-    throw new Error('Factory ' + name + ' already exists.');
+  Factories.prototype.begin = function() {
 
-  this._factories[name] = new Factory(name, collection, attr);
-  return this._factories[name];
-};
+  };
 
-Factories.prototype.create = function(name, changes, traits) {
-  var factory = this._factories[name];
-  var attr, insertId;
+  Factories.prototype._factoryExists = function(name) {
+    return this._factories[name] !== undefined;
+  };
 
-  if (!factory)
-    throw new Error('Factory ' + name + ' does not exist.');
+  Factories.prototype.define = function(name, collection, attr) {
+    if (this._factories[name])
+      return console.error('Factory ' + name + ' already exists.');
 
-  attr = _.clone(factory._attr);
-  _.extend(attr, changes);
+    this._factories[name] = new Factory(name, collection, attr);
+    return this._factories[name];
+  };
 
-  for (var i = 2; i < arguments.length; i++) {
-    var trait = factory._traits[arguments[i]];
+  Factories.prototype.create = function(name, changes) {
+    var result = {_id: undefined};
+    var factory = this._factories[name];
+    var traits = [];
+    var attr;
 
-    if (trait)
-      _.extend(attr, trait);
-  }
+    if (!factory)
+      return console.error('Factory ' + name + ' does not exist.');
 
-  insertId = Meteor.call('factoryInsert', factory._collection, attr);
-  _.extend(attr, {_id: insertId});
+    for (var i = 2; i < arguments.length; i++)
+      traits.push(arguments[i]);
 
-  if (arguments.length > 2) {
-    for (var i = 2; i < arguments.length; i++) {
-      var afterTrait = factory._afterTraits[arguments[i]];
+    attr = _.clone(factory._attr);
+    _.extend(result, attr);
 
-      if (afterTrait)
-        _.extend(attr, afterTrait(attr));
+    Meteor.call('factoryInsert', factory._collection, attr, function(error, insertResult) {
+      result._id = insertResult;
+
+      _.each(traits, function(trait) {
+        if (!factory._traitExists(trait))
+          return console.error('Trait ' + trait + ' does not exist.');
+
+        _.extend(result, factory._traits[trait](result));
+        Meteor.call('factoryUpdate', insertResult, factory._collection, result, function() {
+
+        });
+      });
+    });
+
+    return result;
+  };
+
+  FactoryWoman = new Factories();
+
+  Factory = function(name, collection, attr) {
+    this._name = name;
+    this._collection = collection;
+    this._attr = attr;
+    this._traits = {};
+  };
+
+  Factory.prototype._traitExists = function(name) {
+    return this._traits[name] !== undefined;
+  };
+
+  Factory.prototype.trait = function(name, func) {
+    if (this._traitExists(name)) {
+      console.error('Trait ' + name + ' already exists.');
+      return this;
     }
 
-    Meteor.call('factoryUpdate', insertId, factory._collection);
-  }
+    this._traits[name] = func;
+    return this;
+  };
 
-  return attr;
 };
-
-var Factory = function(name, collection, attr) {
-  this._name = name;
-  this._collection = collection;
-  this._attr = attr;
-  this._traits = {};
-  this._afterTraits = {};
-};
-
-Factory.prototype.afterTrait = function(name, func) {
-  if (this._afterTraits[name])
-    throw new Error('After Trait ' + name + ' already exists.');
-
-  this._afterTraits[name] = func;
-  return this;
-};
-
-Factory.prototype.trait = function(name, attr) {
-  if (this._traits[name])
-    throw new Error('Trait ' + name + ' already exists.');
-
-  this._traits[name] = attr;
-  return this;
-};
-
-FactoryWoman = new Factories();
 
 if (Meteor.isServer) {
+  var Factories = function() {
+    this._collections = {};
+  };
+
+  FactoryWoman = new Factories();
+
   Meteor.addCollectionExtension(function(collection) {
     FactoryWoman._collections[collection._name] = collection;
   });
