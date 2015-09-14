@@ -38,13 +38,13 @@ describe("notFound template", function() {
 
     beforeAll(function(done) {
       $('a').click();
-      waitForElement('span#landing-page', function() {
+      waitForElement('#landing-page', function() {
         done();
       });
     });
 
     it("links back to the landing page", function() {
-      expect($('span#landing-page')).toExist();
+      expect($('#landing-page')).toExist();
     });
   });
 });

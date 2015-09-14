@@ -1,26 +1,24 @@
 <template name="landingPage">
-  <span id="landing-page">
-    <nav class="navbar navbar-fixed-top">
-      <div class="container-fluid">
-        <form class="navbar-form navbar-right">
-          <button class="btn btn-primary btn-block" id="create-lecture"  type="submit">Create Classroom</button>
-        </form>
-      </div>
-    </nav>
+<div class="site-wrapper" id="landing-page">
+  <nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <form class="navbar-form navbar-right">
+        <button class="btn btn-primary btn-block" id="create-lecture"  type="submit">Create Classroom</button>
+      </form>
+    </div>
+  </nav>
 
-    <div class="site-wrapper">
-      <div class="site-wrapper-inner">
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-              <form class="form-group">
-                <input class="form-control input-lg text-center" id="lecture-code-input" placeholder="Classroom Code" required autofocus autocomplete="off">
-                <button id="btn-enter-class" class="btn btn-lg btn-primary btn-block disabled" type="submit">Enter Class</button>
-              </form>
-            </div>
-          </div>
+  <div class="site-wrapper-inner">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+          <form class="form-group">
+            <input class="form-control input-lg text-center" id="lecture-code-input" placeholder="Classroom Code" required autofocus autocomplete="off">
+            <button id="btn-enter-class" class="btn btn-lg btn-primary btn-block disabled" type="submit">Enter Class</button>
+          </form>
         </div>
       </div>
     </div>
-  </span>
+  </div>
+</div>
 </template>
