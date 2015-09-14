@@ -25,8 +25,8 @@ if (Meteor.isClient) {
 
   Factories.prototype._checkIfDone = function() {
     if (this._createCalls <= 0) {
-      this._done();
       this._running = false;
+      this._done();
     }
   };
 
@@ -39,7 +39,6 @@ if (Meteor.isClient) {
   };
 
   Factories.prototype.create = function(name, changes) {
-    this._createCalls++;
     var self = this;
     var result = {_id: undefined};
     var factory = this._factories[name];
@@ -56,6 +55,7 @@ if (Meteor.isClient) {
     attr = _.extend(attr, changes);
     result = _.extend(result, attr);
 
+    this._createCalls++;
     Meteor.call('factoryInsert', factory._collection, attr, function(error, insertResult) {
       result._id = insertResult;
 
