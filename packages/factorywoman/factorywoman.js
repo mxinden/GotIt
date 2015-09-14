@@ -3,14 +3,31 @@ if (Meteor.isClient) {
 
   Factories = function() {
     this._factories = {};
+    this._createCalls = 0;
+    this._running = false;
+    this._done = null;
   };
 
-  Factories.prototype.begin = function() {
+  Factories.prototype.begin = function(func, done) {
+    if (this._running)
+      return console.error('Another begin block of FactoryWoman is already running.');
 
+    this._createCalls = 0;
+    this._running = true;
+    this._done = done;
+
+    func();
   };
 
   Factories.prototype._factoryExists = function(name) {
     return this._factories[name] !== undefined;
+  };
+
+  Factories.prototype._checkIfDone = function() {
+    if (this._createCalls <= 0) {
+      this._done();
+      this._running = false;
+    }
   };
 
   Factories.prototype.define = function(name, collection, attr) {
@@ -22,6 +39,8 @@ if (Meteor.isClient) {
   };
 
   Factories.prototype.create = function(name, changes) {
+    this._createCalls++;
+    var self = this;
     var result = {_id: undefined};
     var factory = this._factories[name];
     var traits = [];
@@ -34,7 +53,8 @@ if (Meteor.isClient) {
       traits.push(arguments[i]);
 
     attr = _.clone(factory._attr);
-    _.extend(result, attr);
+    attr = _.extend(attr, changes);
+    result = _.extend(result, attr);
 
     Meteor.call('factoryInsert', factory._collection, attr, function(error, insertResult) {
       result._id = insertResult;
@@ -44,10 +64,15 @@ if (Meteor.isClient) {
           return console.error('Trait ' + trait + ' does not exist.');
 
         _.extend(result, factory._traits[trait](result));
-        Meteor.call('factoryUpdate', insertResult, factory._collection, result, function() {
 
+        self._createCalls++;
+        Meteor.call('factoryUpdate', insertResult, factory._collection, result, function() {
+          self._createCalls--;
+          self._checkIfDone();
         });
       });
+      self._createCalls--;
+      self._checkIfDone();
     });
 
     return result;
