@@ -42,6 +42,3 @@ Template.landingPage.events({
 var possibleLecture = function(lectureCode) { 
   return Lectures.findOne({lectureCode: lectureCode});
 }
-
-
-

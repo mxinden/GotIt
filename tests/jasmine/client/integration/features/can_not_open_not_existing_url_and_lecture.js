@@ -48,5 +48,3 @@ describe("notFound template", function() {
     });
   });
 });
-
-
