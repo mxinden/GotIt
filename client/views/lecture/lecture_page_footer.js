@@ -1,24 +1,20 @@
 Template.lecturePageFooter.events({
 
   /** Create new question */
-  'submit form': function (event) { 
-    event.preventDefault();
-
+  'submit form': function (event) {
+    var lectureCode = this.lectureCode;
     var question = {
-      'lectureCode': this.lectureCode, 
-      'questionText': $(event.target).find('#question-text').val()
+      lectureCode: lectureCode,
+      questionText: $(event.target).find('#question-text').val()
     };
 
-    Meteor.call('questionInsert',question, function(error, result){
-      /** Display error */
+    event.preventDefault();
+    Meteor.call('questionInsertAddVote', question, function(error, result){
       if(error)
         return alert(error.reason);
     });
-
     event.target.reset();
-
   }
 
-  
 });
 
