@@ -7,52 +7,102 @@ html, body {
 
 body {
   padding-top: 60px;
-}
-
-.site-wrapper#landing-page {
-
-  height: 100%;
-  min-width: 250px;
-  position: relative;
-  width: 100%;
-
-  .site-wrapper-inner {
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: inherit;
-  }
-
-  #lecture-code-input {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    height: 80px;
-    font-size: 30px
-  }
-
-  #btn-enter-class {
-    margin-top: -1px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    height: 80px;
-    font-size: 30px;
-  }
-
-}
-
-.navbar-footer {
-  .col-xs-10, .col-xs-2 {
-    padding: 7px 1px 0 1px;
-  }
-
-  .col-xs-10 {
-    padding-left: 5px;
-  }
-
-  .col-xs-2 {
-    padding-right: 5px;
-  }
+  background-color: rgb(255, 189, 13);
 }
 
 
+/**
+ *============================================================================= 
+ * General
+ *=============================================================================
+ */
+
+  /** Header for both landing and lecture page */
+  .navbar.navbar-fixed-top {
+    background-color: #454453;
+    border-color: transparent;
+
+    #application-logo {
+      width: 125px;
+      margin-top: 7px;
+    }
+  }
+
+
+  /** 
+   *=============================================================================
+   * Landing page 
+   *=============================================================================
+   */
+
+  .site-wrapper#landing-page {
+
+    height: 100%;
+    min-width: 250px;
+    position: relative;
+    width: 100%;
+
+    .navbar{
+      #create-lecture {
+        margin-top: 7px;
+      }
+    }
+
+    .site-wrapper-inner {
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: inherit;
+    }
+
+    #lecture-code-input {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      height: 80px;
+      font-size: 30px
+    }
+
+    #btn-enter-class {
+      margin-top: -1px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      height: 80px;
+      font-size: 30px;
+
+    }
+
+    #btn-enter-class.disabled {
+      opacity: 1;
+      background-color: #969696;
+      border-color: #969696;
+    }
+
+  }
+
+
+  /**
+   *=============================================================================
+   * Lecture page
+   *=============================================================================
+   */
+  #lecture-page-footer {
+
+    background-color: transparent;
+    border-color: transparent;
+
+    .navbar-footer {
+      .col-xs-10, .col-xs-2 {
+        padding: 7px 1px 0 1px;
+      }
+
+      .col-xs-10 {
+        padding-left: 5px;
+      }
+
+      .col-xs-2 {
+        padding-right: 5px;
+      }
+    }
+
+  }
