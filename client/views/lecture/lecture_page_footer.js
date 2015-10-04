@@ -14,6 +14,19 @@ Template.lecturePageFooter.events({
         return alert(error.reason);
     });
     event.target.reset();
+  },
+  'keyup #question-text' : function() {
+    var questionText = $('#question-text').val();
+    
+    if(questionText.replace(/\s/g, '') == ""){
+      //$('#create-question').removeClass('btn-success');
+      $('#create-question').addClass('disabled');
+    }
+    else {
+      //$('#create-question').addClass('btn-success');
+      $('#create-question').removeClass('disabled');
+      
+    }
   }
 
 });
