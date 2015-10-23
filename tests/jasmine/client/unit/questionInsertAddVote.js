@@ -22,7 +22,8 @@ describe('questionInsertAddVote', function() {
 
     it('throws an error', function() {
       expect(callResult).toBe(undefined);
-      expect(callError).not.toBe(undefined);
+      expect(callError).not.toBe(undefined);      
+      expect(callError.error).toEqual("Not a valid question text");
     });
 
     it("does not create a new question in the mongodb", function() {
@@ -55,6 +56,7 @@ describe('questionInsertAddVote', function() {
     it('throws an error', function() {
       expect(callResult).toBe(undefined);
       expect(callError).not.toBe(undefined);
+      expect(callError.error).toEqual("Not a valid question text");
     });
 
     it("does not create a new question in the mongodb", function() {
