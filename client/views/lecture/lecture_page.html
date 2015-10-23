@@ -1,9 +1,11 @@
 <template name="lecturePage">
   {{> lecturePageHeader}}
   {{> lecturePageFooter}}
-  <ul class="list-group">
-    {{#each questions}}
+  <div class="container">
+    <ul class="list-group">
+      {{#each questions}}
       {{> question}}
-    {{/each}}
-  </ul>
+      {{/each}}
+    </ul>
+  </div>
 </template>
