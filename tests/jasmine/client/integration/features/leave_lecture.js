@@ -36,4 +36,9 @@ describe("Leaving the lecture", function() {
     expect(Router.current().route.getName()).toEqual('landingPage'); 
   });
 
+  it("Should delete the user from the members array of the lecture", function() {
+    amountMembers = Lectures.findOne({lectureCode: lectureCode}).members.length;
+    expect(amountMembers).toEqual(0);
+  });
+
 });
