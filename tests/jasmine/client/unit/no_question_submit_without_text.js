@@ -7,7 +7,7 @@ describe('questionInsertAddVote', function() {
     var amountQuestionsBefore = Questions.find().count();
     var amountQuestionsAfter;
 
-    question = {
+    var question = {
       lectureCode: '00000', 
       questionText: ''
     }
@@ -39,7 +39,7 @@ describe('questionInsertAddVote', function() {
     var amountQuestionsBefore = Questions.find().count();
     var amountQuestionsAfter;
 
-    question = {
+    var question = {
       lectureCode: '00000', 
       questionText: '  '
     }
