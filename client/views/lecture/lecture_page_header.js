@@ -13,7 +13,7 @@ Template.lecturePageHeader.events({
       if(error) 
         return alert(error);
     });
-    Meteor.call('memberDelete', this.lectureCode, function(error, result) {
+    Meteor.call('deleteMember', this.lectureCode, function(error, result) {
       if(error)
         return alert(error);
     });
