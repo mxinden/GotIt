@@ -1,6 +1,6 @@
-var lectureCode = '00000';
-
 describe("lecturePage", function() {
+
+  var lectureCode = '00000';
 
   describe("template", function() {
 

@@ -1,6 +1,6 @@
-var lectureCode = '00001';
-
 describe("Leaving the lecture", function() {
+
+  var lectureCode = '00001';
 
   beforeAll(function(done) {
     Router.go('lecturePage', {lectureCode: lectureCode});
