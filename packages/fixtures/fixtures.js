@@ -7,6 +7,10 @@ if (Meteor.isServer && process.env.IS_MIRROR) {
         lectureCode: '00000',
         title: 'OpenSource150904'
       });
+      Lectures.insert({
+        lectureCode: '00001', 
+        title: 'OpenSource151024'
+      });
       Questions.insert({
         lectureCode: "00000",
         questionText: "What is a monolithic kernel?",
