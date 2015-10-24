@@ -94,6 +94,8 @@ body {
    *=============================================================================
    */
   #lecture-page {
+    @minimum-width: 400px; 
+    min-width: @minimum-width;
 
     #lecture-page-header {
       #back-button {
@@ -106,9 +108,9 @@ body {
     }
 
     #lecture-page-footer {
-
       background-color: transparent;
       border: 0;
+      min-width: @minimum-width;
 
       .navbar-footer {
         .col-xs-10, .col-xs-2 {
@@ -126,27 +128,28 @@ body {
 
     }
 
-    .question.panel.panel-default {
+    .question {
       border: 0;
 
       .panel-body {
-        padding: 8px 8px 8px 8px;
-        .row {
-          margin-left: 0;
+        padding: 20px 8px 8px 8px;
 
-          .question-text {
-            margin-bottom: 0px;
-          }
-
-          .right-side {
-            padding-left: 8px;
-
-          .btn {
-            margin-top: 5px;
-            margin-right: 2px;
-          }
+        .question-text {
+          margin-bottom: 0px;
         }
 
+        .votes-badge {
+          font-size: 15px;
+          position: absolute;
+          right: 2px;
+          top: -5px;
+        }
+
+        @media (max-width: 768px) {
+          .col-vote-button {
+            padding: 0;
+            margin-top: 6px;
+          }
         }
       }
 
