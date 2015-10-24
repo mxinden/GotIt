@@ -72,7 +72,7 @@ describe("lecturePage", function() {
         });
 
         it("replaces the 'Got it!' button with the 'Same here' button", function(done) {
-          waitForElement('span.question-text', function() {
+          waitForElement('.question-text', function() {
             expect($('.btn-vote')).toExist();
             expect($('.btn-unvote')).not.toExist();
             done();
@@ -104,9 +104,12 @@ describe("lecturePage", function() {
           amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
           $('#question-text').val(testQuestion);
           $('#create-question').click();
-          waitForElement('.list-group-item:eq(1) > .btn-unvote', function(){
-            done();
-          });
+          var checkExist = setInterval(function() {
+            if($('.question:eq(1)').length == 1) {
+              clearInterval(checkExist);
+              done();
+            }
+          }, 10);
         });
 
         it("creates a new question in the questions collection", function() {
@@ -120,8 +123,8 @@ describe("lecturePage", function() {
         });
 
         it("adds a new question template with the right title that is voted by the user", function() {
-          expect($('span.question-text:contains("'+ testQuestion + '")')).toExist();
-          expect($('.list-group-item:eq(1) > .btn-unvote').text()).toEqual("Got it!");
+          expect($('.question-text:contains("'+ testQuestion + '")')).toExist();
+          expect($('.btn-unvote').text()).toEqual("Got it!");
         });
 
       });
