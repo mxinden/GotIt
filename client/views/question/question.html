@@ -1,16 +1,27 @@
 <template name="question">
-<li class="list-group-item">
-  <span class="question-text">{{questionText}}</span>
-  <span class="badge">{{numberOfVotes}}/{{numberMembers}}</span>
-  {{#if votedByMe}}
-  <button class="btn btn-default btn-success btn-unvote">Got it!</button>
-  {{else}}
-  <button class="btn btn-default btn-vote">Same here</button>
-  {{/if}} 
-</li>
-<div class="progress">
-  <div class="progress-bar" role="progressbar" aria-valuenow="{{percentageUserVote}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentageUserVote}}%;">
-    {{percentageUserVote}}%
+  <div class="panel panel-default question">
+
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-11 col-md-10 col-sm-10  col-xs-9 question-text well">{{questionText}}</div>
+        <div class="col-lg-1 col-md-2 col-sm-2 xol-xs-3 col-centered" role="group">
+          <div class="badge row">{{numberOfVotes}}/{{numberMembers}}</div>
+          <div  class="row">
+            {{#if votedByMe}}
+            <button class="btn btn-default btn-success btn-unvote">Got it!</button>
+            {{else}}
+            <button class="btn btn-default btn-vote">Same</button>
+            {{/if}} 
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{percentageUserVote}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentageUserVote}}%;">
+        {{percentageUserVote}}%
+      </div>
+    </div>
+
   </div>
-</div>
 </template>
