@@ -94,7 +94,7 @@ body {
    *=============================================================================
    */
   #lecture-page {
-    @minimum-width: 400px; 
+    @minimum-width: 300px; 
     min-width: @minimum-width;
 
     #lecture-page-header {
@@ -132,23 +132,30 @@ body {
       border: 0;
 
       .panel-body {
-        padding: 20px 8px 8px 8px;
+        padding: 8px 8px 8px 8px;
 
-        .question-text {
-          margin-bottom: 0px;
-        }
+        .container-fluid {
+          padding-right: 0px;
+          padding-left: 0px;
 
-        .votes-badge {
-          font-size: 15px;
-          position: absolute;
-          right: 2px;
-          top: -5px;
-        }
+          .question-text {
+            margin-bottom: 0px;
+            padding: 7px;
+          }
 
-        @media (max-width: 768px) {
-          .col-vote-button {
-            padding: 0;
-            margin-top: 6px;
+          .votes-badge {
+            font-size: 15px;
+            position: absolute;
+            right: 2px;
+            top: -5px;
+            z-index: 999;
+          }
+
+          @media (max-width: 768px) {
+            .col-vote-button {
+              padding: 0;
+              margin-top: 6px;
+            }
           }
         }
       }
