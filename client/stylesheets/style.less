@@ -3,11 +3,11 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-} 
+}
 
 body {
   padding-top: 60px;
-  background-color: #FFBD0D; 
+  background-color: #FFBD0D;
 }
 
 
@@ -65,7 +65,7 @@ body {
       border-bottom-right-radius: 0;
       -moz-border-bottom-right-radius: 0;
       -webkit-border-bottom-right-radius: 0;
- 
+
       height: 80px;
       font-size: 30px
     }
@@ -93,33 +93,82 @@ body {
    * Lecture page
    *=============================================================================
    */
-  #lecture-page-header {
-    #back-button {
+  #lecture-page {
+    @minimum-width: 300px; 
+    min-width: @minimum-width;
+
+    #lecture-page-header {
+      #back-button {
+        background-color: transparent;
+        border: 0;
+        color: #FFF;
+        font-size: 40px;
+        margin-top: 3px;
+      }
+    }
+
+    #lecture-page-footer {
       background-color: transparent;
       border: 0;
-      color: #FFF;
-      font-size: 40px;
-      margin-top: 3px;
-    }
-  }
+      min-width: @minimum-width;
 
-  #lecture-page-footer {
+      .navbar-footer {
+        .col-xs-10, .col-xs-2 {
+          padding: 7px 1px 0 1px;
+        }
 
-    background-color: transparent;
-    border: 0;
+        .col-xs-10 {
+          padding-left: 5px;
+        }
 
-    .navbar-footer {
-      .col-xs-10, .col-xs-2 {
-        padding: 7px 1px 0 1px;
+        .col-xs-2 {
+          padding-right: 5px;
+        }
       }
 
-      .col-xs-10 {
-        padding-left: 5px;
-      }
-
-      .col-xs-2 {
-        padding-right: 5px;
-      }
     }
 
+    .question {
+      border: 0;
+
+      .panel-body {
+        padding: 8px 8px 8px 8px;
+
+        .container-fluid {
+          padding-right: 0px;
+          padding-left: 0px;
+
+          .question-text {
+            margin-bottom: 0px;
+            padding: 7px;
+          }
+
+          .votes-badge {
+            font-size: 15px;
+            position: absolute;
+            right: 2px;
+            top: -5px;
+            z-index: 999;
+          }
+
+          @media (max-width: 768px) {
+            .col-vote-button {
+              padding: 0;
+              margin-top: 6px;
+            }
+          }
+        }
+      }
+
+      .progress {
+        margin-bottom: 0px;
+        border-top-left-radius: 0px;
+        -moz-border-top-left-radius: 0px;
+        -webkit-border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        -moz-border-top-right-radius: 0px;
+        -webkit-border-top-right-radius: 0px;
+
+      }
+    }
   }
