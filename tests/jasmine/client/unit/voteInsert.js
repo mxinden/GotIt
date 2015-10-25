@@ -27,7 +27,7 @@ describe('voteInsert', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      amountVotesAfter = Votes.find().count();
+      var amountVotesAfter = Votes.find().count();
       expect(amountVotesBefore).toEqual(amountVotesAfter);
     });  
 
