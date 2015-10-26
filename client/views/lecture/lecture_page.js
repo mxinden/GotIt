@@ -3,11 +3,10 @@ Template.lecturePage.helpers({
   questions: function() {
     var questions =  Questions.find({lectureCode: this.lectureCode}).fetch();
 
-    for (var i = 0; i< questions.length; i++) {
-      var question = questions[i];
+    _.each(questions, function(question) {
       var amountVotes = Votes.find({questionId: question._id}).count();
       question.amountVotes = amountVotes;
-    }
+    });
 
     questions.sort(function(a,b) {
       return b.amountVotes - a.amountVotes;
@@ -17,6 +16,7 @@ Template.lecturePage.helpers({
   },
 
 });
+
 Template.lecturePage.rendered = function() {
   this.find('.animated')._uihooks = {
     insertElement: function (node, next) {
@@ -53,8 +53,8 @@ Template.lecturePage.rendered = function() {
         .css('top', oldTop < newTop ? height : -1 * height);
 
 
-        // force a redraw
-        $(node).offset();
+      // force a redraw
+      $(node).offset();
 
       // reset everything to 0, animated
       $(node).addClass('animate').css('top', 0);
