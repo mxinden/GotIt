@@ -18,6 +18,7 @@ Template.lecturePage.helpers({
 });
 
 Template.lecturePage.rendered = function() {
+  //* Copyright (C) 2012--2014 Discover Meteor */
   this.find('.animated')._uihooks = {
     insertElement: function (node, next) {
       $(node)
