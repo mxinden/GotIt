@@ -49,3 +49,7 @@ Template.question.events({
     });
   }
 });
+
+//Template.question.rendered = function() {
+ // this.$('.question').hide().fadeIn(500);
+//}
