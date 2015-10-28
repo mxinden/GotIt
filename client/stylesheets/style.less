@@ -10,7 +10,6 @@ body {
   background-color: #FFBD0D;
 }
 
-
 /**
  *============================================================================= 
  * General
@@ -130,6 +129,7 @@ body {
 
     .question {
       border: 0;
+      position: relative;
 
       .panel-body {
         padding: 8px 8px 8px 8px;
@@ -171,4 +171,13 @@ body {
 
       }
     }
+
+    .question.animate{
+      -webkit-transition: all 300ms 0ms;
+      -moz-transition: all 300ms 0ms ease-in;
+      -o-transition: all 300ms 0ms ease-in;
+      transition: all 300ms 0ms ease-in;
+    }
+
+
   }
