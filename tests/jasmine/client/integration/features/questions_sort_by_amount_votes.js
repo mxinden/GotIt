@@ -16,7 +16,6 @@ describe("Questions on the lecture page", function() {
     $('#create-question').click();
     var checkExist1 = setInterval(function() {
       if($('.question:eq(0)').length == 1) {
-        console.log("First");
         firstQuestionExists = true;
         clearInterval(checkExist1);
       }
@@ -26,7 +25,6 @@ describe("Questions on the lecture page", function() {
     $('#create-question').click();
     var checkExist2 = setInterval(function() {
       if(firstQuestionExists && $('.question:eq(1)').length == 1) {
-        console.log("Second");
         secondQuestionExists = true;
         clearInterval(checkExist2);
       }
@@ -34,7 +32,6 @@ describe("Questions on the lecture page", function() {
 
     var waitForSecondQuestion = setInterval(function() {
       if(secondQuestionExists) {
-        console.log("Third");
         $('.question:eq(0) .btn-unvote').click();
         clearInterval(waitForSecondQuestion);
         done();
@@ -44,10 +41,7 @@ describe("Questions on the lecture page", function() {
 
 
   it("reorder when votes are changed", function(done) {
-    console.log("Fourth");
     var checkExist = setInterval(function() {
-      console.log("Fifth");
-      console.log($('.question:eq(1) .btn-vote').length);
       if($('.question:eq(1) .btn-vote').length == 1) {
         expect(true).toBe(true);
         clearInterval(checkExist);

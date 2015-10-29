@@ -27,7 +27,6 @@ Template.lecturePage.rendered = function() {
         .fadeIn();
     },
     moveElement: function (node, next) {
-      console.log("moved");
       var $node = $(node), $next = $(next);
       var oldTop = $node.offset().top;
       var height = $(node).outerHeight(true);
