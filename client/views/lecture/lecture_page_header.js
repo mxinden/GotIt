@@ -13,6 +13,9 @@ Template.lecturePageHeaderTitle.helpers({
       result += 's';
 
     return result;
+  },
+  isAuthor: function() {
+    return (this.author == Meteor.userId());
   }
 });
 
