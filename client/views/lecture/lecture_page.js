@@ -67,3 +67,16 @@ Template.lecturePage.rendered = function() {
     }
   };
 };
+
+
+leaveLecture = function(lectureCode) {
+  Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
+    if(error) 
+      return alert(error);
+  });
+  Meteor.call('deleteMember', lectureCode, function(error, result) {
+    if(error)
+      return alert(error);
+  });
+  Router.go('landingPage');
+}
