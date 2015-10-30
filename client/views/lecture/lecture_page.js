@@ -68,8 +68,19 @@ Template.lecturePage.rendered = function() {
   };
 };
 
+/** call leaveLecture() before tab / window close */
+Meteor.startup(function() {
+  $(window).bind('beforeunload', function() {
+    if(Router.current().route.getName() == 'lecturePage'){
+    leaveLecture();
+      return;
+    }
+  });
+});
 
-leaveLecture = function(lectureCode) {
+
+leaveLecture = function() {
+  var lectureCode = Router.current().data().lectureCode;
   Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
     if(error) 
       return alert(error);

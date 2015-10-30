@@ -9,7 +9,7 @@ Template.lecturePageHeader.helpers({
 Template.lecturePageHeader.events({
 
   'click #back-button': function() {
-    leaveLecture(this.lectureCode); //see lecture_page.js
+    leaveLecture(); //see lecture_page.js
  }
 
 });
