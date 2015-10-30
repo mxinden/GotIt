@@ -38,7 +38,13 @@ Template.landingPage.events({
 
 });
 
+Template.landingPage.rendered = function() {
+  $('#landing-page-carousel').carousel({
+    interval: 4000
+  });
+};
+
 /** Check weather a lecture with this lecture code exists in the Lectures collection */
 var possibleLecture = function(lectureCode) { 
   return Lectures.findOne({lectureCode: lectureCode});
-}
+};
