@@ -43,30 +43,10 @@ body {
     position: relative;
     width: 100%;
 
-    #welcome-text {
-      color: #453353;
-      font-size: 15px;
-
-      h3, h4 {
-        color: #EC971F;
-      }
-
-      @media (max-width: 768px) {
-        padding-top: 20px;
-        text-align: left;
-      }
-    }
-
     .navbar{
       #create-lecture {
         margin-top: 7px;
       }
-    }
-
-    #enter-form-group {
-      background-color: #fff;
-      border: 1px solid #edeeee;
-      border-radius: 5px;
     }
 
     .site-wrapper-inner {
@@ -77,14 +57,33 @@ body {
       -moz-transform: translate(-50%, -50%);
       -webkit-transform: translate(-50%, -50%);
       width: inherit;
-    }
 
-    #btn-enter-class.disabled {
-      opacity: 1;
-      background-color: #969696;
-      border-color: #969696;
-    }
+      #welcome-text {
+        color: #453353;
+        font-size: 15px;
 
+        h3, h4 {
+          color: #EC971F;
+        }
+
+        @media (max-width: 768px) {
+          padding-top: 20px;
+          text-align: left;
+        }
+      }
+
+      #enter-form-group {
+        background-color: #fff;
+        border: 1px solid #edeeee;
+        border-radius: 5px;
+      }
+
+      #btn-enter-class.disabled {
+        opacity: 1;
+        background-color: #969696;
+        border-color: #969696;
+      }
+    }
   }
 
 
