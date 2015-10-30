@@ -9,11 +9,29 @@ Template.lecturePageFooter.events({
     };
 
     event.preventDefault();
+
+    if(question.questionText.replace(/\s/g, '') == ""){
+      return;
+    }
+
     Meteor.call('questionInsertAddVote', question, function(error, result){
       if(error)
-        return alert(error.reason);
+        return alert(error);
     });
+
     event.target.reset();
+  },
+
+
+  'keyup #question-text' : function() {
+    var questionText = $('#question-text').val();
+
+    if(questionText.replace(/\s/g, '') == ""){
+      $('#create-question').addClass('disabled');
+    }
+    else {
+      $('#create-question').removeClass('disabled');
+    }
   }
 
 });

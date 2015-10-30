@@ -1,15 +1,39 @@
 <template name="landingPage">
-  <div class="site-wrapper">
+  <div class="site-wrapper" id="landing-page">
+    <nav class="navbar navbar-fixed-top" id="landing-page-header">
+      <div class="container">
+        <img alt="Brand" class="pull-left" id="application-logo" src="logo/logo.png">
+        <button class="btn btn-warning pull-right" id="create-lecture">Create Classroom</button>
+      </div>
+    </nav>
+
     <div class="site-wrapper-inner">
-      <div class="container-fluid">
+      <div class="container">
         <div class="row">
-          <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
-            <form class="form-group">
-              <input class="form-control input-lg text-center" id="lectureID" placeholder="Classroom Code" required autofocus>
-              <button id="btn-enter-class" class="btn btn-lg btn-primary btn-block" type="submit">Enter Class</button>
+          <div id="enter-form-group" class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-sm-push-7 col-md-offset-0 col-md-3 col-md-push-7">
+            <h1>Got it?!</h1>
+            <form>
+              <div class="form-group">
+                <input class="form-control text-center" id="lecture-code-input" placeholder="Classroom Code" required autofocus autocomplete="off">
+              </div>
+              <div class="form-group">
+                <button id="btn-enter-class" class="btn btn-primary form-control disabled" type="submit">Enter Class</button>
+              </div>
             </form>
-            <div class="form-group">
-             <button class="btn btn-lg btn-primary btn-block" id="createClassroom"  type="submit">Create Classroom</button>
+          </div>
+          <div id="welcome-text" class="col-xs-offset-1 col-xs-10 col-sm-6 col-sm-pull-4 col-md-offset-2 col-md-5 col-md-pull-3 text-right">
+            <h4>Handle questions in lectures easily online</h4>
+            <div id="landing-page-carousel" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <h3><small>Are you a </small>teacher?</h3>
+                  Hit the "create lecture" button on the top. Distribute the code.
+                </div>
+                <div class="item">
+                  <h3><small>Are you a </small>student?</h3>
+                  Input your lecture code and enter the lecture.
+                </div>
+              </div>
             </div>
           </div>
         </div>
