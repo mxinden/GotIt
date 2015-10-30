@@ -14,162 +14,162 @@ body {
 
 
 /**
- *============================================================================= 
+ *----------------------------------------------------------------------------- 
  * General
- *=============================================================================
+ *-----------------------------------------------------------------------------
  */
 
-  /** Header for both landing and lecture page */
-  .navbar.navbar-fixed-top {
-    background-color: #454453;
-    border: 0;
+/** Header for both landing and lecture page */
+.navbar.navbar-fixed-top {
+  background-color: #454453;
+  border: 0;
 
-    #application-logo {
-      width: 125px;
+  #application-logo {
+    width: 125px;
+    margin-top: 7px;
+  }
+}
+
+
+/**
+ *-----------------------------------------------------------------------------
+ * Landing page
+ *-----------------------------------------------------------------------------
+ */
+
+.site-wrapper#landing-page {
+
+  height: 100%;
+  min-height: 350px;
+  min-width: 250px;
+  position: relative;
+  width: 100%;
+
+  .navbar{
+    #create-lecture {
       margin-top: 7px;
     }
   }
 
+  .site-wrapper-inner {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: inherit;
 
-  /**
-   *=============================================================================
-   * Landing page
-   *=============================================================================
-   */
+    #welcome-text {
+      color: #453353;
+      font-size: 15px;
 
-  .site-wrapper#landing-page {
+      h3, h4 {
+        color: #EC971F;
+      }
 
-    height: 100%;
-    min-height: 350px;
-    min-width: 250px;
-    position: relative;
-    width: 100%;
-
-    .navbar{
-      #create-lecture {
-        margin-top: 7px;
+      @media (max-width: 768px) {
+        padding-top: 20px;
+        text-align: left;
       }
     }
 
-    .site-wrapper-inner {
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
-      width: inherit;
+    #enter-form-group {
+      background-color: #fff;
+      border: 1px solid #edeeee;
+      border-radius: 5px;
+    }
 
-      #welcome-text {
-        color: #453353;
-        font-size: 15px;
+    #btn-enter-class.disabled {
+      opacity: 1;
+      background-color: #969696;
+      border-color: #969696;
+    }
+  }
+}
 
-        h3, h4 {
-          color: #EC971F;
+
+/**
+ *-----------------------------------------------------------------------------
+ * Lecture page
+ *-----------------------------------------------------------------------------
+ */
+#lecture-page {
+  @minimum-width: 300px;
+  min-width: @minimum-width;
+
+  #lecture-page-header {
+    #back-button {
+      background-color: transparent;
+      border: 0;
+      color: #FFF;
+      font-size: 40px;
+      margin-top: 3px;
+    }
+  }
+
+  #lecture-page-footer {
+    background-color: @background-color;
+    border: 0;
+    min-width: @minimum-width;
+
+    .navbar-footer {
+      .col-xs-10, .col-xs-2 {
+        padding: 7px 1px 0 1px;
+      }
+
+      .col-xs-10 {
+        padding-left: 5px;
+      }
+
+      .col-xs-2 {
+        padding-right: 5px;
+      }
+    }
+
+  }
+
+  .question {
+    border: 1px solid #edeeee;
+
+    .panel-body {
+      padding: 8px 8px 8px 8px;
+
+      .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+
+        .question-text {
+          margin-bottom: 0px;
+          padding: 7px;
+        }
+
+        .votes-badge {
+          font-size: 15px;
+          position: absolute;
+          right: 2px;
+          top: -5px;
+          z-index: 999;
         }
 
         @media (max-width: 768px) {
-          padding-top: 20px;
-          text-align: left;
+          .col-vote-button {
+            padding: 0;
+            margin-top: 6px;
+          }
         }
       }
+    }
 
-      #enter-form-group {
-        background-color: #fff;
-        border: 1px solid #edeeee;
-        border-radius: 5px;
-      }
+    .progress {
+      margin-bottom: 0px;
+      border-top-left-radius: 0px;
+      -moz-border-top-left-radius: 0px;
+      -webkit-border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      -moz-border-top-right-radius: 0px;
+      -webkit-border-top-right-radius: 0px;
 
-      #btn-enter-class.disabled {
-        opacity: 1;
-        background-color: #969696;
-        border-color: #969696;
-      }
     }
   }
-
-
-  /**
-   *=============================================================================
-   * Lecture page
-   *=============================================================================
-   */
-  #lecture-page {
-    @minimum-width: 300px;
-    min-width: @minimum-width;
-
-    #lecture-page-header {
-      #back-button {
-        background-color: transparent;
-        border: 0;
-        color: #FFF;
-        font-size: 40px;
-        margin-top: 3px;
-      }
-    }
-
-    #lecture-page-footer {
-      background-color: @background-color;
-      border: 0;
-      min-width: @minimum-width;
-
-      .navbar-footer {
-        .col-xs-10, .col-xs-2 {
-          padding: 7px 1px 0 1px;
-        }
-
-        .col-xs-10 {
-          padding-left: 5px;
-        }
-
-        .col-xs-2 {
-          padding-right: 5px;
-        }
-      }
-
-    }
-
-    .question {
-      border: 1px solid #edeeee;
-
-      .panel-body {
-        padding: 8px 8px 8px 8px;
-
-        .container-fluid {
-          padding-right: 0px;
-          padding-left: 0px;
-
-          .question-text {
-            margin-bottom: 0px;
-            padding: 7px;
-          }
-
-          .votes-badge {
-            font-size: 15px;
-            position: absolute;
-            right: 2px;
-            top: -5px;
-            z-index: 999;
-          }
-
-          @media (max-width: 768px) {
-            .col-vote-button {
-              padding: 0;
-              margin-top: 6px;
-            }
-          }
-        }
-      }
-
-      .progress {
-        margin-bottom: 0px;
-        border-top-left-radius: 0px;
-        -moz-border-top-left-radius: 0px;
-        -webkit-border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        -moz-border-top-right-radius: 0px;
-        -webkit-border-top-right-radius: 0px;
-
-      }
-    }
-  }
+}
