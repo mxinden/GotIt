@@ -1,3 +1,5 @@
+@background-color: #fafafb;
+
 html, body {
   height: 100%;
   margin: 0;
@@ -7,75 +9,74 @@ html, body {
 
 body {
   padding-top: 60px;
-  background-color: #FFBD0D;
+  background-color: @background-color;
 }
 
 /**
- *============================================================================= 
+ *----------------------------------------------------------------------------- 
  * General
- *=============================================================================
+ *-----------------------------------------------------------------------------
  */
 
-  /** Header for both landing and lecture page */
-  .navbar.navbar-fixed-top {
-    background-color: #454453;
-    border: 0;
+/** Header for both landing and lecture page */
+.navbar.navbar-fixed-top {
+  background-color: #454453;
+  border: 0;
 
-    #application-logo {
-      width: 125px;
+  #application-logo {
+    width: 125px;
+    margin-top: 7px;
+  }
+}
+
+
+/**
+ *-----------------------------------------------------------------------------
+ * Landing page
+ *-----------------------------------------------------------------------------
+ */
+
+.site-wrapper#landing-page {
+
+  height: 100%;
+  min-height: 350px;
+  min-width: 250px;
+  position: relative;
+  width: 100%;
+
+  .navbar{
+    #create-lecture {
       margin-top: 7px;
     }
   }
 
+  .site-wrapper-inner {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    width: inherit;
 
-  /**
-   *=============================================================================
-   * Landing page
-   *=============================================================================
-   */
+    #welcome-text {
+      color: #453353;
+      font-size: 15px;
 
-  .site-wrapper#landing-page {
+      h3, h4 {
+        color: #EC971F;
+      }
 
-    height: 100%;
-    min-width: 250px;
-    position: relative;
-    width: 100%;
-
-    .navbar{
-      #create-lecture {
-        margin-top: 7px;
+      @media (max-width: 768px) {
+        padding-top: 20px;
+        text-align: left;
       }
     }
 
-    .site-wrapper-inner {
-      left: 50%;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      -moz-transform: translate(-50%, -50%);
-      -webkit-transform: translate(-50%, -50%);
-      width: inherit;
-    }
-
-    #lecture-code-input {
-      border-bottom-left-radius: 0;
-      -moz-border-bottom-left-radius: 0;
-      -webkit-border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
-      -moz-border-bottom-right-radius: 0;
-      -webkit-border-bottom-right-radius: 0;
-
-      height: 80px;
-      font-size: 30px
-    }
-
-    #btn-enter-class {
-      margin-top: -1px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      height: 80px;
-      font-size: 30px;
-
+    #enter-form-group {
+      background-color: #fff;
+      border: 1px solid #edeeee;
+      border-radius: 5px;
     }
 
     #btn-enter-class.disabled {
@@ -83,52 +84,50 @@ body {
       background-color: #969696;
       border-color: #969696;
     }
-
   }
+}
 
 
-  /**
-   *=============================================================================
-   * Lecture page
-   *=============================================================================
-   */
-  #lecture-page {
-    @minimum-width: 300px; 
-    min-width: @minimum-width;
+/**
+ *-----------------------------------------------------------------------------
+ * Lecture page
+ *-----------------------------------------------------------------------------
+ */
+#lecture-page {
+  @minimum-width: 300px;
+  min-width: @minimum-width;
 
-    #lecture-page-header {
-      #back-button {
-        background-color: transparent;
-        border: 0;
-        color: #FFF;
-        font-size: 40px;
-        margin-top: 3px;
-      }
-    }
-
-    #lecture-page-footer {
+  #lecture-page-header {
+    #back-button {
       background-color: transparent;
       border: 0;
-      min-width: @minimum-width;
+      color: #FFF;
+      font-size: 40px;
+      margin-top: 3px;
+    }
+  }
 
-      .navbar-footer {
-        .col-xs-10, .col-xs-2 {
-          padding: 7px 1px 0 1px;
-        }
+  #lecture-page-footer {
+    background-color: @background-color;
+    border: 0;
+    min-width: @minimum-width;
 
-        .col-xs-10 {
-          padding-left: 5px;
-        }
-
-        .col-xs-2 {
-          padding-right: 5px;
-        }
+    .navbar-footer {
+      .col-xs-10, .col-xs-2 {
+        padding: 7px 1px 0 1px;
       }
 
+      .col-xs-10 {
+        padding-left: 5px;
+      }
+
+      .col-xs-2 {
+        padding-right: 5px;
+      }
     }
 
     .question {
-      border: 0;
+      border: 1px solid #edeeee;
       position: relative;
 
       .panel-body {
@@ -170,14 +169,13 @@ body {
         -webkit-border-top-right-radius: 0px;
 
       }
+
+      .question.animate{
+        -webkit-transition: all 300ms 0ms;
+        -moz-transition: all 300ms 0ms ease-in;
+        -o-transition: all 300ms 0ms ease-in;
+        transition: all 300ms 0ms ease-in;
+      }
     }
-
-    .question.animate{
-      -webkit-transition: all 300ms 0ms;
-      -moz-transition: all 300ms 0ms ease-in;
-      -o-transition: all 300ms 0ms ease-in;
-      transition: all 300ms 0ms ease-in;
-    }
-
-
   }
+}
