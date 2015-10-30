@@ -1,3 +1,5 @@
+@background-color: #fafafb;
+
 html, body {
   height: 100%;
   margin: 0;
@@ -7,7 +9,7 @@ html, body {
 
 body {
   padding-top: 60px;
-  background-color: #fafafb;
+  background-color: @background-color;
 }
 
 
@@ -93,7 +95,7 @@ body {
    *=============================================================================
    */
   #lecture-page {
-    @minimum-width: 300px; 
+    @minimum-width: 300px;
     min-width: @minimum-width;
 
     #lecture-page-header {
@@ -107,7 +109,7 @@ body {
     }
 
     #lecture-page-footer {
-      background-color: transparent;
+      background-color: @background-color;
       border: 0;
       min-width: @minimum-width;
 
