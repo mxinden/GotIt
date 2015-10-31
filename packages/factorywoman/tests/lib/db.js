@@ -1,8 +1,11 @@
-console.log("collections file");
-Questions = new Meteor.Collection('Questions');
+User    = new Meteor.Collection('users');
+Animal  = new Meteor.Collection('animals');
 
-Meteor.methods({
-  'db_reset': function() {
-    Questions.remove({});
-  }
-});
+if (Meteor.isServer) {
+  Meteor.methods({
+    'resetDatabase': function() {
+      User.remove({});
+      Animal.remove({});
+    }
+  });
+};
