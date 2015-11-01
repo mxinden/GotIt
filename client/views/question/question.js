@@ -22,7 +22,20 @@ Template.question.helpers({
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
     var percent = (questionCount / memberCount) * 100;
     return Math.round(percent);
+  },
+  
+  isLectureCreator: function() {
+    Meteor.call('isLectureCreator', this.lectureCode,  function(error, result){
+      if(error){
+        return alert(error.reason);
+      }
+      else{
+        Session.set("data", result)
+      }
+    });
+    return Session.get("data");
   }
+    
 });
 
 Template.question.events({
