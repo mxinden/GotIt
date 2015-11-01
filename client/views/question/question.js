@@ -60,5 +60,17 @@ Template.question.events({
       if(error)
         return alert(error.reason);
     });
-  }
+  },
+  'click .btn-delete-question': function () {
+    
+    var questionDeleteParams = {
+    questionId: this._id,
+    lectureCode: this.lectureCode
+    }
+  
+      Meteor.call('deleteQuestion', questionDeleteParams ,  function(error, result){          
+        if(error)
+          return alert(error.reason);
+      });
+    }  
 });
