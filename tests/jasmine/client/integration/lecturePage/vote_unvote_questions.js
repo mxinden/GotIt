@@ -28,14 +28,12 @@ describe("Vote unvote question", function() {
     beforeAll(function(done) {
       amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
       $('button.btn-vote').click();
-      waitForElement('.btn-unvote', function() {
-        done();
-      });
+      waitForElement('.btn-unvote', done);
     });
 
     it("creates a new vote in the votes collection", function() {
       var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
-      expect(amountVotesAfter).toBeGreaterThan(amountVotesBefore);
+      expect(amountVotesAfter).toEqual(amountVotesBefore + 1);
     });
 
     it("replaces the 'Same here' button with the 'Got it!' button", function(done) {
