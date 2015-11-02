@@ -52,7 +52,7 @@ describe("Vote unvote question", function() {
   describe("Unvote question", function() {
 
     var amountVotesBefore;
-    beforeAll(function() {
+    beforeAll(function(done) {
       amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
       $('button.btn-unvote').click();
       waitForElement('.btn-vote', function() {
