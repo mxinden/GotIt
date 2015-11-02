@@ -23,9 +23,7 @@ describe("Create a question", function() {
   beforeAll(waitForRouter);
 
   beforeAll(function(done) {
-    waitForElement('#lecture-page', function() {
-      done();
-    });
+    waitForElement('#lecture-page', done);
   });
 
   beforeAll(function(done) {
