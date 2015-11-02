@@ -1,6 +1,19 @@
 describe("Leaving the lecture", function() {
 
-  var lectureCode = '00001';
+  var lectureCode;
+
+  beforeAll(function(done) {
+    Fixtures.clearDB(function(error, result) {
+      done();
+    });
+  });
+
+  beforeAll(function(done) {
+    Fixtures.createLecture({lectureCode: '00001'}, function(error, result){
+      lectureCode = result;
+      done();
+    });
+  });
 
   beforeAll(function(done) {
     Router.go('lecturePage', {lectureCode: lectureCode});
