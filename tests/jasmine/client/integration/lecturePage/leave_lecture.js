@@ -3,6 +3,16 @@ describe("Leaving the lecture", function() {
   var lectureCode = '00001';
 
   beforeAll(function(done) {
+    Fixtures.clearDB(done);
+  });
+
+  beforeAll(function(done) {
+    Fixtures.createLecture({lectureCode: lectureCode}, function(){
+      done();
+    });
+  });
+
+  beforeAll(function(done) {
     Router.go('lecturePage', {lectureCode: lectureCode});
     Tracker.afterFlush(done);
   });
