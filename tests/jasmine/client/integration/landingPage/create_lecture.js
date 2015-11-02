@@ -31,9 +31,7 @@ describe("Create lecture", function() {
 
   it("creates an new lecture document in the lectures collection", function() {
     var amountLecturesAfter = Lectures.find().count();
-    expect(amountLecturesAfter).toBeGreaterThan(amountLecturesBefore);
+    expect(amountLecturesAfter).toEqual(amountLecturesBefore  + 1);
   });
 
 });
-
-
