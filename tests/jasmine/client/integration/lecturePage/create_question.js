@@ -38,12 +38,12 @@ describe("Create a question", function() {
 
   it("creates a new question in the questions collection", function() {
     var amountQuestionsAfter = Questions.find({lectureCode: lectureCode}).count();
-    expect(amountQuestionsAfter).toBeGreaterThan(amountQuestionsBefore);
+    expect(amountQuestionsAfter).toEqual(amountQuestionsBefore + 1);
   });
 
   it("creates a new vote in the votes collection", function() {
     var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
-    expect(amountVotesAfter).toBeGreaterThan(amountVotesBefore);
+    expect(amountVotesAfter).toEqual(amountVotesBefore + 1);
   });
 
   it("adds a new question template with the right title that is voted by the user", function() {
