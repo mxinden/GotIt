@@ -93,6 +93,7 @@ body {
  * Lecture page
  *-----------------------------------------------------------------------------
  */
+
 #lecture-page {
   @minimum-width: 300px;
   min-width: @minimum-width;
@@ -104,6 +105,57 @@ body {
       color: #FFF;
       font-size: 40px;
       margin-top: 3px;
+    }
+  }
+
+  .question {
+    border: 1px solid #edeeee;
+    position: relative;
+
+    &.animate{
+      -webkit-transition: all 300ms 0ms;
+      -moz-transition: all 300ms 0ms ease-in;
+      -o-transition: all 300ms 0ms ease-in;
+      transition: all 300ms 0ms ease-in;
+    }
+
+    .panel-body {
+      padding: 8px 8px 8px 8px;
+
+      .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+
+        .question-text {
+          margin-bottom: 0px;
+          padding: 7px;
+        }
+
+        .votes-badge {
+          font-size: 15px;
+          position: absolute;
+          right: -15px;
+          top: -9px;
+          z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+          .col-vote-button {
+            padding: 0;
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+
+    .progress {
+      margin-bottom: 0px;
+      border-top-left-radius: 0px;
+      -moz-border-top-left-radius: 0px;
+      -webkit-border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      -moz-border-top-right-radius: 0px;
+      -webkit-border-top-right-radius: 0px;
     }
   }
 
@@ -126,56 +178,5 @@ body {
       }
     }
 
-    .question {
-      border: 1px solid #edeeee;
-      position: relative;
-
-      .panel-body {
-        padding: 8px 8px 8px 8px;
-
-        .container-fluid {
-          padding-right: 0px;
-          padding-left: 0px;
-
-          .question-text {
-            margin-bottom: 0px;
-            padding: 7px;
-          }
-
-          .votes-badge {
-            font-size: 15px;
-            position: absolute;
-            right: 2px;
-            top: -5px;
-            z-index: 999;
-          }
-
-          @media (max-width: 768px) {
-            .col-vote-button {
-              padding: 0;
-              margin-top: 6px;
-            }
-          }
-        }
-      }
-
-      .progress {
-        margin-bottom: 0px;
-        border-top-left-radius: 0px;
-        -moz-border-top-left-radius: 0px;
-        -webkit-border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        -moz-border-top-right-radius: 0px;
-        -webkit-border-top-right-radius: 0px;
-
-      }
-
-      .question.animate{
-        -webkit-transition: all 300ms 0ms;
-        -moz-transition: all 300ms 0ms ease-in;
-        -o-transition: all 300ms 0ms ease-in;
-        transition: all 300ms 0ms ease-in;
-      }
-    }
   }
 }

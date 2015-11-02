@@ -1,5 +1,9 @@
 describe("Routing to a not existing url", function() {
 
+  beforeAll(function(done) {
+    Fixtures.clearDB(done);
+  });
+
   beforeAll(function() {  
     Router.go('/invalidURL');
   });
