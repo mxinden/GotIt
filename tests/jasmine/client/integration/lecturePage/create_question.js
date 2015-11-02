@@ -5,9 +5,7 @@ describe("Create a question", function() {
   var lectureCode;
 
   beforeAll(function(done) {
-    Fixtures.clearDB(function(error, result) {
-      done();
-    });
+    Fixtures.clearDB(done);
   });
 
   beforeAll(function(done) {

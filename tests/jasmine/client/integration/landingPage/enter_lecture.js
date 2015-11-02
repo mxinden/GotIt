@@ -1,9 +1,7 @@
 describe("Enter lecture", function() {
   var lectureCode = '00007';
   beforeAll(function(done) {
-    Fixtures.clearDB(function(error, result) {
-      done()
-    });
+    Fixtures.clearDB(done);
   });
 
   beforeAll(function(done) {

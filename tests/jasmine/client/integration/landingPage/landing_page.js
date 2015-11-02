@@ -1,5 +1,11 @@
 describe("landingPage", function() {
+
   describe("template", function() {
+
+    beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
     beforeAll(function(done) {
       Router.go('landingPage');
       Tracker.afterFlush(done);

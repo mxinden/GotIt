@@ -3,9 +3,7 @@ describe("Leaving the lecture", function() {
   var lectureCode = '00001';
 
   beforeAll(function(done) {
-    Fixtures.clearDB(function(error, result) {
-      done();
-    });
+    Fixtures.clearDB(done);
   });
 
   beforeAll(function(done) {
