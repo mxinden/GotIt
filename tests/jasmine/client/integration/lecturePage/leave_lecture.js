@@ -1,6 +1,6 @@
 describe("Leaving the lecture", function() {
 
-  var lectureCode;
+  var lectureCode = '00001';
 
   beforeAll(function(done) {
     Fixtures.clearDB(function(error, result) {
@@ -9,8 +9,7 @@ describe("Leaving the lecture", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({lectureCode: '00001'}, function(error, result){
-      lectureCode = result;
+    Fixtures.createLecture({lectureCode: lectureCode}, function(){
       done();
     });
   });
