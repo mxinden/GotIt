@@ -28,18 +28,12 @@ describe("Create a question", function() {
     });
   });
 
-  /** Insert a new question */
   beforeAll(function(done) {
     amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
     amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
     $('#question-text').val(testQuestion);
     $('#create-question').click();
-    var checkExist = setInterval(function() {
-      if($('.question:eq(0)').length == 1) {
-        clearInterval(checkExist);
-        done();
-      }
-    }, 100);
+    waitForElement('.question', done);
   });
 
   it("creates a new question in the questions collection", function() {
