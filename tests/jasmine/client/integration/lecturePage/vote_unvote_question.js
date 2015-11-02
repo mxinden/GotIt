@@ -58,7 +58,7 @@ describe("Vote unvote question", function() {
 
     it("deletes the vote in the votes collection", function() {
       var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
-      expect(amountVotesBefore).toBeGreaterThan(amountVotesAfter);
+      expect(amountVotesBefore).toEqual(amountVotesAfter + 1);
     });
 
     it("replaces the 'Got it!' button with the 'Same here' button", function(done) {
