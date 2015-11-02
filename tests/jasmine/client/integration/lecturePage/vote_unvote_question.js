@@ -53,9 +53,7 @@ describe("Vote unvote question", function() {
     beforeAll(function(done) {
       amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
       $('button.btn-unvote').click();
-      waitForElement('.btn-vote', function() {
-        done();
-      });
+      waitForElement('.btn-vote', done);
     });
 
     it("deletes the vote in the votes collection", function() {
