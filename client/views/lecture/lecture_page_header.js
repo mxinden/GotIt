@@ -1,18 +1,6 @@
 Template.lecturePageHeader.helpers({
   isChangingTitle: function() {
     return Session.get('landingPage.changingTitle');
-  },
-  numberOfMembers: function() {
-    var number = getNumberOfMembersInLecture(this.lectureCode);
-    var result = number + ' member';
-
-    if (number > 1) 
-      result += 's';
-
-    return result;
-  },
-  isAuthor: function() {
-    return (this.author == Meteor.userId());
   }
 });
 
@@ -38,6 +26,20 @@ Template.lecturePageHeader.events({
   }
 });
 
+Template.lecturePageHeaderTitle.helpers({
+  isAuthor: function() {
+    return (this.author == Meteor.userId());
+  },
+  numberOfMembers: function() {
+    var number = getNumberOfMembersInLecture(this.lectureCode);
+    var result = number + ' member';
+
+    if (number > 1) 
+      result += 's';
+
+    return result;
+  }
+});
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
   $(window).trigger('resize');
