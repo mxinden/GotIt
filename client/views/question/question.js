@@ -20,22 +20,21 @@ Template.question.helpers({
   percentageUserVote: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
-    var percent = (questionCount / memberCount) * 100;
-    return Math.round(percent);
+    
+    if(memberCount == 0 ){
+      return 0;
+    }
+    else{
+      var percent = (questionCount / memberCount) * 100;
+      return Math.round(percent);
+    }
   },
   
-  isLectureCreator: function() {
-    Meteor.call('isLectureCreator', this.lectureCode,  function(error, result){
-      if(error){
-        return alert(error.reason);
-      }
-      else{
-        Session.set("data", result)
-      }
-    });
-    return Session.get("data");
+  isAuthor: function() {
+    lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
+    console.log("Lecture:" + lecture);
+    return lecture.author == Meteor.userId;
   }
-    
 });
 
 Template.question.events({
