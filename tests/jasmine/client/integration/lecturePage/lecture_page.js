@@ -37,11 +37,8 @@ describe("lecturePage", function() {
       });
 
       it("shows at least one present user", function() {
-        /** return everything after a colon and a space */
-        var reg = new RegExp(/\:\s(.*)/);
-        var htmlString = $('#number-members')[0].innerHTML;
-        numberMembers = reg.exec(htmlString)[1];
-        expect(numberMembers).toBeGreaterThan(0);
+        var numberOfMembers = $('#number-of-members').text();
+        expect(numberOfMembers).toEqual('1 member');
       });
 
     });
