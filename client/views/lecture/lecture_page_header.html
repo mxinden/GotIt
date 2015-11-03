@@ -8,10 +8,7 @@
         {{#if isChangingTitle}}
         {{> lecturePageHeaderTitleChange}}
         {{else}}
-        <h4>
-          <span id="title" class="{{#if isAuthor}}changeable{{/if}}">{{title}}</span>
-          <small id="number-members">{{numberOfMembers}}</small>
-        </h4>
+        {{> lecturePageHeaderTitle}}
         {{/if}}
       </div>
       <div class="col-sm-1 hidden-xs">
@@ -23,4 +20,11 @@
 
 <template name="lecturePageHeaderTitleChange">
   <input id="title-input" value="{{title}}" class="form-control">
+</template>
+
+<template name="lecturePageHeaderTitle">
+  <h4>
+    <span id="title" class="{{#if isAuthor}}changeable{{/if}}">{{title}}</span>
+    <small id="number-members">{{numberOfMembers}}</small>
+  </h4>
 </template>

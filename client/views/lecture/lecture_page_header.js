@@ -35,10 +35,14 @@ Template.lecturePageHeader.events({
   },
   'click #back-button': function() {
     leaveLecture(); //see lecture_page.js
-  },
-
+  }
 });
 
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
+  $(window).trigger('resize');
+};
+
+Template.lecturePageHeaderTitle.rendered = function() {
+  $(window).trigger('resize');
 };
