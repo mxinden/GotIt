@@ -1,6 +1,6 @@
 getNumberOfMembersInLecture =  function(lectureCode) {
 
-   lecture = Lectures.findOne({lectureCode: lectureCode}, {members: true, lectureCreator: true});//.members.length;
+   lecture = Lectures.findOne({lectureCode: lectureCode}, {members: true, lectureCreator: true});
    lectureCreator = Lectures.findOne({lectureCode: lectureCode,members: lecture.lectureCreator }, {members: true, lectureCreator: true});
   
   if(lectureCreator !== undefined){
@@ -9,6 +9,4 @@ getNumberOfMembersInLecture =  function(lectureCode) {
   else{
     return lecture.members.length
   }
-
 };
-
