@@ -15,6 +15,14 @@ Template.lecturePage.helpers({
     return questions;
   },
 
+  lectureDataReady: function() {
+    lectureData = Lectures.findOne({lectureCode: this.lectureCode});
+    if(lectureData)
+      return true;
+    else 
+      return false;
+  }
+
 });
 
 Template.lecturePage.rendered = function() {

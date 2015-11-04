@@ -1,11 +1,13 @@
 <template name="lecturePage">
+  {{#if lectureDataReady}}
   <div id="lecture-page">
     {{> lecturePageHeader}}
     {{> lecturePageFooter}}
     <div class="container animated">
       {{#each questions}}
-          {{> question}}
+      {{> question}}
       {{/each}}
     </div>
   </div>
+  {{/if}}
 </template>
