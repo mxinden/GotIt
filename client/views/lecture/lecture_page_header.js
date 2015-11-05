@@ -13,7 +13,7 @@ Template.lecturePageHeader.events({
   //Handle the <RETURN> key event
   'keypress #title-input': function(e) {
     if (e.which == 13) {
-      Meteor.call('setTitleOfLecture', this.lectureCode, $('#title-input').val());
+      Meteor.call('setTitle', this.lectureCode, $('#title-input').val());
       Session.set('landingPage.changingTitle', false);
     }
   },

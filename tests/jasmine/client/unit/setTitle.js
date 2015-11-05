@@ -30,7 +30,7 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('setTitleOfLecture', lectureCode, newLectureTitle, function(error, result) {
+      Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
         callError = error;
         console.log('error and result'+ error + ' ' + result);
         done();
@@ -75,7 +75,7 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('setTitleOfLecture',lectureCode, newLectureTitle, function(error, result) {
+      Meteor.call('setTitle',lectureCode, newLectureTitle, function(error, result) {
         callError = error;
         done();
       });
