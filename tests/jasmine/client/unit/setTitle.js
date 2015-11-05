@@ -20,7 +20,7 @@ describe('setTitle', function() {
 
     beforeAll(function(done) {
       Meteor.subscribe('lecture', '00000');
-      interval = setInterval(function() {
+      var interval = setInterval(function() {
         lecture = Lectures.findOne({lectureCode: lectureCode});
         if(lecture) {
           clearInterval(interval);
@@ -65,7 +65,7 @@ describe('setTitle', function() {
 
     beforeAll(function(done) {
       Meteor.subscribe('lecture', '00000');
-      interval = setInterval(function() {
+      var interval = setInterval(function() {
         lecture = Lectures.findOne({lectureCode: lectureCode});
         if(lecture) {
           clearInterval(interval);
