@@ -22,8 +22,10 @@ describe('Change class room title', function() {
     });
 
     beforeAll(function(done) {
-      $('#title').trigger('click');
-      setInterval(done, 100);
+      waitForElement('#title', function() {
+        $('#title').trigger('click');
+        done();
+      });
     });
 
     it('should not be changeable', function() {
@@ -53,27 +55,34 @@ describe('Change class room title', function() {
     });
 
     beforeAll(function(done) {
-      $('#title').trigger('click');
-      setInterval(done, 100);
+        $('#title').trigger('click');
+        done();
     });
 
-    it('should be changeable', function() {
-      expect($('#title')).not.toExist();
-      expect($('#title-input')).toExist();
+    it('should be changeable', function(done) {
+      waitForElement('#title-input', function() {
+        expect($('#title')).not.toExist();
+        expect($('#title-input')).toExist();
+        done();
+      });
     });
 
     describe('title update', function() {
-      beforeAll(function(done) {
+      beforeAll(function() {
         $('#title-input').val('I like trains');
         $('#title-input').blur();
-        setTimeout(done, 100);
       });
 
       it('updates the title in the database', function() {
-        var lecture = Lectures.findOne({lectureCode: lectureCode});
-
-        expect(lecture.title).toEqual('I like trains');
+        var interval = setInterval(function() {
+          var lecture = Lectures.findOne({lectureCode: lectureCode, title: 'I like trains'});
+          if(lecture) {
+            expect(true).toBe(true);
+            clearInterval(interval);
+          }
+        }, 100);
       });
+
     });
   });
 });
