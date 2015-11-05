@@ -18,10 +18,6 @@ describe('Change class room title', function() {
     beforeAll(waitForRouter);
 
     beforeAll(function(done) {
-      waitForElement('#lecture-page', done);
-    });
-
-    beforeAll(function(done) {
       waitForElement('#title', function() {
         $('#title').trigger('click');
         done();
