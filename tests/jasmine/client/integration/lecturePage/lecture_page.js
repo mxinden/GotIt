@@ -21,6 +21,7 @@ describe("lecturePage", function() {
     Router.go('lecturePage', {lectureCode: lectureCode});
     Tracker.afterFlush(done);
   });
+
   beforeAll(waitForRouter);
 
   describe("template", function() {
@@ -30,6 +31,10 @@ describe("lecturePage", function() {
     });
 
     describe("header", function() {
+
+      beforeAll(function(done) {
+        waitForElement('#title', done);
+      });
 
       it("shows the right title", function() {
         lectureTitle = Router.current().data().title;
