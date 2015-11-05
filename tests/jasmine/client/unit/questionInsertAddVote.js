@@ -13,6 +13,15 @@ describe('questionInsertAddVote', function() {
     }
 
     beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('questions', question.lectureCode);
+      done();
+    });
+
+    beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
         callError = error;
         callResult = result;
@@ -46,6 +55,15 @@ describe('questionInsertAddVote', function() {
     }
 
     beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('questions', question.lectureCode);
+      done();
+    });
+
+    beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
         callError = error;
         callResult = result;
@@ -66,7 +84,7 @@ describe('questionInsertAddVote', function() {
 
   });
 
-  describe("with a invalid lecture code", function() {
+  describe("with an invalid lecture code", function() {
 
     var callError;
     var callResult;
@@ -77,6 +95,15 @@ describe('questionInsertAddVote', function() {
       lectureCode: 'notAValidLectureCode', 
       questionText: 'Is this a valid lecture code?'
     }
+
+    beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('questions', question.lectureCode);
+          done();
+    });
 
     beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
