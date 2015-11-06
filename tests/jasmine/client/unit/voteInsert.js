@@ -13,6 +13,15 @@ describe('voteInsert', function() {
     }
 
     beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('votes', vote.lectureCode);
+      done();
+    });
+
+    beforeAll(function(done) {
       Meteor.call('voteInsert', vote, function(error, result) {
         callError = error;
         callResult = result;
@@ -26,7 +35,7 @@ describe('voteInsert', function() {
       expect(callError.error).toEqual('Question for this vote does not exist');
     });
 
-    it("does not create a new question in the mongodb", function() {
+    it("does not create a new vote in the mongodb", function() {
       var amountVotesAfter = Votes.find().count();
       expect(amountVotesBefore).toEqual(amountVotesAfter);
     });  
