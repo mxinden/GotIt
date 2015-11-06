@@ -1,4 +1,4 @@
-# Got it?! [![Build Status](https://travis-ci.org/minden/GotIt.svg?branch=develop)](https://travis-ci.org/minden/GotIt)
+# Got it?! [![Build Status](https://travis-ci.org/minden/GotIt.svg?branch=develop)](https://travis-ci.org/minden/GotIt) [![Code Climate](https://codeclimate.com/github/minden/GotIt/badges/gpa.svg)](https://codeclimate.com/github/minden/GotIt)
 
 **Helps you handle questions in lectures easily online.**
 
