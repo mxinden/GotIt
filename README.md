@@ -1,6 +1,8 @@
 # Got it?! [![Build Status](https://travis-ci.org/minden/GotIt.svg?branch=develop)](https://travis-ci.org/minden/GotIt)
 
-Got it?! helps you handle questions in lectures easily online.
+**Helps you handle questions in lectures easily online.**
+
+Students can ask and vote on questions in an online lecture room.
 
 
 
