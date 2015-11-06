@@ -41,7 +41,7 @@ describe("lecturePage", function() {
         expect($('#title')[0].innerHTML).toEqual(lectureTitle);
       });
 
-      it("shows at least one present user", function() {
+      it("shows one present user", function() {
         var numberOfMembers = $('#number-of-members').text();
         expect(numberOfMembers).toEqual('1 member');
       });
