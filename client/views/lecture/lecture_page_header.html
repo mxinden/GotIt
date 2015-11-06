@@ -1,15 +1,30 @@
 <template name="lecturePageHeader">
-  <nav class="navbar navbar-default navbar-fixed-top" id="lecture-page-header">
-    <a class="fa fa-github navbar-right hidden-xs" id="btn-github" href="https://github.com/minden/GotIt"> </a>
-    <div class="container text-center">
-      <button class="fa fa-angle-left pull-left" id="back-button"></button>
-      <div>
-        <span id="title">{{title}}</span>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div id="lecture-page-header" class="container">
+      <div class="col-xs-2 col-sm-1">
+        <button class="fa fa-angle-left" id="back-button"></button>
       </div>
-      <div>
-        <a id="number-members">Number of present users: {{numberMembers}}</a>
+      <div class="col-xs-10 col-sm-10">
+        {{#if isChangingTitle}}
+        {{> lecturePageHeaderTitleChange}}
+        {{else}}
+        {{> lecturePageHeaderTitle}}
+        {{/if}}
+      </div>
+      <div class="col-sm-1 hidden-xs">
+        <a class="fa fa-github" id="btn-github" href="https://github.com/minden/GotIt" target="_blank"></a>
       </div>
     </div>
   </nav>
 </template>
 
+<template name="lecturePageHeaderTitleChange">
+  <input id="title-input" value="{{title}}" class="form-control">
+</template>
+
+<template name="lecturePageHeaderTitle">
+  <h4>
+    <span id="title" class="{{#if isAuthor}}changeable{{/if}}">{{title}}</span>
+    <small id="number-of-members">{{numberOfMembers}}</small>
+  </h4>
+</template>

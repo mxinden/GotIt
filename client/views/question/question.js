@@ -2,7 +2,7 @@ Template.question.helpers({
   votedByMe: function() {
     return Votes.findOne({
       author: Meteor.userId(),
-      questionId: this._id,
+      questionId: this._id
     }) !== undefined;
   },
 

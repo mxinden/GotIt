@@ -18,7 +18,7 @@ Fixtures = {
 }
 
 
-if (Meteor.isServer && process.env.IS_MIRROR) {
+if (Meteor.isServer) {
   Meteor.methods({
     'createTestUser': function(changes) {
       var user = {

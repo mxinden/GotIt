@@ -13,8 +13,7 @@ Template.lecturePage.helpers({
     });
 
     return questions;
-  },
-
+  }
 });
 
 Template.lecturePage.rendered = function() {
@@ -74,6 +73,13 @@ Meteor.startup(function() {
     if(Router.current().route.getName() == 'lecturePage'){
       leaveLecture();
     }
+  });
+
+  // as the navbar poisition is fixed, the page content needs to be
+  // pulled down when the navbar gets higher (on resize or when the title is edited)
+  $(window).resize(function() {
+    var bodyPaddingTop = ($('#lecture-page-header').height() + 12) + 'px';
+    $('body').css('padding-top', bodyPaddingTop);
   });
 });
 
