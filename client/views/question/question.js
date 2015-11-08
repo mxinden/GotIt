@@ -13,14 +13,14 @@ Template.question.helpers({
   },
 
   numberMembers: function() {
-   return getNumberOfMembersInLecture(this.lectureCode);
+    return getNumberOfMembersInLecture(this.lectureCode);
   },
 
   /** Return percentage of users in the current classroom who have voted on this question */ 
   percentageUserVote: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
-    
+
     if(memberCount == 0 ){
       return 0;
     }
@@ -29,7 +29,7 @@ Template.question.helpers({
       return Math.round(percent);
     }
   },
-  
+
   isAuthor: function() {
     lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
     return lecture.author == Meteor.userId;
@@ -60,15 +60,15 @@ Template.question.events({
     });
   },
   'click .btn-delete-question': function () {
-    
+
     var questionDeleteParams = {
-    questionId: this._id,
-    lectureCode: this.lectureCode
+      questionId: this._id,
+      lectureCode: this.lectureCode
     }
-  
-      Meteor.call('deleteQuestion', questionDeleteParams ,  function(error, result){          
-        if(error)
-          return alert(error.reason);
-      });
-    }  
+
+    Meteor.call('deleteQuestion', questionDeleteParams ,  function(error, result){
+      if(error)
+        return alert(error.reason);
+    });
+  }
 });
