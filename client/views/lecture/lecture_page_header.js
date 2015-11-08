@@ -10,7 +10,6 @@ Template.lecturePageHeader.events({
     if (this.author == Meteor.userId()) {
       Session.set('landingPage.changingTitle', true);
     }
-  }
   },
   //Handle the <RETURN> key event
   'keypress #title-input': function(e) {
