@@ -15,8 +15,9 @@ Template.lecturePageFooter.events({
     }
 
     Meteor.call('questionInsertAddVote', question, function(error, result){
-      if(error)
+      if(error) {
         return alert(error);
+      }
     });
 
     event.target.reset();

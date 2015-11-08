@@ -15,8 +15,9 @@ Template.landingPage.events({
 
     Meteor.call('lectureInsert', function(error, result){
       //Display error
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
 
       Router.go('lecturePage', {lectureCode: result.lectureCode});
     });

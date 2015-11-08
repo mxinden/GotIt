@@ -35,8 +35,9 @@ Template.question.events({
 
     Meteor.call('voteInsert', vote, function(error, result){
       /** Display error */
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
     });
   },
 
@@ -44,8 +45,9 @@ Template.question.events({
   'click .btn-unvote': function () {
     Meteor.call('voteDelete', this._id, function(error, result){
       /** Display error */
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
     });
   }
 });
