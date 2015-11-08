@@ -64,7 +64,7 @@ Template.question.events({
     var questionDeleteParams = {
       questionId: this._id,
       lectureCode: this.lectureCode
-    }
+    };
 
     Meteor.call('deleteQuestion', questionDeleteParams ,  function(error, result){
       if(error)
