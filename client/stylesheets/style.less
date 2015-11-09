@@ -42,7 +42,6 @@ body {
   }
 }
 
-
 /**
  *-----------------------------------------------------------------------------
  * Landing page
@@ -112,6 +111,25 @@ body {
   min-width: @minimum-width;
 
   #lecture-page-header {
+    min-width: @minimum-width;
+
+    h4 {
+      color: #fff;
+      margin-top: 15px;
+    }
+
+    #title-input {
+      font-weight: bold;
+      margin-top: 7px;
+      text-align: center;
+    }
+
+    #title {
+      &.changeable:hover {
+        cursor: pointer;
+      }
+    }
+
     #back-button {
       background-color: transparent;
       border: 0;

@@ -21,6 +21,7 @@ describe("lecturePage", function() {
     Router.go('lecturePage', {lectureCode: lectureCode});
     Tracker.afterFlush(done);
   });
+
   beforeAll(waitForRouter);
 
   describe("template", function() {
@@ -31,17 +32,18 @@ describe("lecturePage", function() {
 
     describe("header", function() {
 
+      beforeAll(function(done) {
+        waitForElement('#title', done);
+      });
+
       it("shows the right title", function() {
         lectureTitle = Router.current().data().title;
         expect($('#title')[0].innerHTML).toEqual(lectureTitle);
       });
 
-      it("shows at least one present user", function() {
-        /** return everything after a colon and a space */
-        var reg = new RegExp(/\:\s(.*)/);
-        var htmlString = $('#number-members')[0].innerHTML;
-        numberMembers = reg.exec(htmlString)[1];
-        expect(numberMembers).toBeGreaterThan(0);
+      it("shows one present user", function() {
+        var numberOfMembers = $('#number-of-members').text();
+        expect(numberOfMembers).toEqual('1 member');
       });
 
     });
