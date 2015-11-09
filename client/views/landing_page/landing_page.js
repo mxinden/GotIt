@@ -27,12 +27,12 @@ Template.landingPage.events({
     var lectureCode = $('#lecture-code-input').val();
     var pLecture = possibleLecture(lectureCode);
     if(pLecture){
-      $('#btn-enter-class').addClass('btn-success');
-      $('#btn-enter-class').removeClass('disabled');
+      $('#btn-enter-lecture').addClass('btn-success');
+      $('#btn-enter-lecture').removeClass('disabled');
     }
     else {
-      $('#btn-enter-class').removeClass('btn-success');
-      $('#btn-enter-class').addClass('disabled');
+      $('#btn-enter-lecture').removeClass('btn-success');
+      $('#btn-enter-lecture').addClass('disabled');
     }
   }
 
