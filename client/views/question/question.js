@@ -16,8 +16,7 @@ Template.question.helpers({
    return getNumberOfMembersInLecture(this.lectureCode);
   },
 
-  /** Return percentage of users in the current classroom who have voted on this question */ 
-  percentageUserVote: function() {
+  percentageOfUsersWhoVoted: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
     var percent = (questionCount / memberCount) * 100;
