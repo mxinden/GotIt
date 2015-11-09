@@ -111,12 +111,7 @@ describe('FactoryWoman', function() {
       expect(user.animals[1].type).toEqual('Turkey');
       expect(user.animals[0]._id).toEqual(animal1._id);
       expect(user.animals[1]._id).toEqual(animal2._id);
-    });
-
-    it('handles sub traits', function() {
-      var animal1 = Animal.findOne({type: 'Lion'});
-
-      expect(animal1.weight).toEqual(317);
+      expect(user.animals[0].weight).toEqual(317);
     });
   });
 });
