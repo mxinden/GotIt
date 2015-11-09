@@ -13,7 +13,17 @@ Template.lecturePage.helpers({
     });
 
     return questions;
+
+  },
+
+  lectureDataReady: function() {
+    lectureData = Lectures.findOne({lectureCode: this.lectureCode});
+    if(lectureData)
+      return true;
+    else
+      return false;
   }
+
 });
 
 Template.lecturePage.rendered = function() {
@@ -87,7 +97,7 @@ Meteor.startup(function() {
 leaveLecture = function() {
   var lectureCode = Router.current().data().lectureCode;
   Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
-    if(error) 
+    if(error)
       return alert(error);
   });
   Meteor.call('deleteMember', lectureCode, function(error, result) {
