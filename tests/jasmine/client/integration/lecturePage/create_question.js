@@ -30,7 +30,7 @@ describe("Create a question", function() {
     amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
     amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
     $('#question-text').val(testQuestion);
-    $('#create-question').click();
+    $('#btn-create-question').click();
     waitForElement('.question', done);
   });
 

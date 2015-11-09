@@ -22,7 +22,7 @@ describe("Leaving the lecture", function() {
   /** Create a new question and thereby a new vote */
   beforeAll(function(done) {
     $('#question-text').val('I am going to leave!');
-    $('#create-question').click();
+    $('#btn-create-question').click();
     waitForElement('.btn-unvote', function() {
       amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
       done();

@@ -1,7 +1,6 @@
 Template.lecturePageFooter.events({
 
-  /** Create new question */
-  'submit form': function (event) {
+  'submit form#create-question': function (event) {
     var lectureCode = this.lectureCode;
     var question = {
       lectureCode: lectureCode,
@@ -28,10 +27,10 @@ Template.lecturePageFooter.events({
     var questionText = $('#question-text').val();
 
     if(questionText.replace(/\s/g, '') == ""){
-      $('#create-question').addClass('disabled');
+      $('#btn-create-question').addClass('disabled');
     }
     else {
-      $('#create-question').removeClass('disabled');
+      $('#btn-create-question').removeClass('disabled');
     }
   }
 
