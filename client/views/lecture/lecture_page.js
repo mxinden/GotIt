@@ -92,7 +92,7 @@ leaveLecture = function() {
       return alert(error);
     }
   });
-  Meteor.call('deleteMember', lectureCode, function(error, result) {
+  Meteor.call('removeCurrentUserFromLecture', lectureCode, function(error, result) {
     if(error) {
       return alert(error);
     }
