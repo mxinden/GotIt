@@ -28,8 +28,7 @@ Template.lecturePageFooter.events({
 
     if(questionText.replace(/\s/g, '') == ""){
       $('#btn-create-question').addClass('disabled');
-    }
-    else {
+    } else {
       $('#btn-create-question').removeClass('disabled');
     }
   }
