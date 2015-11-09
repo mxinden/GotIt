@@ -13,7 +13,7 @@ Template.landingPage.events({
   'click #create-lecture': function (event) {
     event.preventDefault();
 
-    Meteor.call('lectureInsert', function(error, result){
+    Meteor.call('insertLecture', function(error, result){
       //Display error
       if(error) {
         return alert(error.reason);
