@@ -8,7 +8,6 @@ Template.landingPage.events({
     }
   },
 
-  /** Create new lecture */
   'click #create-lecture': function (event) {
     event.preventDefault();
 
