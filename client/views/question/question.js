@@ -32,8 +32,8 @@ Template.question.helpers({
   
   isAuthor: function() {
     lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
-    console.log("Lecture:" + lecture);
-    return lecture.author == Meteor.userId;
+    
+    return lecture.author == Meteor.userId();
   }
 });
 
