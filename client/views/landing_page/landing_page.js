@@ -1,7 +1,6 @@
 Template.landingPage.events({
 
-  /** Go to lecture page */
-  'submit form': function(e) {
+  'submit form#enter-lecture': function(e) {
     e.preventDefault();
     lectureCode = $(e.target).find('#lecture-code-input').val();
     if(possibleLecture(lectureCode)){
