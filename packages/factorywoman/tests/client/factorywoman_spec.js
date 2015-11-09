@@ -4,10 +4,12 @@ describe('FactoryWoman', function() {
     lastName: 'Testa',
     city: 'Ojai Valley'
   }).trait('with animals', function(user) {
-    return [
-      FactoryWoman.create('animal1', {owner: user._id}, 'special lion'),
-      FactoryWoman.create('animal2', {owner: user._id})
-    ];
+    return {
+      animals: [
+        FactoryWoman.create('animal1', {owner: user._id}, 'special lion'),
+        FactoryWoman.create('animal2', {owner: user._id})
+      ]
+    };
   });
 
   FactoryWoman.define('animal1', 'animals', {
