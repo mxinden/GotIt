@@ -41,7 +41,7 @@ Template.question.events({
   },
 
   'click .btn-unvote': function () {
-    Meteor.call('voteDelete', this._id, function(error, result){
+    Meteor.call('deleteVote', this._id, function(error, result){
       /** Display error */
       if(error) {
         return alert(error.reason);
