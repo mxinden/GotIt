@@ -32,7 +32,7 @@ Template.question.events({
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('voteInsert', vote, function(error, result){
+    Meteor.call('insertVote', vote, function(error, result){
       /** Display error */
       if(error) {
         return alert(error.reason);
