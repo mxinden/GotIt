@@ -13,7 +13,7 @@ Template.question.helpers({
   },
 
   numberMembers: function() {
-   return getNumberOfMembersInLecture(this.lectureCode);
+    return getNumberOfMembersInLecture(this.lectureCode);
   },
 
   percentageOfUsersWhoVoted: function() {
@@ -25,7 +25,7 @@ Template.question.helpers({
 });
 
 Template.question.events({
-  /** Vote a question */
+
   'click .btn-vote': function () {
     var vote = {
       questionId: this._id,
@@ -40,7 +40,6 @@ Template.question.events({
     });
   },
 
-  /** Unvote a question */
   'click .btn-unvote': function () {
     Meteor.call('voteDelete', this._id, function(error, result){
       /** Display error */
