@@ -1,7 +1,6 @@
 Template.landingPage.events({
 
-  /** Go to lecture page */
-  'submit form': function(e) {
+  'submit form#enter-lecture': function(e) {
     e.preventDefault();
     lectureCode = $(e.target).find('#lecture-code-input').val();
     if(possibleLecture(lectureCode)){
@@ -9,14 +8,14 @@ Template.landingPage.events({
     }
   },
 
-  /** Create new lecture */
   'click #create-lecture': function (event) {
     event.preventDefault();
 
-    Meteor.call('lectureInsert', function(error, result){
+    Meteor.call('insertLecture', function(error, result){
       //Display error
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
 
       Router.go('lecturePage', {lectureCode: result.lectureCode});
     });
@@ -27,12 +26,12 @@ Template.landingPage.events({
     var lectureCode = $('#lecture-code-input').val();
     var pLecture = possibleLecture(lectureCode);
     if(pLecture){
-      $('#btn-enter-class').addClass('btn-success');
-      $('#btn-enter-class').removeClass('disabled');
+      $('#btn-enter-lecture').addClass('btn-success');
+      $('#btn-enter-lecture').removeClass('disabled');
     }
     else {
-      $('#btn-enter-class').removeClass('btn-success');
-      $('#btn-enter-class').addClass('disabled');
+      $('#btn-enter-lecture').removeClass('btn-success');
+      $('#btn-enter-lecture').addClass('disabled');
     }
   }
 

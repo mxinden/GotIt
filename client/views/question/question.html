@@ -3,7 +3,7 @@
 
     <div class="panel-body">
       <div class="container-fluid">
-        <div class="badge votes-badge">{{numberOfVotes}}/{{numberMembers}}</div>
+        <div class="badge votes-badge">{{numberOfVotes}}/{{numberOfMembersInLecture}}</div>
         <div class="col-sm-10 col-xs-12 question-text well">{{questionText}}</div>
         <div class="col-sm-2 col-xs-12 col-vote-button">
           {{#if votedByMe}}
@@ -16,8 +16,8 @@
     </div>
 
     <div class="progress">
-      <div class="progress-bar" role="progressbar" aria-valuenow="{{percentageUserVote}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentageUserVote}}%;">
-        {{percentageUserVote}}%
+      <div class="progress-bar" role="progressbar" aria-valuenow="{{percentageOfUsersWhoVoted}}" aria-valuemin="0" aria-valuemax="100" style="width: {{percentageOfUsersWhoVoted}}%;">
+        {{percentageOfUsersWhoVoted}}%
       </div>
     </div>
 

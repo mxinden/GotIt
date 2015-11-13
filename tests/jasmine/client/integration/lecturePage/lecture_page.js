@@ -55,7 +55,7 @@ describe("lecturePage", function() {
       });
 
       it("shows the 'Send' button", function() {
-        expect($('button#create-question')).toExist();
+        expect($('button#btn-create-question')).toExist();
       });
 
     });

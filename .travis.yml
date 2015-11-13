@@ -10,3 +10,6 @@ before_script:
     - sh -e /etc/init.d/xvfb start
 script:
     - meteor --test --release velocity:METEOR@1.1.0.2_2
+
+after_script:
+    - tail .meteor/local/log/jasmine-client-integration.log

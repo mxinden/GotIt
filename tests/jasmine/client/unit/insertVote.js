@@ -1,4 +1,4 @@
-describe('voteInsert', function() {
+describe('insertVote', function() {
 
   describe('with a wrong questionId', function() {
 
@@ -22,7 +22,7 @@ describe('voteInsert', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('voteInsert', vote, function(error, result) {
+      Meteor.call('insertVote', vote, function(error, result) {
         callError = error;
         callResult = result;
         done();
