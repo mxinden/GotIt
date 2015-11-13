@@ -12,7 +12,7 @@ Template.question.helpers({
     }).count();
   },
 
-  numberMembers: function() {
+  numberOfMembersInLecture: function() {
     return getNumberOfMembersInLecture(this.lectureCode);
   },
 
