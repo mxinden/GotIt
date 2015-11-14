@@ -1,7 +1,6 @@
 Template.lecturePageFooter.events({
 
-  /** Create new question */
-  'submit form': function (event) {
+  'submit form#create-question': function (event) {
     var lectureCode = this.lectureCode;
     var question = {
       lectureCode: lectureCode,
@@ -15,8 +14,9 @@ Template.lecturePageFooter.events({
     }
 
     Meteor.call('questionInsertAddVote', question, function(error, result){
-      if(error)
+      if(error) {
         return alert(error);
+      }
     });
 
     event.target.reset();
@@ -27,10 +27,9 @@ Template.lecturePageFooter.events({
     var questionText = $('#question-text').val();
 
     if(questionText.replace(/\s/g, '') == ""){
-      $('#create-question').addClass('disabled');
-    }
-    else {
-      $('#create-question').removeClass('disabled');
+      $('#btn-create-question').addClass('disabled');
+    } else {
+      $('#btn-create-question').removeClass('disabled');
     }
   }
 

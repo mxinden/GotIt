@@ -12,12 +12,11 @@ Template.question.helpers({
     }).count();
   },
 
-  numberMembers: function() {
+  numberOfMembersInLecture: function() {
     return getNumberOfMembersInLecture(this.lectureCode);
   },
 
-  /** Return percentage of users in the current classroom who have voted on this question */
-  percentageUserVote: function() {
+  percentageOfUsersWhoVoted: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
 
@@ -39,26 +38,27 @@ Template.question.helpers({
 });
 
 Template.question.events({
-  /** Vote a question */
+
   'click .btn-vote': function () {
     var vote = {
       questionId: this._id,
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('voteInsert', vote, function(error, result){
+    Meteor.call('insertVote', vote, function(error, result){
       /** Display error */
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
     });
   },
 
-  /** Unvote a question */
   'click .btn-unvote': function () {
-    Meteor.call('voteDelete', this._id, function(error, result){
+    Meteor.call('deleteVote', this._id, function(error, result){
       /** Display error */
-      if(error)
+      if(error) {
         return alert(error.reason);
+      }
     });
   },
   'click .btn-delete-question': function () {

@@ -7,8 +7,9 @@ Template.lecturePageHeader.helpers({
 Template.lecturePageHeader.events({
   //Handle Click event
   'click #title': function(e) {
-    if (this.author == Meteor.userId())
+    if (this.author == Meteor.userId()) {
       Session.set('landingPage.changingTitle', true);
+    }
   },
   //Handle the <RETURN> key event
   'keypress #title-input': function(e) {
@@ -34,8 +35,9 @@ Template.lecturePageHeaderTitle.helpers({
     var number = getNumberOfMembersInLecture(this.lectureCode);
     var result = number + ' member';
 
-    if (number > 1) 
+    if (number > 1) {
       result += 's';
+    }
 
     return result;
   }

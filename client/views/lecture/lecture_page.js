@@ -42,8 +42,9 @@ Template.lecturePage.rendered = function() {
 
       // find all the elements between next and node
       var $inBetween = $(next).nextUntil(node);
-      if ($inBetween.length === 0)
+      if ($inBetween.length === 0) {
         $inBetween = $(node).nextUntil(next);
+      }
 
       // now put node in place
       $(node).insertBefore(next);
@@ -97,12 +98,15 @@ Meteor.startup(function() {
 leaveLecture = function() {
   var lectureCode = Router.current().data().lectureCode;
   Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
-    if(error)
+
+    if(error) {
       return alert(error);
+    }
   });
-  Meteor.call('deleteMember', lectureCode, function(error, result) {
-    if(error)
+  Meteor.call('removeCurrentUserFromLecture', lectureCode, function(error, result) {
+    if(error) {
       return alert(error);
+    }
   });
   Router.go('landingPage');
 }

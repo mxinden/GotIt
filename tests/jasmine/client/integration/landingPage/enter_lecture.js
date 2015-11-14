@@ -19,7 +19,7 @@ describe("Enter lecture", function() {
 
   beforeAll(function(done) {
     $('#lecture-code-input').val(lectureCode);
-    $('#btn-enter-class').trigger("click");
+    $('#btn-enter-lecture').trigger("click");
     waitForElement('#question-text', function() {
       done();
     });

@@ -28,7 +28,7 @@ describe("landingPage", function() {
     });
 
     it("shows the 'Enter Class' button", function() {
-      expect($('button#btn-enter-class')).toExist();
+      expect($('button#btn-enter-lecture')).toExist();
     });
 
     it("shows the 'Create Classroom' button", function() {
