@@ -1,7 +1,6 @@
 
 describe("Delete a question", function() {
 
-
   var lectureCode;
   var amountQuestionsBefore;
   var testQuestion = "Why is the earth not flat?";
@@ -16,7 +15,6 @@ describe("Delete a question", function() {
       done();
     });
   });
-
 
   beforeAll(function(done) {
     Fixtures.createQuestion({lectureCode: lectureCode, questionText: testQuestion },function(error, result) {
@@ -56,8 +54,4 @@ describe("Delete a question", function() {
       expect($('.question-text:contains("'+ testQuestion + '")')).not.toExist();
       expect('.btn-delete-question').not.toExist();
   });
-
-
-
-
 });
