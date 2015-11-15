@@ -1,8 +1,5 @@
-
 describe("Delete a question", function() {
-
-  var lectureCode;
-  var amountQuestionsBefore;
+  var lectureCode, amountQuestionsBefore;
   var testQuestion = "Why is the earth not flat?";
 
   beforeAll(function(done) {
@@ -10,16 +7,14 @@ describe("Delete a question", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({author:  Meteor.userId()},function(error, result) {
+    Fixtures.createLecture({author:  Meteor.userId()}, function(error, result) {
       lectureCode = result;
       done();
     });
   });
 
   beforeAll(function(done) {
-    Fixtures.createQuestion({lectureCode: lectureCode, questionText: testQuestion },function(error, result) {
-      done();
-    });
+    Fixtures.createQuestion({lectureCode: lectureCode, questionText: testQuestion}, done);
   });
 
   beforeAll(function(done) {
@@ -34,15 +29,17 @@ describe("Delete a question", function() {
   });
 
   beforeAll(function(done) {
+    var interval;
+
     amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
     $('.btn-delete-question').click();
-    var interval = setInterval(function() {
-       question = $('.question-text:contains("'+ testQuestion + '")').length;
-       if(question === 0) {
-         clearInterval(interval);
-         done();
-       }
-     }, 100);
+    interval = setInterval(function() {
+      question = $('.question-text:contains("' + testQuestion + '")').length;
+      if (question === 0) {
+        clearInterval(interval);
+        done();
+      }
+    }, 100);
   });
 
   it("deletes the question in the questions collection", function() {
@@ -51,7 +48,7 @@ describe("Delete a question", function() {
   });
 
   it("removes the question template", function() {
-      expect($('.question-text:contains("'+ testQuestion + '")')).not.toExist();
-      expect('.btn-delete-question').not.toExist();
+    expect($('.question-text:contains("'+ testQuestion + '")')).not.toExist();
+    expect('.btn-delete-question').not.toExist();
   });
 });
