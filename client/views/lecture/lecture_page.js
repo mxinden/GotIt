@@ -17,6 +17,9 @@ Template.lecturePage.helpers({
 });
 
 Template.lecturePage.rendered = function() {
+  Session.set('lecturePage.isCodeVisible', true);
+  $(window).trigger('resize');
+
   //* Copyright (C) 2012--2014 Discover Meteor */
   this.find('.animated')._uihooks = {
     insertElement: function (node, next) {
@@ -79,8 +82,18 @@ Meteor.startup(function() {
   // as the navbar poisition is fixed, the page content needs to be
   // pulled down when the navbar gets higher (on resize or when the title is edited)
   $(window).resize(function() {
-    var bodyPaddingTop = ($('#lecture-page-header').height() + 12) + 'px';
-    $('body').css('padding-top', bodyPaddingTop);
+    var navbarHeight = $('#lecture-page-header').height();
+    var lectureCodeBarHeight = 0;
+    var bodyPaddingTop;
+
+    if (Session.get('lecturePage.isCodeVisible')) {
+      lectureCodeBarHeight = $('#lecture-page-navbar-code').height();
+    }
+
+    bodyPaddingTop = navbarHeight + lectureCodeBarHeight + 12;
+
+    $('#lecture-page-navbar-code').css('top', navbarHeight + 'px');
+    $('body').css('padding-top', bodyPaddingTop + 'px');
   });
 });
 
