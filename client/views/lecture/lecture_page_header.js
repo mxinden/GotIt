@@ -2,8 +2,8 @@ Template.lecturePageHeader.helpers({
   isChangingTitle: function() {
     return Session.get('landingPage.changingTitle');
   },
-  isCodeVisible: function() {
-    return Session.get('lecturePage.isCodeVisible');
+  isLectureCodeVisible: function() {
+    return Session.get('lecturePage.isLectureCodeVisible');
   }
 });
 
@@ -27,6 +27,16 @@ Template.lecturePageHeader.events({
   },
   'click #back-button': function() {
     leaveLecture(); //see lecture_page.js
+  },
+  'click #show-lecture-code': function() {
+    Session.set('lecturePage.isLectureCodeVisible', true);
+    Tracker.afterFlush(function() {
+      $(window).trigger('resize');
+    });
+  },
+  'click #hide-lecture-code': function() {
+    Session.set('lecturePage.isLectureCodeVisible', false);
+    $(window).trigger('resize');
   }
 });
 
@@ -46,14 +56,6 @@ Template.lecturePageHeaderTitle.helpers({
   }
 });
 
-Template.lecturePageHeader.rendered = function() {
-  $('#hide-lecture-code').click(function() {
-    $('#lecture-page-navbar-code').hide(0);
-    Session.set('lecturePage.isCodeVisible', false);
-    $(window).trigger('resize');
-  });
-};
-
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
   $(window).trigger('resize');
@@ -61,12 +63,4 @@ Template.lecturePageHeaderTitleChange.rendered = function() {
 
 Template.lecturePageHeaderTitle.rendered = function() {
   $(window).trigger('resize');
-};
-
-Template.lecturePageHeaderShowCodeButton.rendered = function() {
-  $('#show-lecture-code').click(function() {
-    $('#lecture-page-navbar-code').show(0);
-    Session.set('lecturePage.isCodeVisible', true);
-    $(window).trigger('resize');
-  });
 };
