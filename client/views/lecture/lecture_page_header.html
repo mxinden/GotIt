@@ -1,18 +1,32 @@
 <template name="lecturePageHeader">
   <nav class="navbar navbar-default navbar-fixed-top">
     <div id="lecture-page-header" class="container">
-      <div class="col-xs-2 col-sm-1">
+      <div id="col-angle-left" class="col-xs-1 col-sm-1">
         <button class="fa fa-angle-left" id="back-button"></button>
       </div>
-      <div class="col-xs-10 col-sm-10">
+      <div class="col-xs-10 col-sm-9">
         {{#if isChangingTitle}}
         {{> lecturePageHeaderTitleChange}}
         {{else}}
         {{> lecturePageHeaderTitle}}
         {{/if}}
       </div>
-      <div class="col-sm-1 hidden-xs">
-        <a class="fa fa-github" id="btn-github" href="https://github.com/minden/GotIt" target="_blank"></a>
+      <div class="col-sm-1 col-xs-1">
+        {{#unless isCodeVisible}}
+        {{> lecturePageHeaderShowCodeButton}}
+        {{/unless}}
+      </div>
+      <div id="col-github-logo" class="col-sm-1 hidden-xs">
+        <a class="fa fa-github pull-right" id="btn-github" href="https://github.com/minden/GotIt" target="_blank"></a>
+      </div>
+    </div>
+  </nav>
+  <nav id="lecture-page-navbar-code" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="col-xs-12">
+        <span class="glyphicon glyphicon-barcode large"></span>
+        <span>Your lecture code is <code>{{this.lectureCode}}</code></span>
+        <a href="#" id="hide-lecture-code"><span class="glyphicon glyphicon-remove pull-right"></span></a>
       </div>
     </div>
   </nav>
@@ -27,4 +41,10 @@
     <span id="title" class="{{#if isAuthor}}changeable{{/if}}">{{title}}</span>
     <small id="number-of-members">{{numberOfMembers}}</small>
   </h4>
+</template>
+
+<template name="lecturePageHeaderShowCodeButton">
+  <a href="#" id="show-lecture-code" title="Display lecture code">
+    <h4 class="glyphicon glyphicon-barcode"></h4>
+  </a>
 </template>
