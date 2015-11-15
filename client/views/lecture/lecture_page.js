@@ -27,8 +27,10 @@ Template.lecturePage.helpers({
 });
 
 Template.lecturePage.rendered = function() {
-  Session.set('lecturePage.isCodeVisible', true);
-  $(window).trigger('resize');
+  Session.set('lecturePage.isLectureCodeVisible', true);
+  Tracker.afterFlush(function() {
+    $(window).trigger('resize');
+  });
 
   //* Copyright (C) 2012--2014 Discover Meteor */
   this.find('.animated')._uihooks = {
@@ -98,7 +100,7 @@ Meteor.startup(function() {
     var lectureCodeBarHeight = 0;
     var bodyPaddingTop;
 
-    if (Session.get('lecturePage.isCodeVisible')) {
+    if (Session.get('lecturePage.isLectureCodeVisible')) {
       lectureCodeBarHeight = $('#lecture-page-navbar-code').height();
     }
 

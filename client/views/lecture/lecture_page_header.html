@@ -12,8 +12,10 @@
         {{/if}}
       </div>
       <div class="col-sm-1 col-xs-1">
-        {{#unless isCodeVisible}}
-        {{> lecturePageHeaderShowCodeButton}}
+        {{#unless isLectureCodeVisible}}
+        <a href="#" id="show-lecture-code" title="Display lecture code">
+          <h3 id="navbar-glyphicon-barcode" class="glyphicon glyphicon-barcode"></h3>
+        </a>
         {{/unless}}
       </div>
       <div id="col-github-logo" class="col-sm-1 hidden-xs">
@@ -21,6 +23,7 @@
       </div>
     </div>
   </nav>
+  {{#if isLectureCodeVisible}}
   <nav id="lecture-page-navbar-code" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="col-xs-12 text-center">
@@ -30,6 +33,7 @@
       </div>
     </div>
   </nav>
+  {{/if}}
 </template>
 
 <template name="lecturePageHeaderTitleChange">
@@ -41,10 +45,4 @@
     <span id="title" class="{{#if isAuthor}}changeable{{/if}}">{{title}}</span>
     <small id="number-of-members">{{numberOfMembers}}</small>
   </h4>
-</template>
-
-<template name="lecturePageHeaderShowCodeButton">
-  <a href="#" id="show-lecture-code" title="Display lecture code">
-    <h3 id="navbar-glyphicon-barcode" class="glyphicon glyphicon-barcode"></h3>
-  </a>
 </template>
