@@ -33,7 +33,12 @@ describe("lecturePage", function() {
     describe("header", function() {
 
       beforeAll(function(done) {
-        waitForElement('#title', done);
+        var interval = setInterval(function() {
+          if($('#title').length) {
+            clearInterval(interval);
+            done();
+          }
+        },100);
       });
 
       it("shows the right title", function() {
