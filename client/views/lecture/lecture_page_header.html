@@ -23,8 +23,8 @@
   </nav>
   <nav id="lecture-page-navbar-code" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-      <div class="col-xs-12">
-        <span class="glyphicon glyphicon-barcode large"></span>
+      <div class="col-xs-12 text-center">
+        <h3 id="glyphicon-barcode-inline" class="glyphicon glyphicon-barcode"></h3>
         <span>Your lecture code is <code>{{this.lectureCode}}</code></span>
         <a href="#" id="hide-lecture-code"><span class="glyphicon glyphicon-remove pull-right"></span></a>
       </div>
@@ -45,6 +45,6 @@
 
 <template name="lecturePageHeaderShowCodeButton">
   <a href="#" id="show-lecture-code" title="Display lecture code">
-    <h4 class="glyphicon glyphicon-barcode"></h4>
+    <h3 id="navbar-glyphicon-barcode" class="glyphicon glyphicon-barcode"></h3>
   </a>
 </template>
