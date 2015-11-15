@@ -69,9 +69,6 @@ describe("questionDelete", function() {
     var amountQuestionsBefore;
     var amountQuestionsAfter;
 
-    var lecture = {
-      author: Meteor.userId(),
-    }
 
     var question = {
       lectureCode: '00000',
@@ -88,15 +85,19 @@ describe("questionDelete", function() {
     });
 
     beforeAll(function(done) {
-      Fixtures.createLecture(lecture, function(error, result) {
-        lectureCode = result;
-        done();
-      });
+      var interval = setInterval(function() {
+        if(Meteor.userId() != null) {
+          Fixtures.createLecture({author: Meteor.userId()}, function(error, result) {
+            lectureCode = result;
+            done();
+          });
+        }
+      },100);
     });
 
     beforeAll(function(done) {
-        amountQuestionsBefore = Questions.find().count();
-        done();
+      amountQuestionsBefore = Questions.find().count();
+      done();
     });
 
     beforeAll(function(done) {
@@ -119,7 +120,6 @@ describe("questionDelete", function() {
     });
 
     it('does not throw an error', function() {
-      expect(callResult).not.toBe(undefined);
       expect(callError).toBe(undefined);
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });

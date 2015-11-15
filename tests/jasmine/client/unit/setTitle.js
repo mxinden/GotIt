@@ -5,21 +5,46 @@ describe('setTitle', function() {
 
   describe("of not own lecture", function() {
 
-    var lectureCode, callError;
+    var lectureCode = '00001';
+    var callError;
+
+    var lecture = {
+      title: oldLectureTitle,
+      lectureCode: lectureCode
+    };
 
     beforeAll(function(done) {
       Fixtures.clearDB(done);
     });
 
     beforeAll(function(done) {
-      Fixtures.createLecture({title: oldLectureTitle}, function(error, result) {
-        lectureCode = result;
-        done();
-      });
+
+      async.series([
+
+          function() {
+            var interval = setInterval(function() {
+              if(Meteor.userId() != null) {
+                clearInterval(interval);
+              }
+            },100);
+          },
+
+          Fixtures.createLecture(lecture, function(error, result) {
+            lectureCode = result;
+          }),
+
+          Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
+            callError = error;
+          }),
+
+          done()
+
+      ]);
+
     });
 
     beforeAll(function(done) {
-      Meteor.subscribe('lecture', '00000');
+      Meteor.subscribe('lecture', lectureCode);
       var interval = setInterval(function() {
         lecture = Lectures.findOne({lectureCode: lectureCode});
         if(lecture) {
@@ -29,16 +54,10 @@ describe('setTitle', function() {
       }, 100);
     });
 
-    beforeAll(function(done) {
-      Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
-        callError = error;
-        console.log('error and result'+ error + ' ' + result);
-        done();
-      });
-    });
 
     it("returns an error", function() {
       expect(callError).not.toBe(undefined);
+      expect(callError.error).toEqual("Not the author of this lecture");
     });
 
     it("does not change the name of the lecture in the db", function() {
