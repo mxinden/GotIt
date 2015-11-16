@@ -1,4 +1,5 @@
 @background-color: #fafafb;
+@gotit-orange: #ec971f;
 
 html, body {
   height: 100%;
@@ -146,6 +147,14 @@ body {
       padding-left: 0;
     }
 
+    #col-show-lecture-code {
+      text-align: center;
+
+      &.enabled {
+        background-color: @gotit-orange;
+      }
+    }
+
     #navbar-glyphicon-barcode {
       color: #fff;
       margin: 12px auto;
@@ -204,8 +213,9 @@ body {
   }
 
   #lecture-page-navbar-lecture-code {
-    background-color: #ec971f;
+    background-color: @gotit-orange;
     color: #fff;
+    margin: auto 0;
 
     .container {
       min-width: @minimum-width;

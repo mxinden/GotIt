@@ -4,19 +4,17 @@
       <div id="col-angle-left" class="col-xs-1 col-sm-1">
         <button class="fa fa-angle-left" id="back-button"></button>
       </div>
-      <div class="col-xs-10 col-sm-9">
+      <div class="col-xs-9">
         {{#if isChangingTitle}}
         {{> lecturePageHeaderTitleChange}}
         {{else}}
         {{> lecturePageHeaderTitle}}
         {{/if}}
       </div>
-      <div class="col-sm-1 col-xs-1">
-        {{#unless isLectureCodeVisible}}
+      <div id="col-show-lecture-code" class="col-sm-1 col-xs-2 {{#if isLectureCodeVisible}}enabled{{/if}}">
         <a href="#" id="show-lecture-code" title="Display lecture code">
           <h3 id="navbar-glyphicon-barcode" class="glyphicon glyphicon-barcode"></h3>
         </a>
-        {{/unless}}
       </div>
       <div id="col-github-logo" class="col-sm-1 hidden-xs">
         <a class="fa fa-github pull-right" id="btn-github" href="https://github.com/minden/GotIt" target="_blank"></a>
