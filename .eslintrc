@@ -57,7 +57,7 @@
       "no-fallthrough": 2,        // disallow fallthrough of case statements
       "no-floating-decimal": 0,   // disallow the use of leading or trailing decimal points in numeric literals (off by default)
       "no-implied-eval": 2,       // disallow use of eval()-like methods
-      "no-invalid-this": 2,       // disallow this keywords outside of classes or class-like objects
+      "no-invalid-this": 0,       // disallow this keywords outside of classes or class-like objects
       "no-iterator": 2,           // disallow usage of __iterator__ property
       "no-labels": 2,             // disallow use of labeled statements
       "no-lone-blocks": 2,        // disallow unnecessary nested blocks
@@ -87,7 +87,7 @@
       "no-with": 2,               // disallow use of the with statement
       "radix": 0,                 // require use of the second argument for parseInt() (off by default)
       "vars-on-top": 2,           // requires to declare all vars on top of their containing scope (off by default)
-      "wrap-iife": 2,             // require immediate function invocation to be wrapped in parentheses (off by default)
+      "wrap-iife": [2, "inside"],             // require immediate function invocation to be wrapped in parentheses (off by default)
       "yoda": 2,                  // require or disallow Yoda conditions
 
 
