@@ -5,7 +5,6 @@
 
       ////////// Possible Errors //////////
 
-      "no-comma-dangle": 2,         // disallow trailing commas in object literals
       "no-cond-assign": [2, "always"],          // disallow assignment in conditional expressions
       "no-console": 2,              // disallow use of console (off by default in the node environment)
       "no-constant-condition": 2,   // disallow use of constant expressions in conditions
@@ -13,7 +12,6 @@
       "no-debugger": 2,             // disallow use of debugger
       "no-dupe-keys": 2,            // disallow duplicate keys when creating object literals
       "no-empty": 2,                // disallow empty statements
-      "no-empty-class": 2,          // disallow the use of empty character classes in regular expressions
       "no-ex-assign": 2,            // disallow assigning to the exception in a catch block
       "no-extra-boolean-cast": 2,   // disallow double-negation boolean casts in a boolean context
       "no-extra-parens": 2,         // disallow unnecessary parentheses (off by default)
@@ -136,7 +134,7 @@
       "eol-last": 0,                  // enforce newline at the end of file, with no multiple empty lines
       "func-names": 0,                // require function expressions to have a name (off by default)
       "func-style": [2, "expression"],                // enforces use of function declarations or expressions (off by default)
-      "key-spacing": [2, {"beforeColon": true, "afterColon": true}], // enforces spacing between keys and values in object literal properties
+      "key-spacing": [2, {"beforeColon": false, "afterColon": true}], // enforces spacing between keys and values in object literal properties
       "indent": [2, 2],
       "linebreak-style": [2, "unix"], // disallow mixed 'LF' and 'CRLF' as linebreaks
       "max-nested-callbacks": 0,      // specify the maximum depth callbacks can be nested (off by default)
@@ -205,7 +203,7 @@
       "Lectures": false, 
       "Questions": false,
       "Votes": false,
-      "getNumberOfMembersInLecture": false,
+      "getNumberOfMembersInLecture": true,
       "Fixtures": false,
       "waitForElement": false, 
       "waitForRouter": false
