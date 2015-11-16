@@ -14,6 +14,7 @@ Template.lecturePage.helpers({
     return questions;
   },
 
+  // Prevent template rendering before lecture data is available
   lectureDataReady: function() {
     var lectureData = Lectures.findOne({lectureCode: this.lectureCode});
 
