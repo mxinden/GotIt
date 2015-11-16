@@ -22,9 +22,9 @@ describe("Enter lecture", function() {
     $("#lecture-code-input").val(lectureCode);
     $("#btn-enter-lecture").trigger("click");
     waitForElement("#question-text", done);
+  });
 
-    it("routes to a lecture page", function() {
-      expect(Router._currentRoute.getName()).toEqual("lecturePage");
-    });
+  it("routes to a lecture page", function() {
+    expect(Router._currentRoute.getName()).toEqual("lecturePage");
   });
 });
