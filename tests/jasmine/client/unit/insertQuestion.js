@@ -5,19 +5,14 @@ describe('insertQuestion', function() {
     Fixtures.clearDB(done);
   });
 
-  beforeAll(function(done) {
-    Meteor.subscribe('questions');
-    done();
-  });
-
   describe('with an empty question text', function() {
-    var callError, callResult, amountQuestionsAfter;
+    var callError, callResult;
     var amountQuestionsBefore = Questions.find().count();
     var lectureCode = 'Irrelevant in this spec';
     var questionText = '';
 
     beforeAll(function(done) {
-      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion', lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();
@@ -31,19 +26,20 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = Questions.find().count();
+
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
   });
 
   describe("with this question text: '  '", function() {
-    var callError, callResult, amountQuestionsAfter;
+    var callError, callResult;
     var amountQuestionsBefore = Questions.find().count();
     var lectureCode = 'Irrelevant in this spec';
     var questionText = '  ';
 
     beforeAll(function(done) {
-      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion', lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();
@@ -57,19 +53,20 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = Questions.find().count();
+
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
   });
 
   describe("with an invalid lecture code", function() {
-    var callError, callResult, amountQuestionsAfter;
+    var callError, callResult;
     var amountQuestionsBefore = Questions.find().count();
     var lectureCode = 'Not existing lecture';
     var questionText = 'Is this a valid lecture code?';
 
     beforeAll(function(done) {
-      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion', lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();
@@ -83,7 +80,8 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = Questions.find().count();
+
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
   });
