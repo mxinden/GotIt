@@ -101,12 +101,12 @@ Meteor.startup(function() {
     var bodyPaddingTop;
 
     if (Session.get('lecturePage.isLectureCodeVisible')) {
-      lectureCodeBarHeight = $('#lecture-page-navbar-code').height();
+      lectureCodeBarHeight = $('#lecture-page-navbar-lecture-code').height();
     }
 
     bodyPaddingTop = navbarHeight + lectureCodeBarHeight + 12;
 
-    $('#lecture-page-navbar-code').css('top', navbarHeight + 'px');
+    $('#lecture-page-navbar-lecture-code').css('top', navbarHeight + 'px');
     $('body').css('padding-top', bodyPaddingTop + 'px');
   });
 });
