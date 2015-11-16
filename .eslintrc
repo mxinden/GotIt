@@ -199,13 +199,14 @@
     },
     "extends": "eslint:recommended",
     "globals": {
-      "Lectures": false, 
+      "Lectures": false,
       "Questions": false,
       "Votes": false,
       "getNumberOfMembersInLecture": true,
       "Fixtures": false,
-      "waitForElement": false, 
-      "waitForRouter": false
+      "waitForElement": false,
+      "waitForRouter": false,
+      "async": false
     }
 
 }
