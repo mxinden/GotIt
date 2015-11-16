@@ -17,7 +17,7 @@ describe('questionInsertAddVote', function() {
     var questionText = '';
 
     beforeAll(function(done) {
-      Meteor.call('questionInsertAddVote',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();
@@ -43,7 +43,7 @@ describe('questionInsertAddVote', function() {
     var questionText = '  ';
 
     beforeAll(function(done) {
-      Meteor.call('questionInsertAddVote',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();
@@ -69,7 +69,7 @@ describe('questionInsertAddVote', function() {
     var questionText = 'Is this a valid lecture code?';
 
     beforeAll(function(done) {
-      Meteor.call('questionInsertAddVote',lectureCode, questionText, function(error, result) {
+      Meteor.call('insertQuestion',lectureCode, questionText, function(error, result) {
         callError = error;
         callResult = result;
         done();

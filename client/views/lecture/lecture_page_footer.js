@@ -12,7 +12,7 @@ Template.lecturePageFooter.events({
       return;
     }
 
-    Meteor.call('questionInsertAddVote', lectureCode, questionText);
+    Meteor.call('insertQuestion', lectureCode, questionText);
     event.target.reset();
   },
 
