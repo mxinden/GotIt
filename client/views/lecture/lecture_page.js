@@ -1,5 +1,4 @@
 Template.lecturePage.helpers({
-
   questions: function() {
     var questions =  Questions.find({lectureCode: this.lectureCode}).fetch();
 
@@ -13,6 +12,17 @@ Template.lecturePage.helpers({
     });
 
     return questions;
+  },
+
+  // Prevent template rendering before lecture data is available
+  lectureDataReady: function() {
+    var lectureData = Lectures.findOne({lectureCode: this.lectureCode});
+
+    if(lectureData) {
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 
@@ -25,6 +35,7 @@ Template.lecturePage.rendered = function() {
         .insertBefore(next)
         .fadeIn();
     },
+
     moveElement: function (node, next) {
       var $node = $(node), $next = $(next);
       var oldTop = $node.offset().top;
@@ -60,6 +71,7 @@ Template.lecturePage.rendered = function() {
       $(node).addClass('animate').css('top', 0);
       $inBetween.addClass('animate').css('top', 0);
     },
+
     removeElement: function(node) {
       $(node).fadeOut(function() {
         $(this).remove();
@@ -87,6 +99,7 @@ Meteor.startup(function() {
 
 leaveLecture = function() {
   var lectureCode = Router.current().data().lectureCode;
+
   Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
     if(error) {
       return alert(error);
@@ -97,5 +110,6 @@ leaveLecture = function() {
       return alert(error);
     }
   });
+
   Router.go('landingPage');
 }
