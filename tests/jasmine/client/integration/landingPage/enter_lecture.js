@@ -6,7 +6,7 @@ describe("Enter lecture", function() {
 
   beforeAll(function(done) {
     Fixtures.createLecture({lectureCode: lectureCode}, function() {
-      done()
+      done();
     });
   });
 
@@ -25,7 +25,7 @@ describe("Enter lecture", function() {
     });
   });
 
-  it("routes to a lecture page", function(){
+  it("routes to a lecture page", function() {
     expect(Router._currentRoute.getName()).toEqual('lecturePage');
   });
 

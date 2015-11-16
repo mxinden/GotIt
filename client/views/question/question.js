@@ -21,7 +21,7 @@ Template.question.helpers({
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
     var percent;
 
-    if(memberCount == 0) {
+    if (memberCount === 0) {
       return 0;
     }
 
@@ -32,12 +32,12 @@ Template.question.helpers({
   isAuthor: function() {
     var lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
 
-    return lecture.author == Meteor.userId();
+    return lecture.author === Meteor.userId();
   }
 });
 
 Template.question.events({
-  'click .btn-vote': function () {
+  'click .btn-vote': function() {
     var vote = {
       questionId: this._id,
       lectureCode: this.lectureCode
@@ -50,15 +50,15 @@ Template.question.events({
     });
   },
 
-  'click .btn-unvote': function () {
+  'click .btn-unvote': function() {
     Meteor.call('deleteVote', this._id, function(error, result) {
-      if(error) {
+      if (error) {
         return alert(error.reason);
       }
     });
   },
 
-  'click .btn-delete-question': function () {
+  'click .btn-delete-question': function() {
     var questionDeleteParams = {
       questionId: this._id,
       lectureCode: this.lectureCode

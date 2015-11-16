@@ -15,7 +15,7 @@ Fixtures = {
   createUser: function(changes) {
     Meteor.call('createTestUser', changes, callback);
   }
-}
+};
 
 
 if (Meteor.isServer) {
@@ -45,7 +45,7 @@ if (Meteor.isServer) {
     'createQuestion': function(changes) {
       var question = {
         _id: '00000000000000000',
-        lectureCode: '00000', 
+        lectureCode: '00000',
         questionText: 'Example question text',
         author: '00000000000000000',
         submited: new Date()
@@ -66,7 +66,7 @@ if (Meteor.isServer) {
       voteId = Votes.insert(vote);
     },
 
-    'clearDB': function(){
+    'clearDB': function() {
       Lectures.remove({});
       Questions.remove({});
       Votes.remove({});

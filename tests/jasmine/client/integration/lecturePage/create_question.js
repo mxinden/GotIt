@@ -9,9 +9,9 @@ describe("Create a question", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({},function(error, result) {
+    Fixtures.createLecture({}, function(error, result) {
       lectureCode = result;
-      done()
+      done();
     });
   });
 
@@ -45,7 +45,7 @@ describe("Create a question", function() {
   });
 
   it("adds a new question template with the right title that is voted by the user", function() {
-    expect($('.question-text:contains("'+ testQuestion + '")')).toExist();
+    expect($('.question-text:contains("' + testQuestion + '")')).toExist();
     expect($('.btn-unvote').text()).toEqual("Got it!");
   });
 

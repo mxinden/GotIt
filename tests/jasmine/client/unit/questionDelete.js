@@ -69,7 +69,7 @@ describe("questionDelete", function() {
 
     beforeAll(function(done) {
       var interval = setInterval(function() {
-        if (Meteor.userId() != null) {
+        if (Meteor.userId() !== null) {
           Fixtures.createLecture({author: Meteor.userId()}, function(error, result) {
             lectureCode = result;
             done();
@@ -84,7 +84,7 @@ describe("questionDelete", function() {
     });
 
     beforeAll(function(done) {
-      Fixtures.createQuestion(question, function(error, result){
+      Fixtures.createQuestion(question, function(error, result) {
         question = {
           lectureCode: '00000',
           questionId: result

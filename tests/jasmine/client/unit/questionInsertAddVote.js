@@ -8,51 +8,9 @@ describe('questionInsertAddVote', function() {
     var amountQuestionsAfter;
 
     var question = {
-      lectureCode: '00000', 
+      lectureCode: '00000',
       questionText: ''
-    }
-
-    beforeAll(function(done) {
-      Fixtures.clearDB(done);
-    });
-
-    beforeAll(function(done) {
-      Meteor.subscribe('questions', question.lectureCode);
-      done();
-    });
-
-    beforeAll(function(done) {
-      Meteor.call('questionInsertAddVote', question, function(error, result) {
-        callError = error;
-        callResult = result;
-        done();
-      });
-    });
-
-    it('throws an error', function() {
-      expect(callResult).toBe(undefined);
-      expect(callError).not.toBe(undefined);      
-      expect(callError.error).toEqual("Not a valid question text");
-    });
-
-    it("does not create a new question in the mongodb", function() {
-      amountQuestionsAfter = Questions.find().count();
-      expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
-    });  
-
-  });
-
-  describe("with this question text: '  '", function() {
-
-    var callError;
-    var callResult;
-    var amountQuestionsBefore = Questions.find().count();
-    var amountQuestionsAfter;
-
-    var question = {
-      lectureCode: '00000', 
-      questionText: '  '
-    }
+    };
 
     beforeAll(function(done) {
       Fixtures.clearDB(done);
@@ -80,7 +38,49 @@ describe('questionInsertAddVote', function() {
     it("does not create a new question in the mongodb", function() {
       amountQuestionsAfter = Questions.find().count();
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
-    });  
+    });
+
+  });
+
+  describe("with this question text: '  '", function() {
+
+    var callError;
+    var callResult;
+    var amountQuestionsBefore = Questions.find().count();
+    var amountQuestionsAfter;
+
+    var question = {
+      lectureCode: '00000',
+      questionText: '  '
+    };
+
+    beforeAll(function(done) {
+      Fixtures.clearDB(done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('questions', question.lectureCode);
+      done();
+    });
+
+    beforeAll(function(done) {
+      Meteor.call('questionInsertAddVote', question, function(error, result) {
+        callError = error;
+        callResult = result;
+        done();
+      });
+    });
+
+    it('throws an error', function() {
+      expect(callResult).toBe(undefined);
+      expect(callError).not.toBe(undefined);
+      expect(callError.error).toEqual("Not a valid question text");
+    });
+
+    it("does not create a new question in the mongodb", function() {
+      amountQuestionsAfter = Questions.find().count();
+      expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
+    });
 
   });
 
@@ -92,9 +92,9 @@ describe('questionInsertAddVote', function() {
     var amountQuestionsAfter;
 
     var question = {
-      lectureCode: 'notAValidLectureCode', 
+      lectureCode: 'notAValidLectureCode',
       questionText: 'Is this a valid lecture code?'
-    }
+    };
 
     beforeAll(function(done) {
       Fixtures.clearDB(done);
@@ -102,7 +102,7 @@ describe('questionInsertAddVote', function() {
 
     beforeAll(function(done) {
       Meteor.subscribe('questions', question.lectureCode);
-          done();
+      done();
     });
 
     beforeAll(function(done) {
@@ -122,7 +122,7 @@ describe('questionInsertAddVote', function() {
     it("does not create a new question in the mongodb", function() {
       amountQuestionsAfter = Questions.find().count();
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
-    });  
+    });
 
   });
 

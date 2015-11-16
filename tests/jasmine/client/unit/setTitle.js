@@ -16,23 +16,23 @@ describe('setTitle', function() {
 
     beforeAll(function(done) {
       async.series([
-          function() {
+        function() {
             var interval = setInterval(function() {
-              if (Meteor.userId() != null) {
+              if (Meteor.userId() !== null) {
                 clearInterval(interval);
               }
             }, 100);
           },
 
-          Fixtures.createLecture(lecture, function(error, result) {
+        Fixtures.createLecture(lecture, function(error, result) {
             lectureCode = result;
           }),
 
-          Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
+        Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
             callError = error;
           }),
 
-          done()
+        done()
       ]);
     });
 
@@ -78,7 +78,7 @@ describe('setTitle', function() {
       Meteor.subscribe('lecture', '00000');
       var interval = setInterval(function() {
         lecture = Lectures.findOne({lectureCode: lectureCode});
-        if(lecture) {
+        if (lecture) {
           clearInterval(interval);
           done();
         }
@@ -86,7 +86,7 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('setTitle',lectureCode, newLectureTitle, function(error, result) {
+      Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
         callError = error;
         done();
       });

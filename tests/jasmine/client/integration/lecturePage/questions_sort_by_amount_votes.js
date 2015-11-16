@@ -40,7 +40,7 @@ describe("Questions on the lecture page", function() {
   beforeAll(function(done) {
     $('.question:eq(0) .btn-unvote').click();
     var checkExist = setInterval(function() {
-      if($('.question:eq(1) .btn-vote').length == 1) {
+      if ($('.question:eq(1) .btn-vote').length === 1) {
         clearInterval(checkExist);
         done();
       }

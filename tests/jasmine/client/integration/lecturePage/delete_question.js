@@ -48,7 +48,7 @@ describe("Delete a question", function() {
   });
 
   it("removes the question template", function() {
-    expect($('.question-text:contains("'+ testQuestion + '")')).not.toExist();
+    expect($('.question-text:contains("' + testQuestion + '")')).not.toExist();
     expect('.btn-delete-question').not.toExist();
   });
 });

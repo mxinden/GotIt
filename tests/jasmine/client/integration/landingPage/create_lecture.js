@@ -25,13 +25,13 @@ describe("Create lecture", function() {
     });
   });
 
-  it("routes to a lecture", function(){
+  it("routes to a lecture", function() {
     expect(Router.current().route.getName()).toEqual('lecturePage');
   });
 
   it("creates an new lecture document in the lectures collection", function() {
     var amountLecturesAfter = Lectures.find().count();
-    expect(amountLecturesAfter).toEqual(amountLecturesBefore  + 1);
+    expect(amountLecturesAfter).toEqual(amountLecturesBefore + 1);
   });
 
 });

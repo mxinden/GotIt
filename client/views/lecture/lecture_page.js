@@ -1,13 +1,13 @@
 Template.lecturePage.helpers({
   questions: function() {
-    var questions =  Questions.find({lectureCode: this.lectureCode}).fetch();
+    var questions = Questions.find({lectureCode: this.lectureCode}).fetch();
 
     _.each(questions, function(question) {
       var amountVotes = Votes.find({questionId: question._id}).count();
       question.amountVotes = amountVotes;
     });
 
-    questions.sort(function(a,b) {
+    questions.sort(function(a, b) {
       return b.amountVotes - a.amountVotes;
     });
 
@@ -18,7 +18,7 @@ Template.lecturePage.helpers({
   lectureDataReady: function() {
     var lectureData = Lectures.findOne({lectureCode: this.lectureCode});
 
-    if(lectureData) {
+    if (lectureData) {
       return true;
     } else {
       return false;
@@ -34,14 +34,14 @@ Template.lecturePage.rendered = function() {
 
   //* Copyright (C) 2012--2014 Discover Meteor */
   this.find('.animated')._uihooks = {
-    insertElement: function (node, next) {
+    insertElement: function(node, next) {
       $(node)
         .hide()
         .insertBefore(next)
         .fadeIn();
     },
 
-    moveElement: function (node, next) {
+    moveElement: function(node, next) {
       var $node = $(node), $next = $(next);
       var oldTop = $node.offset().top;
       var height = $(node).outerHeight(true);
@@ -88,7 +88,7 @@ Template.lecturePage.rendered = function() {
 /** call leaveLecture() before tab / window close */
 Meteor.startup(function() {
   $(window).bind('beforeunload', function() {
-    if(Router.current().route.getName() == 'lecturePage'){
+    if (Router.current().route.getName() === 'lecturePage') {
       leaveLecture();
     }
   });
@@ -107,12 +107,12 @@ leaveLecture = function() {
   var lectureCode = Router.current().data().lectureCode;
 
   Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
-    if(error) {
+    if (error) {
       return alert(error);
     }
   });
   Meteor.call('removeCurrentUserFromLecture', lectureCode, function(error, result) {
-    if(error) {
+    if (error) {
       return alert(error);
     }
   });
@@ -129,7 +129,7 @@ leaveLecture = function() {
 // pulled down when the navbar gets higher (on resize or when the title is edited)
 updateNavbarCSS = function() {
   var navbarHeight, columnLectureCodeHeight, columnLectureCodeMargin,
-  lectureCodeNavbarHeight, bodyPaddingTop;
+    lectureCodeNavbarHeight, bodyPaddingTop;
 
   // reset the margin of the column to calculate proper dimensions
   $('#col-show-lecture-code').css('margin-top', '0');

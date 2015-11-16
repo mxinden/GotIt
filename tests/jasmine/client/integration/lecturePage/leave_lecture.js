@@ -7,7 +7,7 @@ describe("Leaving the lecture", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({lectureCode: lectureCode}, function(){
+    Fixtures.createLecture({lectureCode: lectureCode}, function() {
       done();
     });
   });
@@ -43,7 +43,7 @@ describe("Leaving the lecture", function() {
   });
 
   it("Routes back to the landing page", function() {
-    expect(Router.current().route.getName()).toEqual('landingPage'); 
+    expect(Router.current().route.getName()).toEqual('landingPage');
   });
 
   it("Should delete the user from the members array of the lecture", function() {

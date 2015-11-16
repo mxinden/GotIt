@@ -8,7 +8,7 @@ describe("lecturePage", function() {
   beforeAll(function(done) {
     Fixtures.createLecture({}, function(error, result) {
       lectureCode = result;
-      done()
+      done();
     });
   });
 

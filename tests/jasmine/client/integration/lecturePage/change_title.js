@@ -51,8 +51,8 @@ describe('Change class room title', function() {
     });
 
     beforeAll(function(done) {
-        $('#title').trigger('click');
-        done();
+      $('#title').trigger('click');
+      done();
     });
 
     it('should be changeable', function(done) {
@@ -72,7 +72,7 @@ describe('Change class room title', function() {
       it('updates the title in the database', function() {
         var interval = setInterval(function() {
           var lecture = Lectures.findOne({lectureCode: lectureCode, title: 'I like trains'});
-          if(lecture) {
+          if (lecture) {
             expect(true).toBe(true);
             clearInterval(interval);
           }

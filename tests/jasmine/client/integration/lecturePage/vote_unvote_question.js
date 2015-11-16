@@ -7,9 +7,9 @@ describe("Vote unvote question", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({},function(error, result) {
+    Fixtures.createLecture({}, function(error, result) {
       lectureCode = result;
-      done()
+      done();
     });
   });
 

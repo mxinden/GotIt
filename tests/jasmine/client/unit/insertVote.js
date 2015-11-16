@@ -8,9 +8,9 @@ describe('insertVote', function() {
     var amountVotesAfter = Votes.find().count();
 
     var vote = {
-      questionId: 'NotAnExistingQuestion', 
+      questionId: 'NotAnExistingQuestion',
       lectureCode: '00000'
-    }
+    };
 
     beforeAll(function(done) {
       Fixtures.clearDB(done);
@@ -38,7 +38,7 @@ describe('insertVote', function() {
     it("does not create a new vote in the mongodb", function() {
       var amountVotesAfter = Votes.find().count();
       expect(amountVotesBefore).toEqual(amountVotesAfter);
-    });  
+    });
 
   });
 
