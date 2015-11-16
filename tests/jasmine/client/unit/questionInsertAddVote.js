@@ -1,27 +1,24 @@
+"use strict";
+
 describe('questionInsertAddVote', function() {
+  beforeAll(function(done) {
+    Fixtures.clearDB(done);
+  });
+
+  beforeAll(function(done) {
+    Meteor.subscribe('questions');
+    done();
+  });
 
   describe('with an empty question text', function() {
-
-    var callError;
-    var callResult;
+    var callError, callResult, amountQuestionsAfter;
     var amountQuestionsBefore = Questions.find().count();
-    var amountQuestionsAfter;
-
     var question = {
-      lectureCode: '00000',
+      lectureCode: 'Irrelevant in this spec',
       questionText: ''
     };
 
     beforeAll(function(done) {
-      Fixtures.clearDB(done);
-    });
-
-    beforeAll(function(done) {
-      Meteor.subscribe('questions', question.lectureCode);
-      done();
-    });
-
-    beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
         callError = error;
         callResult = result;
@@ -39,31 +36,17 @@ describe('questionInsertAddVote', function() {
       amountQuestionsAfter = Questions.find().count();
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
-
   });
 
   describe("with this question text: '  '", function() {
-
-    var callError;
-    var callResult;
+    var callError, callResult, amountQuestionsAfter;
     var amountQuestionsBefore = Questions.find().count();
-    var amountQuestionsAfter;
-
     var question = {
-      lectureCode: '00000',
+      lectureCode: 'Irrelevant in this spec',
       questionText: '  '
     };
 
     beforeAll(function(done) {
-      Fixtures.clearDB(done);
-    });
-
-    beforeAll(function(done) {
-      Meteor.subscribe('questions', question.lectureCode);
-      done();
-    });
-
-    beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
         callError = error;
         callResult = result;
@@ -81,29 +64,15 @@ describe('questionInsertAddVote', function() {
       amountQuestionsAfter = Questions.find().count();
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
-
   });
 
   describe("with an invalid lecture code", function() {
-
-    var callError;
-    var callResult;
+    var callError, callResult, amountQuestionsAfter;
     var amountQuestionsBefore = Questions.find().count();
-    var amountQuestionsAfter;
-
     var question = {
-      lectureCode: 'notAValidLectureCode',
+      lectureCode: 'Not existing lecture',
       questionText: 'Is this a valid lecture code?'
     };
-
-    beforeAll(function(done) {
-      Fixtures.clearDB(done);
-    });
-
-    beforeAll(function(done) {
-      Meteor.subscribe('questions', question.lectureCode);
-      done();
-    });
 
     beforeAll(function(done) {
       Meteor.call('questionInsertAddVote', question, function(error, result) {
@@ -123,7 +92,5 @@ describe('questionInsertAddVote', function() {
       amountQuestionsAfter = Questions.find().count();
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
-
   });
-
 });
