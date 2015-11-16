@@ -1,7 +1,7 @@
+"use strict";
+
 describe("landingPage", function() {
-
   describe("template", function() {
-
     beforeAll(function(done) {
       Fixtures.clearDB(done);
     });
@@ -14,9 +14,7 @@ describe("landingPage", function() {
     beforeAll(waitForRouter);
 
     beforeAll(function(done) {
-      waitForElement('#landing-page', function() {
-        done();
-      });
+      waitForElement('#landing-page', done);
     });
 
     it("is the landingPage", function() {
@@ -34,6 +32,5 @@ describe("landingPage", function() {
     it("shows the 'Create Classroom' button", function() {
       expect($('button#create-lecture')).toExist();
     });
-
   });
 });
