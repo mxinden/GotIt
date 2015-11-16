@@ -17,7 +17,7 @@ Template.lecturePageFooter.events({
       var vote;
       var questionId = result;
 
-      if (isAuthor(lectureCode)) {
+      if (isAuthorOfLecture(lectureCode)) {
         return;
       }
 
