@@ -1,3 +1,4 @@
+/* eslint-disable strict, no-unused-expressions */
 
 Fixtures = {
   clearDB: function(callback) {
