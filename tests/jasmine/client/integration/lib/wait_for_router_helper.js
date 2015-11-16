@@ -1,3 +1,4 @@
+"use strict";
 
 (function(Meteor, Tracker, Router) {
   var isRouterReady = false;
