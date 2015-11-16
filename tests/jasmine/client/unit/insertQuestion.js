@@ -1,6 +1,6 @@
 "use strict";
 
-describe('questionInsertAddVote', function() {
+describe('insertQuestion', function() {
   beforeAll(function(done) {
     Fixtures.clearDB(done);
   });
