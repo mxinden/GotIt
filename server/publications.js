@@ -9,7 +9,7 @@ Meteor.publish('lecturesOnlyLectureCode', function() {
 });
 
 Meteor.publish('questions', function(lectureCode) {
-  return Questions.find({lectureCode: lectureCode});
+  return App.Questions.Collection.find({lectureCode: lectureCode});
 });
 
 Meteor.publish('votes', function(lectureCode) {

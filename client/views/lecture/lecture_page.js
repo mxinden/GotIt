@@ -1,6 +1,6 @@
 Template.lecturePage.helpers({
   questions: function() {
-    var questions = Questions.find({lectureCode: this.lectureCode}).fetch();
+    var questions = App.Questions.Collection.find({lectureCode: this.lectureCode}).fetch();
 
     _.each(questions, function(question) {
       var amountVotes = Votes.find({questionId: question._id}).count();

@@ -51,7 +51,7 @@ if (Meteor.isServer) {
         submited: new Date()
       };
       _.extend(question, changes);
-      questionId = Questions.insert(question);
+      questionId = App.Questions.Collection.insert(question);
       return questionId;
     },
 
@@ -68,7 +68,7 @@ if (Meteor.isServer) {
 
     'clearDB': function() {
       App.Lectures.Collection.remove({});
-      Questions.remove({});
+      App.Questions.Collection.remove({});
       Votes.remove({});
     }
   });

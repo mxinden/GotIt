@@ -31,7 +31,7 @@ describe("Delete a question", function() {
   beforeAll(function(done) {
     var interval;
 
-    amountQuestionsBefore = Questions.find({lectureCode: lectureCode}).count();
+    amountQuestionsBefore = App.Questions.Collection.find({lectureCode: lectureCode}).count();
     $('.btn-delete-question').click();
     interval = setInterval(function() {
       question = $('.question-text:contains("' + testQuestion + '")').length;
@@ -43,7 +43,7 @@ describe("Delete a question", function() {
   });
 
   it("deletes the question in the questions collection", function() {
-    var amountQuestionsAfter = Questions.find({lectureCode: lectureCode}).count();
+    var amountQuestionsAfter = App.Questions.Collection.find({lectureCode: lectureCode}).count();
     expect(amountQuestionsAfter).toEqual(amountQuestionsBefore - 1);
   });
 

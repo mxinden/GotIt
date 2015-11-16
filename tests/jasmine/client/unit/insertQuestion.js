@@ -7,7 +7,7 @@ describe('insertQuestion', function() {
 
   describe('with an empty question text', function() {
     var callError, callResult;
-    var amountQuestionsBefore = Questions.find().count();
+    var amountQuestionsBefore = App.Questions.Collection.find().count();
     var lectureCode = 'Irrelevant in this spec';
     var questionText = '';
 
@@ -26,7 +26,7 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      var amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = App.Questions.Collection.find().count();
 
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
@@ -34,7 +34,7 @@ describe('insertQuestion', function() {
 
   describe("with this question text: '  '", function() {
     var callError, callResult;
-    var amountQuestionsBefore = Questions.find().count();
+    var amountQuestionsBefore = App.Questions.Collection.find().count();
     var lectureCode = 'Irrelevant in this spec';
     var questionText = '  ';
 
@@ -53,7 +53,7 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      var amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = App.Questions.Collection.find().count();
 
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
@@ -61,7 +61,7 @@ describe('insertQuestion', function() {
 
   describe("with an invalid lecture code", function() {
     var callError, callResult;
-    var amountQuestionsBefore = Questions.find().count();
+    var amountQuestionsBefore = App.Questions.Collection.find().count();
     var lectureCode = 'Not existing lecture';
     var questionText = 'Is this a valid lecture code?';
 
@@ -80,7 +80,7 @@ describe('insertQuestion', function() {
     });
 
     it("does not create a new question in the mongodb", function() {
-      var amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = App.Questions.Collection.find().count();
 
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });

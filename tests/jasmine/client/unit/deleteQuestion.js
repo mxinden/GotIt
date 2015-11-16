@@ -33,7 +33,7 @@ describe("deleteQuestion", function() {
     });
 
     beforeAll(function(done) {
-      amountQuestionsBefore = Questions.find().count();
+      amountQuestionsBefore = App.Questions.Collection.find().count();
       Meteor.call('deleteQuestion', question, function(error) {
         callError = error;
         done();
@@ -47,7 +47,7 @@ describe("deleteQuestion", function() {
     });
 
     it("does not change the number of questions", function() {
-      var amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = App.Questions.Collection.find().count();
 
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter);
     });
@@ -81,7 +81,7 @@ describe("deleteQuestion", function() {
 
     beforeAll(function(done) {
       Fixtures.createQuestion(question, function(error, result) {
-        amountQuestionsBefore = Questions.find().count();
+        amountQuestionsBefore = App.Questions.Collection.find().count();
         question.questionId = result;
         done();
       });
@@ -99,7 +99,7 @@ describe("deleteQuestion", function() {
     });
 
     it("decreases the amount of questions", function() {
-      var amountQuestionsAfter = Questions.find().count();
+      var amountQuestionsAfter = App.Questions.Collection.find().count();
 
       expect(amountQuestionsBefore).toEqual(amountQuestionsAfter + 1);
     });
