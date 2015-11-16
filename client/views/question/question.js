@@ -15,12 +15,12 @@ Template.question.helpers({
   },
 
   numberOfMembersInLecture: function() {
-    return getNumberOfMembersInLecture(this.lectureCode);
+    return App.Lectures.getNumberOfMembers(this.lectureCode);
   },
 
   percentageOfUsersWhoVoted: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
-    var memberCount = getNumberOfMembersInLecture(this.lectureCode);
+    var memberCount = App.Lectures.getNumberOfMembers(this.lectureCode);
     var percent;
 
     if (memberCount === 0) {
@@ -32,7 +32,7 @@ Template.question.helpers({
   },
 
   isAuthor: function() {
-    var lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
+    var lecture = App.Lectures.Collection.findOne({lectureCode: this.lectureCode}, {author: true});
 
     return lecture.author === Meteor.userId();
   }

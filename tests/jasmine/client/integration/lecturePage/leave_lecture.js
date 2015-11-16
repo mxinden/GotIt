@@ -47,7 +47,7 @@ describe("Leaving the lecture", function() {
   });
 
   it("Should delete the user from the members array of the lecture", function() {
-    amountMembers = Lectures.findOne({lectureCode: lectureCode}).members.length;
+    amountMembers = App.Lectures.Collection.findOne({lectureCode: lectureCode}).members.length;
     expect(amountMembers).toEqual(0);
   });
 

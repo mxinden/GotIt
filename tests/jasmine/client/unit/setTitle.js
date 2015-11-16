@@ -43,7 +43,7 @@ describe('setTitle', function() {
 
       Meteor.subscribe('lecture', lectureCode);
       interval = setInterval(function() {
-        var foundLecture = Lectures.findOne({lectureCode: lectureCode});
+        var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
 
         if (foundLecture) {
           clearInterval(interval);
@@ -59,7 +59,7 @@ describe('setTitle', function() {
     });
 
     it('does not change the name of the lecture in the db', function() {
-      var foundLecture = Lectures.findOne({lectureCode: lectureCode});
+      var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
 
       expect(foundLecture.title).toEqual(oldLectureTitle);
     });
@@ -84,7 +84,7 @@ describe('setTitle', function() {
 
       Meteor.subscribe('lecture', '00000');
       interval = setInterval(function() {
-        var foundLecture = Lectures.findOne({lectureCode: lectureCode});
+        var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
 
         if (foundLecture) {
           clearInterval(interval);
@@ -105,7 +105,7 @@ describe('setTitle', function() {
     });
 
     it('changes the name of the lecture in the db', function() {
-      var lecture = Lectures.findOne({lectureCode: lectureCode});
+      var lecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
       expect(lecture.title).toEqual(newLectureTitle);
     });
   });
