@@ -38,7 +38,7 @@ if (Meteor.isServer) {
         members: []
       };
       _.extend(lecture, changes);
-      Lectures.insert(lecture);
+      App.Lectures.Collection.insert(lecture);
       return lecture.lectureCode;
     },
 
@@ -67,7 +67,7 @@ if (Meteor.isServer) {
     },
 
     'clearDB': function() {
-      Lectures.remove({});
+      App.Lectures.Collection.remove({});
       Questions.remove({});
       Votes.remove({});
     }

@@ -44,5 +44,5 @@ Template.landingPage.rendered = function() {
 
 /** Check weather a lecture with this lecture code exists in the Lectures collection */
 possibleLecture = function(lectureCode) {
-  return Lectures.findOne({lectureCode: lectureCode});
+  return App.Lectures.Collection.findOne({lectureCode: lectureCode});
 };

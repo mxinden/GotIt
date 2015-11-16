@@ -71,7 +71,7 @@ describe('Change class room title', function() {
 
       it('updates the title in the database', function() {
         var interval = setInterval(function() {
-          var lecture = Lectures.findOne({lectureCode: lectureCode, title: 'I like trains'});
+          var lecture = App.Lectures.Collection.findOne({lectureCode: lectureCode, title: 'I like trains'});
           if (lecture) {
             expect(true).toBe(true);
             clearInterval(interval);
