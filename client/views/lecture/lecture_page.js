@@ -113,4 +113,9 @@ leaveLecture = function() {
     }
   });
   Router.go('landingPage');
+  // trigger the resize event to reset the page top padding when returning
+  // to the landing page
+  Tracker.afterFlush(function() {
+    $(window).trigger('resize');
+  });
 }
