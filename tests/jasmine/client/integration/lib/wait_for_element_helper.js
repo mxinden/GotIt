@@ -1,3 +1,5 @@
+"use strict";
+
 window.waitForElement = function(selector, successCallback) {
   var checkInterval = 50;
   var timeoutInterval = jasmine.DEFAULT_TIMEOUT_INTERVAL;
