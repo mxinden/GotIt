@@ -97,10 +97,8 @@ Meteor.startup(function() {
 
   $(window).resize(function() {
     var currentRoute = Router.current().route.getName();
-
     if (currentRoute === 'lecturePage' || currentRoute === 'landingPage') {
       App.updateNavbarCSS();
     }
   });
 });
-
