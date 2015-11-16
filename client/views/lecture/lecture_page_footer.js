@@ -1,3 +1,5 @@
+"use strict";
+
 Template.lecturePageFooter.events({
 
   'submit form#create-question': function(event) {
@@ -13,17 +15,12 @@ Template.lecturePageFooter.events({
       return;
     }
 
-    Meteor.call('questionInsertAddVote', question, function(error, result) {
-      if (error) {
-        return alert(error);
-      }
-    });
-
+    Meteor.call('questionInsertAddVote', question);
     event.target.reset();
   },
 
 
-  'keyup #question-text' : function() {
+  'keyup #question-text': function() {
     var questionText = $('#question-text').val();
 
     if (questionText.replace(/\s/g, '') === "") {
