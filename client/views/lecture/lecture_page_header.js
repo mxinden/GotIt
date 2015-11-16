@@ -34,12 +34,12 @@ Template.lecturePageHeader.events({
   'click #show-lecture-code': function() {
     Session.set('lecturePage.isLectureCodeVisible', true);
     Tracker.afterFlush(function() {
-      updateNavbarCSS();
+      App.updateNavbarCSS();
     });
   },
   'click #hide-lecture-code': function() {
     Session.set('lecturePage.isLectureCodeVisible', false);
-    updateNavbarCSS();
+    App.updateNavbarCSS();
   }
 });
 
@@ -61,9 +61,9 @@ Template.lecturePageHeaderTitle.helpers({
 
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
-  updateNavbarCSS();
+  App.updateNavbarCSS();
 };
 
 Template.lecturePageHeaderTitle.rendered = function() {
-  updateNavbarCSS();
+  App.updateNavbarCSS();
 };
