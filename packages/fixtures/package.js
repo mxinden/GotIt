@@ -2,7 +2,7 @@ Package.describe({
   name: 'fixtures',
   version: '0.0.1'
   /** no debugOnly because otherwise api.export is not working */
-  //debugOnly: true,
+  // debugOnly: true
 });
 
 Package.onUse(function(api) {

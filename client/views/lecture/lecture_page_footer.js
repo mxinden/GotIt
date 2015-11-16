@@ -3,7 +3,6 @@
 Template.lecturePageFooter.events({
 
   'submit form#create-question': function(event) {
-    var questionId;
     var lectureCode = this.lectureCode;
     var questionText = $(event.target).find('#question-text').val();
 

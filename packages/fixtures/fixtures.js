@@ -12,25 +12,27 @@ Fixtures = {
   createVote: function(changes, callback) {
     Meteor.call('createVote', changes, callback);
   },
-  createUser: function(changes) {
+  createUser: function(changes, callback) {
     Meteor.call('createTestUser', changes, callback);
   }
 };
 
+"use strict";
 
 if (Meteor.isServer) {
   Meteor.methods({
-    'createTestUser': function(changes) {
+    createTestUser: function(changes) {
+      var userId;
       var user = {
         _id: '00000000000000000',
         createdAt: new Date()
       };
       _.extend(user, changes);
-      userId = Users.insert(user);
+      userId = Meteor.users.insert(user);
       return userId;
     },
 
-    'createLecture': function(changes) {
+    createLecture: function(changes) {
       var lecture = {
         lectureCode: '00000',
         title: 'Example lecture title',
@@ -42,7 +44,8 @@ if (Meteor.isServer) {
       return lecture.lectureCode;
     },
 
-    'createQuestion': function(changes) {
+    createQuestion: function(changes) {
+      var questionId;
       var question = {
         _id: '00000000000000000',
         lectureCode: '00000',
@@ -55,7 +58,8 @@ if (Meteor.isServer) {
       return questionId;
     },
 
-    'createVote': function(changes) {
+    createVote: function(changes) {
+      var voteId;
       var vote = {
         _id: '00000000000000000',
         questionId: '00000000000000000',
@@ -64,9 +68,10 @@ if (Meteor.isServer) {
       };
       _.extend(vote, changes);
       voteId = App.Votes.Collection.insert(vote);
+      return voteId;
     },
 
-    'clearDB': function() {
+    clearDB: function() {
       App.Lectures.Collection.remove({});
       App.Questions.Collection.remove({});
       App.Votes.Collection.remove({});

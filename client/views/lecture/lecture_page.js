@@ -1,3 +1,5 @@
+"use strict";
+
 Template.lecturePage.helpers({
   questions: function() {
     var questions = App.Questions.Collection.find({lectureCode: this.lectureCode}).fetch();

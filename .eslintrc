@@ -199,11 +199,12 @@
     },
     "extends": "eslint:recommended",
     "globals": {
+      "App": true,
       "Lectures": false,
       "Questions": false,
       "Votes": false,
       "getNumberOfMembersInLecture": true,
-      "Fixtures": false,
+      "Fixtures": true,
       "waitForElement": false,
       "waitForRouter": false,
       "async": false
