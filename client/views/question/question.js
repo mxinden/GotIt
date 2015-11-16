@@ -19,31 +19,53 @@ Template.question.helpers({
   percentageOfUsersWhoVoted: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
     var memberCount = getNumberOfMembersInLecture(this.lectureCode);
-    var percent = (questionCount / memberCount) * 100;
+    var percent;
+
+    if(memberCount == 0) {
+      return 0;
+    }
+
+    percent = (questionCount / memberCount) * 100;
     return Math.round(percent);
+  },
+
+  isAuthor: function() {
+    var lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
+
+    return lecture.author == Meteor.userId();
   }
 });
 
 Template.question.events({
-
   'click .btn-vote': function () {
     var vote = {
       questionId: this._id,
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('insertVote', vote, function(error, result){
-      /** Display error */
-      if(error) {
+    Meteor.call('insertVote', vote, function(error, result) {
+      if (error) {
         return alert(error.reason);
       }
     });
   },
 
   'click .btn-unvote': function () {
-    Meteor.call('deleteVote', this._id, function(error, result){
-      /** Display error */
+    Meteor.call('deleteVote', this._id, function(error, result) {
       if(error) {
+        return alert(error.reason);
+      }
+    });
+  },
+
+  'click .btn-delete-question': function () {
+    var questionDeleteParams = {
+      questionId: this._id,
+      lectureCode: this.lectureCode
+    };
+
+    Meteor.call('deleteQuestion', questionDeleteParams, function(error, result) {
+      if (error) {
         return alert(error.reason);
       }
     });

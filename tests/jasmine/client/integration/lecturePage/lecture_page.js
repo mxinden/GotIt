@@ -1,5 +1,4 @@
 describe("lecturePage", function() {
-
   var lectureCode;
 
   beforeAll(function(done) {
@@ -7,7 +6,7 @@ describe("lecturePage", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({},function(error, result) {
+    Fixtures.createLecture({}, function(error, result) {
       lectureCode = result;
       done()
     });
@@ -25,19 +24,22 @@ describe("lecturePage", function() {
   beforeAll(waitForRouter);
 
   describe("template", function() {
-
     it("is a lecture page", function() {
-      expect(Router.current().route.getName()).toEqual('lecturePage'); 
+      expect(Router.current().route.getName()).toEqual('lecturePage');
     });
 
     describe("header", function() {
-
       beforeAll(function(done) {
-        waitForElement('#title', done);
+        var interval = setInterval(function() {
+          if ($('#title').length) {
+            clearInterval(interval);
+            done();
+          }
+        }, 100);
       });
 
       it("shows the right title", function() {
-        lectureTitle = Router.current().data().title;
+        var lectureTitle = Router.current().data().title;
         expect($('#title')[0].innerHTML).toEqual(lectureTitle);
       });
 
@@ -52,7 +54,6 @@ describe("lecturePage", function() {
     });
 
     describe("footer", function() {
-
       it("shows the 'Your question ...' input field", function() {
         expect($('input#question-text')).toExist();
       });
@@ -60,9 +61,6 @@ describe("lecturePage", function() {
       it("shows the 'Send' button", function() {
         expect($('button#btn-create-question')).toExist();
       });
-
     });
-
   });
-
 });
