@@ -1,3 +1,5 @@
+"use strict";
+
 describe("lecturePage", function() {
   var lectureCode;
 
