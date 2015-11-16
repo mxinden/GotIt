@@ -29,7 +29,7 @@ Template.lecturePageHeader.events({
   },
   'click #back-button': function() {
     // see lecture_page.js
-    leaveLecture();
+    App.Lectures.leaveLecture(this.lectureCode);
   },
   'click #show-lecture-code': function() {
     Session.set('lecturePage.isLectureCodeVisible', true);

@@ -85,11 +85,11 @@ Template.lecturePage.rendered = function() {
   };
 };
 
-/** call leaveLecture() before tab / window close */
+/** call App.Lectures.leaveLecture() before tab / window close */
 Meteor.startup(function() {
   $(window).bind('beforeunload', function() {
     if (Router.current().route.getName() === 'lecturePage') {
-      leaveLecture();
+      App.Lectures.leaveLecture(this.lectureCode);
     }
   });
 
@@ -102,17 +102,3 @@ Meteor.startup(function() {
   });
 });
 
-
-leaveLecture = function() {
-  var lectureCode = Router.current().data().lectureCode;
-
-  Meteor.call('deleteVotesFromUserFromLecture', lectureCode);
-  Meteor.call('removeCurrentUserFromLecture', lectureCode);
-
-  Router.go('landingPage');
-  /* reset the page top padding when returning to the landing page
-   * as the CSS of the body does not refresh */
-  Tracker.afterFlush(function() {
-    App.updateNavbarCSS();
-  });
-};
