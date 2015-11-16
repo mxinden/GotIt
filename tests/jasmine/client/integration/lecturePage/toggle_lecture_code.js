@@ -21,12 +21,7 @@ describe('Toggle lecture code', function() {
   });
 
   it('displays the lecture code on load of lecture page', function() {
-    expect($('#lecture-page-navbar-lecture-code')).toExist();
     expect($('#lecture-page-navbar-lecture-code')).toBeVisible();
-  });
-
-  it('hides the show-button', function() {
-    expect($('#show-lecture-code')).not.toBeVisible();
   });
 
   describe('clicking the hide-button', function() {
@@ -38,10 +33,6 @@ describe('Toggle lecture code', function() {
     it('hides the lecture code', function() {
       expect($('#lecture-page-navbar-lecture-code')).not.toExist();
     });
-
-    it('shows the show-button', function() {
-      expect($('#show-lecture-code')).toBeVisible();
-    });
   });
 
   describe('clicking the show-button', function() {
@@ -51,13 +42,7 @@ describe('Toggle lecture code', function() {
     });
 
     it('displays the lecture code again', function() {
-      expect($('#lecture-page-navbar-lecture-code')).toExist();
       expect($('#lecture-page-navbar-lecture-code')).toBeVisible();
-      expect($('#show-lecture-code')).not.toBeVisible();
-    });
-
-    it('hides the show-button again', function() {
-      expect($('#show-lecture-code')).not.toBeVisible();
     });
   });
 });
