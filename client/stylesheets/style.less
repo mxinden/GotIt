@@ -1,4 +1,5 @@
 @background-color: #fafafb;
+@gotit-orange: #ec971f;
 
 html, body {
   height: 100%;
@@ -137,6 +138,27 @@ body {
       font-size: 40px;
       margin-top: 3px;
     }
+
+    #col-github-logo {
+      padding-right: 0;
+    }
+
+    #col-angle-left {
+      padding-left: 0;
+    }
+
+    #col-show-lecture-code {
+      text-align: center;
+
+      &.enabled {
+        background-color: @gotit-orange;
+      }
+    }
+
+    #navbar-glyphicon-barcode {
+      color: #fff;
+      margin: 12px auto;
+    }
   }
 
   .question {
@@ -187,6 +209,29 @@ body {
       border-top-right-radius: 0px;
       -moz-border-top-right-radius: 0px;
       -webkit-border-top-right-radius: 0px;
+    }
+  }
+
+  #lecture-page-navbar-lecture-code {
+    background-color: @gotit-orange;
+    color: #fff;
+    margin: auto 0;
+
+    .container {
+      min-width: @minimum-width;
+
+      .col-xs-12 {
+        span {
+          vertical-align: middle;
+          color: #fff;
+          line-height: 47px;
+        }
+
+        #glyphicon-barcode-inline {
+          margin: 0 8px;
+          vertical-align: middle;
+        }
+      }
     }
   }
 

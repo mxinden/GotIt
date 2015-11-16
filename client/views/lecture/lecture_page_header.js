@@ -1,6 +1,9 @@
 Template.lecturePageHeader.helpers({
   isChangingTitle: function() {
     return Session.get('landingPage.changingTitle');
+  },
+  isLectureCodeVisible: function() {
+    return Session.get('lecturePage.isLectureCodeVisible');
   }
 });
 
@@ -24,6 +27,16 @@ Template.lecturePageHeader.events({
   },
   'click #back-button': function() {
     leaveLecture(); //see lecture_page.js
+  },
+  'click #show-lecture-code': function() {
+    Session.set('lecturePage.isLectureCodeVisible', true);
+    Tracker.afterFlush(function() {
+      updateNavbarCSS();
+    });
+  },
+  'click #hide-lecture-code': function() {
+    Session.set('lecturePage.isLectureCodeVisible', false);
+    updateNavbarCSS();
   }
 });
 
@@ -42,11 +55,12 @@ Template.lecturePageHeaderTitle.helpers({
     return result;
   }
 });
+
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
-  $(window).trigger('resize');
+  updateNavbarCSS();
 };
 
 Template.lecturePageHeaderTitle.rendered = function() {
-  $(window).trigger('resize');
+  updateNavbarCSS();
 };

@@ -48,6 +48,9 @@ describe("lecturePage", function() {
         expect(numberOfMembers).toEqual('1 member');
       });
 
+      it('shows the show-lecture-code button', function() {
+        expect($('#show-lecture-code')).toBeVisible();
+      });
     });
 
     describe("footer", function() {
