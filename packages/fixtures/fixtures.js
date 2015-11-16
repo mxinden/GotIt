@@ -63,13 +63,13 @@ if (Meteor.isServer) {
         author: '00000000000000000'
       };
       _.extend(vote, changes);
-      voteId = Votes.insert(vote);
+      voteId = App.Votes.Collection.insert(vote);
     },
 
     'clearDB': function() {
       App.Lectures.Collection.remove({});
       App.Questions.Collection.remove({});
-      Votes.remove({});
+      App.Votes.Collection.remove({});
     }
   });
 }

@@ -3,7 +3,7 @@ Template.lecturePage.helpers({
     var questions = App.Questions.Collection.find({lectureCode: this.lectureCode}).fetch();
 
     _.each(questions, function(question) {
-      var amountVotes = Votes.find({questionId: question._id}).count();
+      var amountVotes = App.Votes.Collection.find({questionId: question._id}).count();
       question.amountVotes = amountVotes;
     });
 

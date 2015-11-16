@@ -3,7 +3,7 @@
 describe("insertVote", function() {
   describe("with a wrong questionId", function() {
     var callError, callResult;
-    var amountVotesBefore = Votes.find().count();
+    var amountVotesBefore = App.Votes.Collection.find().count();
     var vote = {
       questionId: "NotAnExistingQuestion",
       lectureCode: "00000"
@@ -33,7 +33,7 @@ describe("insertVote", function() {
     });
 
     it("does not create a new vote in the mongodb", function() {
-      var amountVotesAfter = Votes.find().count();
+      var amountVotesAfter = App.Votes.Collection.find().count();
 
       expect(amountVotesBefore).toEqual(amountVotesAfter);
     });

@@ -28,7 +28,7 @@ describe("Create a question", function() {
 
   beforeAll(function(done) {
     amountQuestionsBefore = App.Questions.Collection.find({lectureCode: lectureCode}).count();
-    amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
+    amountVotesBefore = App.Votes.Collection.find({lectureCode: lectureCode}).count();
     $('#question-text').val(testQuestion);
     $('#btn-create-question').click();
     waitForElement('.question', done);
@@ -40,7 +40,7 @@ describe("Create a question", function() {
   });
 
   it("creates a new vote in the votes collection", function() {
-    var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
+    var amountVotesAfter = App.Votes.Collection.find({lectureCode: lectureCode}).count();
     expect(amountVotesAfter).toEqual(amountVotesBefore + 1);
   });
 

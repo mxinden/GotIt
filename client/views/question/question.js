@@ -2,14 +2,14 @@
 
 Template.question.helpers({
   votedByMe: function() {
-    return Votes.findOne({
+    return App.Votes.Collection.findOne({
       author: Meteor.userId(),
       questionId: this._id
     }) !== undefined;
   },
 
   numberOfVotes: function() {
-    return Votes.find({
+    return App.Votes.Collection.find({
       questionId: this._id
     }).count();
   },
@@ -19,7 +19,7 @@ Template.question.helpers({
   },
 
   percentageOfUsersWhoVoted: function() {
-    var questionCount = Votes.find({questionId: this._id}).count();
+    var questionCount = App.Votes.Collection.find({questionId: this._id}).count();
     var memberCount = App.Lectures.getNumberOfMembers(this.lectureCode);
     var percent;
 

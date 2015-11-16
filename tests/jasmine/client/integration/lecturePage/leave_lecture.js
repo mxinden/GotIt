@@ -23,7 +23,7 @@ describe("Leaving the lecture", function() {
     $("#question-text").val("I am going to leave!");
     $("#btn-create-question").click();
     waitForElement(".btn-unvote", function() {
-      amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
+      amountVotesBefore = App.Votes.Collection.find({lectureCode: lectureCode}).count();
       done();
     });
   });
@@ -34,7 +34,7 @@ describe("Leaving the lecture", function() {
   });
 
   it("deletes all votes from user from lecture in the MongoDB", function() {
-    var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
+    var amountVotesAfter = App.Votes.Collection.find({lectureCode: lectureCode}).count();
 
     expect(amountVotesAfter).toBeLessThan(amountVotesBefore);
   });

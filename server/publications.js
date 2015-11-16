@@ -13,5 +13,5 @@ Meteor.publish('questions', function(lectureCode) {
 });
 
 Meteor.publish('votes', function(lectureCode) {
-  return Votes.find({lectureCode: lectureCode});
+  return App.Votes.Collection.find({lectureCode: lectureCode});
 });

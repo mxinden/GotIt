@@ -27,13 +27,13 @@ describe("Vote unvote question", function() {
 
   describe("Vote question", function() {
     beforeAll(function(done) {
-      amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
+      amountVotesBefore = App.Votes.Collection.find({lectureCode: lectureCode}).count();
       $("button.btn-vote").click();
       waitForElement(".btn-unvote", done);
     });
 
     it("creates a new vote in the votes collection", function() {
-      var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
+      var amountVotesAfter = App.Votes.Collection.find({lectureCode: lectureCode}).count();
       expect(amountVotesAfter).toEqual(amountVotesBefore + 1);
     });
 
@@ -48,13 +48,13 @@ describe("Vote unvote question", function() {
 
   describe("Unvote question", function() {
     beforeAll(function(done) {
-      amountVotesBefore = Votes.find({lectureCode: lectureCode}).count();
+      amountVotesBefore = App.Votes.Collection.find({lectureCode: lectureCode}).count();
       $("button.btn-unvote").click();
       waitForElement(".btn-vote", done);
     });
 
     it("deletes the vote in the votes collection", function() {
-      var amountVotesAfter = Votes.find({lectureCode: lectureCode}).count();
+      var amountVotesAfter = App.Votes.Collection.find({lectureCode: lectureCode}).count();
       expect(amountVotesBefore).toEqual(amountVotesAfter + 1);
     });
 
