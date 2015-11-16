@@ -1,3 +1,5 @@
+"use strict";
+
 describe("Delete a question", function() {
   var lectureCode, amountQuestionsBefore;
   var testQuestion = "Why is the earth not flat?";
@@ -7,7 +9,7 @@ describe("Delete a question", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({author:  Meteor.userId()}, function(error, result) {
+    Fixtures.createLecture({author: Meteor.userId()}, function(error, result) {
       lectureCode = result;
       done();
     });
@@ -18,14 +20,14 @@ describe("Delete a question", function() {
   });
 
   beforeAll(function(done) {
-    Router.go('lecturePage', {lectureCode: lectureCode});
+    Router.go("lecturePage", {lectureCode: lectureCode});
     Tracker.afterFlush(done);
   });
 
   beforeAll(waitForRouter);
 
   beforeAll(function(done) {
-    waitForElement('.btn-delete-question', done);
+    waitForElement(".btn-delete-question", done);
   });
 
   beforeAll(function(done) {
@@ -34,8 +36,9 @@ describe("Delete a question", function() {
     amountQuestionsBefore = App.Questions.Collection.find({lectureCode: lectureCode}).count();
     $('.btn-delete-question').click();
     interval = setInterval(function() {
-      question = $('.question-text:contains("' + testQuestion + '")').length;
-      if (question === 0) {
+      var displayedQuestions = $(".question-text:contains('" + testQuestion + "')");
+
+      if (displayedQuestions.length === 0) {
         clearInterval(interval);
         done();
       }
@@ -48,7 +51,7 @@ describe("Delete a question", function() {
   });
 
   it("removes the question template", function() {
-    expect($('.question-text:contains("' + testQuestion + '")')).not.toExist();
-    expect('.btn-delete-question').not.toExist();
+    expect($(".question-text:contains('" + testQuestion + "')")).not.toExist();
+    expect(".btn-delete-question").not.toExist();
   });
 });
