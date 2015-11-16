@@ -15,12 +15,12 @@ Template.question.helpers({
   },
 
   numberOfMembersInLecture: function() {
-    return getNumberOfMembersInLecture(this.lectureCode);
+    return App.Lectures.getNumberOfMembersInLecture(this.lectureCode);
   },
 
   percentageOfUsersWhoVoted: function() {
     var questionCount = Votes.find({questionId: this._id}).count();
-    var memberCount = getNumberOfMembersInLecture(this.lectureCode);
+    var memberCount = App.Lectures.getNumberOfMembersInLecture(this.lectureCode);
     var percent;
 
     if (memberCount === 0) {

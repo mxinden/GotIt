@@ -48,7 +48,7 @@ Template.lecturePageHeaderTitle.helpers({
     return this.author === Meteor.userId();
   },
   numberOfMembers: function() {
-    var number = getNumberOfMembersInLecture(this.lectureCode);
+    var number = App.Lectures.getNumberOfMembersInLecture(this.lectureCode);
     var result = number + ' member';
 
     if (number > 1) {
