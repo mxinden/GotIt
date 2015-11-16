@@ -4,18 +4,15 @@ Template.lecturePageFooter.events({
 
   'submit form#create-question': function(event) {
     var lectureCode = this.lectureCode;
-    var question = {
-      lectureCode: lectureCode,
-      questionText: $(event.target).find('#question-text').val()
-    };
+    var questionText =  $(event.target).find('#question-text').val()
 
     event.preventDefault();
 
-    if (question.questionText.replace(/\s/g, '') === "") {
+    if (questionText.replace(/\s/g, '') === "") {
       return;
     }
 
-    Meteor.call('questionInsertAddVote', question);
+    Meteor.call('questionInsertAddVote', lectureCode, questionText);
     event.target.reset();
   },
 
