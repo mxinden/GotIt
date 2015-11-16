@@ -1,8 +1,8 @@
+"use strict";
+
 describe("Create a question", function() {
-  var amountQuestionsBefore;
-  var amountVotesBefore;
+  var amountQuestionsBefore, amountVotesBefore, lectureCode;
   var testQuestion = "What is a micro kernel?";
-  var lectureCode;
 
   beforeAll(function(done) {
     Fixtures.clearDB(done);
@@ -16,22 +16,22 @@ describe("Create a question", function() {
   });
 
   beforeAll(function(done) {
-    Router.go('lecturePage', {lectureCode: lectureCode});
+    Router.go("lecturePage", {lectureCode: lectureCode});
     Tracker.afterFlush(done);
   });
 
   beforeAll(waitForRouter);
 
   beforeAll(function(done) {
-    waitForElement('#lecture-page', done);
+    waitForElement("#lecture-page", done);
   });
 
   beforeAll(function(done) {
     amountQuestionsBefore = App.Questions.Collection.find({lectureCode: lectureCode}).count();
     amountVotesBefore = App.Votes.Collection.find({lectureCode: lectureCode}).count();
-    $('#question-text').val(testQuestion);
-    $('#btn-create-question').click();
-    waitForElement('.question', done);
+    $("#question-text").val(testQuestion);
+    $("#btn-create-question").click();
+    waitForElement(".question", done);
   });
 
   it("creates a new question in the questions collection", function() {
@@ -45,8 +45,7 @@ describe("Create a question", function() {
   });
 
   it("adds a new question template with the right title that is voted by the user", function() {
-    expect($('.question-text:contains("' + testQuestion + '")')).toExist();
-    expect($('.btn-unvote').text()).toEqual("Got it!");
+    expect($(".question-text:contains('" + testQuestion + "')")).toExist();
+    expect($(".btn-unvote").text()).toEqual("Got it!");
   });
-
 });
