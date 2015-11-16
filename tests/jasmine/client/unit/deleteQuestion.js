@@ -1,4 +1,6 @@
-describe("questionDelete", function() {
+"use strict";
+
+describe("deleteQuestion", function() {
   beforeAll(function(done) {
     Fixtures.clearDB(done);
   });
@@ -10,7 +12,7 @@ describe("questionDelete", function() {
       author: 'Somebody else'
     };
     var question = {
-      lectureCode: lecture.lectureCode,
+      lectureCode: lecture.lectureCode
     };
 
     beforeAll(function(done) {
@@ -32,9 +34,8 @@ describe("questionDelete", function() {
 
     beforeAll(function(done) {
       amountQuestionsBefore = Questions.find().count();
-      Meteor.call('deleteQuestion', question, function(error, result) {
+      Meteor.call('deleteQuestion', question, function(error) {
         callError = error;
-        callResult = result;
         done();
       });
     });
@@ -53,7 +54,7 @@ describe("questionDelete", function() {
   });
 
   describe("when the user is the lecture author", function() {
-    var callError, callResult, lectureCode, amountQuestionsBefore;
+    var callError, amountQuestionsBefore;
     var lecture = {
       lectureCode: '11111'
     };
@@ -71,6 +72,7 @@ describe("questionDelete", function() {
     beforeAll(function(done) {
       var interval = setInterval(function() {
         if (Meteor.userId() !== null) {
+          clearInterval(interval);
           lecture.author = Meteor.userId();
           Fixtures.createLecture(lecture, done);
         }
@@ -86,9 +88,8 @@ describe("questionDelete", function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('deleteQuestion', question, function(error, result) {
+      Meteor.call('deleteQuestion', question, function(error) {
         callError = error;
-        callResult = result;
         done();
       });
     });
