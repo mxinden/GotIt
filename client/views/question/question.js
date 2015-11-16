@@ -1,3 +1,5 @@
+"use strict";
+
 Template.question.helpers({
   votedByMe: function() {
     return Votes.findOne({
@@ -25,7 +27,7 @@ Template.question.helpers({
       return 0;
     }
 
-    percent = (questionCount / memberCount) * 100;
+    percent = questionCount / memberCount * 100;
     return Math.round(percent);
   },
 
@@ -43,19 +45,11 @@ Template.question.events({
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('insertVote', vote, function(error, result) {
-      if (error) {
-        return alert(error.reason);
-      }
-    });
+    Meteor.call('insertVote', vote);
   },
 
   'click .btn-unvote': function() {
-    Meteor.call('deleteVote', this._id, function(error, result) {
-      if (error) {
-        return alert(error.reason);
-      }
-    });
+    Meteor.call('deleteVote', this._id);
   },
 
   'click .btn-delete-question': function() {
@@ -64,10 +58,6 @@ Template.question.events({
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('deleteQuestion', questionDeleteParams, function(error, result) {
-      if (error) {
-        return alert(error.reason);
-      }
-    });
+    Meteor.call('deleteQuestion', questionDeleteParams);
   }
 });
