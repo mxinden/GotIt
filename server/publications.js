@@ -1,3 +1,5 @@
+"use strict";
+
 Meteor.publish('lecture', function(lectureCode) {
   return Lectures.find({lectureCode: lectureCode});
 });
