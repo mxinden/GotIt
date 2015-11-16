@@ -20,9 +20,8 @@ Template.lecturePage.helpers({
 
     if (lectureData) {
       return true;
-    } else {
-      return false;
     }
+    return false;
   }
 });
 
@@ -42,7 +41,8 @@ Template.lecturePage.rendered = function() {
     },
 
     moveElement: function(node, next) {
-      var $node = $(node), $next = $(next);
+      var newTop;
+      var $node = $(node);
       var oldTop = $node.offset().top;
       var height = $(node).outerHeight(true);
 
@@ -56,7 +56,7 @@ Template.lecturePage.rendered = function() {
       $(node).insertBefore(next);
 
       // measure new top
-      var newTop = $(node).offset().top;
+      newTop = $(node).offset().top;
 
       // move node *back* to where it was before
       $(node)
@@ -106,16 +106,8 @@ Meteor.startup(function() {
 leaveLecture = function() {
   var lectureCode = Router.current().data().lectureCode;
 
-  Meteor.call('deleteVotesFromUserFromLecture', lectureCode, function(error, result) {
-    if (error) {
-      return alert(error);
-    }
-  });
-  Meteor.call('removeCurrentUserFromLecture', lectureCode, function(error, result) {
-    if (error) {
-      return alert(error);
-    }
-  });
+  Meteor.call('deleteVotesFromUserFromLecture', lectureCode);
+  Meteor.call('removeCurrentUserFromLecture', lectureCode);
 
   Router.go('landingPage');
   // reset the page top padding when returning to the landing page
