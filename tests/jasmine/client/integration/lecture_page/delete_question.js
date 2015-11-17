@@ -9,7 +9,7 @@ describe("Delete a question", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createLecture({author: Meteor.userId()}, function(error, result) {
+    Fixtures.createLecture({lecturer: Meteor.userId()}, function(error, result) {
       lectureCode = result;
       done();
     });

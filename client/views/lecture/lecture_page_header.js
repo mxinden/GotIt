@@ -12,7 +12,7 @@ Template.lecturePageHeader.helpers({
 Template.lecturePageHeader.events({
   // Handle Click event
   'click #title': function() {
-    if (this.author === Meteor.userId()) {
+    if (this.lecturer === Meteor.userId()) {
       Session.set('landingPage.changingTitle', true);
     }
   },
@@ -44,14 +44,14 @@ Template.lecturePageHeader.events({
 });
 
 Template.lecturePageHeaderTitle.helpers({
-  isAuthor: function() {
-    return this.author === Meteor.userId();
+  isLecturer: function() {
+    return App.Lectures.isLecturer(this.lectureCode);
   },
-  numberOfMembers: function() {
-    var number = App.Lectures.getNumberOfMembers(this.lectureCode);
-    var result = number + ' member';
+  numberOfStudents: function() {
+    var number = this.students.length;
+    var result = number + ' student';
 
-    if (number > 1) {
+    if (number !== 1) {
       result += 's';
     }
 

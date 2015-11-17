@@ -37,8 +37,8 @@ if (Meteor.isServer) {
       var lecture = {
         lectureCode: '00000',
         title: 'Example lecture title',
-        author: '00000000000000000',
-        members: []
+        lecturer: '00000000000000000',
+        students: []
       };
       _.extend(lecture, changes);
       App.Lectures.Collection.insert(lecture);

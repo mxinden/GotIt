@@ -14,27 +14,25 @@ Template.question.helpers({
     }).count();
   },
 
-  numberOfMembersInLecture: function() {
-    return App.Lectures.getNumberOfMembers(this.lectureCode);
+  numberOfStudentsInLecture: function() {
+    return App.Lectures.getNumberOfStudents(this.lectureCode);
   },
 
   percentageOfUsersWhoVoted: function() {
     var questionCount = App.Votes.Collection.find({questionId: this._id}).count();
-    var memberCount = App.Lectures.getNumberOfMembers(this.lectureCode);
+    var studentCount = App.Lectures.getNumberOfStudents(this.lectureCode);
     var percent;
 
-    if (memberCount === 0) {
+    if (studentCount === 0) {
       return 0;
     }
 
-    percent = questionCount / memberCount * 100;
+    percent = questionCount / studentCount * 100;
     return Math.round(percent);
   },
 
-  isAuthor: function() {
-    var lecture = App.Lectures.Collection.findOne({lectureCode: this.lectureCode}, {author: true});
-
-    return lecture.author === Meteor.userId();
+  isLecturer: function() {
+    return App.Lectures.isLecturer(this.lectureCode);
   }
 });
 

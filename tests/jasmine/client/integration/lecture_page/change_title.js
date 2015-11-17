@@ -5,7 +5,7 @@ describe("Change class room title", function() {
     Fixtures.clearDB(done);
   });
 
-  describe("for non authors", function() {
+  describe("for non lecturer", function() {
     var lectureCode = "AAAAA";
 
     beforeAll(function(done) {
@@ -31,13 +31,13 @@ describe("Change class room title", function() {
     });
   });
 
-  describe("for authors", function() {
+  describe("for lecturer", function() {
     var lectureCode = "BBBBB";
 
     beforeAll(function(done) {
       Fixtures.createLecture({
         lectureCode: lectureCode,
-        author: Meteor.userId()
+        lecturer: Meteor.userId()
       }, done);
     });
 

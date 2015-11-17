@@ -55,7 +55,7 @@ describe('setTitleOfLecture', function() {
 
     it('returns an error', function() {
       expect(callError).not.toBe(undefined);
-      expect(callError.error).toEqual('Not the author of this lecture');
+      expect(callError.error).toEqual('Not the lecturer of this lecture');
     });
 
     it('does not change the name of the lecture in the db', function() {
@@ -73,7 +73,7 @@ describe('setTitleOfLecture', function() {
     });
 
     beforeAll(function(done) {
-      Fixtures.createLecture({author: Meteor.userId(), title: oldLectureTitle}, function(error, result) {
+      Fixtures.createLecture({lecturer: Meteor.userId(), title: oldLectureTitle}, function(error, result) {
         lectureCode = result;
         done();
       });

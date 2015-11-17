@@ -5,11 +5,11 @@ describe("deleteQuestion", function() {
     Fixtures.clearDB(done);
   });
 
-  describe("when the user is not the lecture author", function() {
+  describe("when the user is not the lecturer of the lecture", function() {
     var callError, callResult, amountQuestionsBefore;
     var lecture = {
       lectureCode: '00000',
-      author: 'Somebody else'
+      lecturer: 'Somebody else'
     };
     var question = {
       lectureCode: lecture.lectureCode
@@ -43,7 +43,7 @@ describe("deleteQuestion", function() {
     it('throws an error', function() {
       expect(callResult).toBe(undefined);
       expect(callError).not.toBe(undefined);
-      expect(callError.error).toEqual('Not the lecture author');
+      expect(callError.error).toEqual('Not the lecturer of this lecture');
     });
 
     it("does not change the number of questions", function() {
@@ -53,7 +53,7 @@ describe("deleteQuestion", function() {
     });
   });
 
-  describe("when the user is the lecture author", function() {
+  describe("when the user is the lecturer of the lecture", function() {
     var callError, amountQuestionsBefore;
     var lecture = {
       lectureCode: '11111'
@@ -73,7 +73,7 @@ describe("deleteQuestion", function() {
       var interval = setInterval(function() {
         if (Meteor.userId() !== null) {
           clearInterval(interval);
-          lecture.author = Meteor.userId();
+          lecture.lecturer = Meteor.userId();
           Fixtures.createLecture(lecture, done);
         }
       }, 100);
