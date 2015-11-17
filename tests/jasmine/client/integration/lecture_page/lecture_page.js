@@ -1,3 +1,5 @@
+"use strict";
+
 describe("lecturePage", function() {
   var lectureCode;
 
@@ -8,7 +10,7 @@ describe("lecturePage", function() {
   beforeAll(function(done) {
     Fixtures.createLecture({}, function(error, result) {
       lectureCode = result;
-      done()
+      done();
     });
   });
 
@@ -44,8 +46,8 @@ describe("lecturePage", function() {
       });
 
       it("shows one present user", function() {
-        var numberOfMembers = $('#number-of-members').text();
-        expect(numberOfMembers).toEqual('1 member');
+        var numberOfStudents = $('#number-of-students').text();
+        expect(numberOfStudents).toEqual('1 student');
       });
 
       it('shows the show-lecture-code button', function() {

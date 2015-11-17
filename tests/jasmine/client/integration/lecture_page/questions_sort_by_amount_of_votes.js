@@ -1,5 +1,6 @@
-describe("Questions on the lecture page", function() {
+"use strict";
 
+describe("Questions sort by amount of votes", function() {
   var lectureCode;
 
   beforeAll(function(done) {
@@ -14,14 +15,11 @@ describe("Questions on the lecture page", function() {
   });
 
   beforeAll(function(done) {
-    Fixtures.createQuestion({questionText: 'First'}, function(error, result) {
-      done();
-    });
+    Fixtures.createQuestion({questionText: 'First'}, done);
   });
+
   beforeAll(function(done) {
-    Fixtures.createQuestion({questionText: 'Second', _id: '11111111111111111'}, function(error, result) {
-      done();
-    });
+    Fixtures.createQuestion({questionText: 'Second', _id: '11111111111111111'}, done);
   });
 
   beforeAll(function(done) {
@@ -32,23 +30,22 @@ describe("Questions on the lecture page", function() {
   beforeAll(waitForRouter);
 
   beforeAll(function(done) {
-    waitForElement('#lecture-page', function() {
-      done();
-    });
+    waitForElement('#lecture-page', done);
   });
 
   beforeAll(function(done) {
+    var interval;
+
     $('.question:eq(0) .btn-unvote').click();
-    var checkExist = setInterval(function() {
-      if($('.question:eq(1) .btn-vote').length == 1) {
-        clearInterval(checkExist);
+    interval = setInterval(function() {
+      if ($('.question:eq(1) .btn-vote').length === 1) {
+        clearInterval(interval);
         done();
       }
     }, 100);
   });
 
-  it("reorder when votes are changed", function() {
+  it("reorders the questions when votes are changed", function() {
     expect(true).toBe(true);
   });
-
 });

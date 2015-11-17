@@ -1,10 +1,12 @@
-describe('setTitle', function() {
+"use strict";
+
+describe('setTitleOfLecture', function() {
   var oldLectureTitle = 'Old lecture title';
   var newLectureTitle = 'New lecture title';
 
   describe('of not own lecture', function() {
-    var lectureCode = '00001';
     var callError;
+    var lectureCode = '00001';
     var lecture = {
       title: oldLectureTitle,
       lectureCode: lectureCode
@@ -16,31 +18,34 @@ describe('setTitle', function() {
 
     beforeAll(function(done) {
       async.series([
-          function() {
-            var interval = setInterval(function() {
-              if (Meteor.userId() != null) {
-                clearInterval(interval);
-              }
-            }, 100);
-          },
+        function() {
+          var interval = setInterval(function() {
+            if (Meteor.userId() !== null) {
+              clearInterval(interval);
+            }
+          }, 100);
+        },
 
-          Fixtures.createLecture(lecture, function(error, result) {
-            lectureCode = result;
-          }),
+        Fixtures.createLecture(lecture, function(error, result) {
+          lectureCode = result;
+        }),
 
-          Meteor.call('setTitle', lectureCode, newLectureTitle, function(error, result) {
-            callError = error;
-          }),
+        Meteor.call('setTitleOfLecture', lectureCode, newLectureTitle, function(error) {
+          callError = error;
+        }),
 
-          done()
+        done()
       ]);
     });
 
     beforeAll(function(done) {
+      var interval;
+
       Meteor.subscribe('lecture', lectureCode);
-      var interval = setInterval(function() {
-        lecture = Lectures.findOne({lectureCode: lectureCode});
-        if (lecture) {
+      interval = setInterval(function() {
+        var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
+
+        if (foundLecture) {
           clearInterval(interval);
           done();
         }
@@ -50,14 +55,14 @@ describe('setTitle', function() {
 
     it('returns an error', function() {
       expect(callError).not.toBe(undefined);
-      expect(callError.error).toEqual('Not the author of this lecture');
+      expect(callError.error).toEqual('Not the lecturer of this lecture');
     });
 
     it('does not change the name of the lecture in the db', function() {
-      var lecture = Lectures.findOne({lectureCode: lectureCode});
-      expect(lecture.title).toEqual(oldLectureTitle);
-    });
+      var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
 
+      expect(foundLecture.title).toEqual(oldLectureTitle);
+    });
   });
 
   describe('of own lecture', function() {
@@ -68,17 +73,20 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Fixtures.createLecture({author: Meteor.userId(), title: oldLectureTitle}, function(error, result) {
+      Fixtures.createLecture({lecturer: Meteor.userId(), title: oldLectureTitle}, function(error, result) {
         lectureCode = result;
         done();
       });
     });
 
     beforeAll(function(done) {
+      var interval;
+
       Meteor.subscribe('lecture', '00000');
-      var interval = setInterval(function() {
-        lecture = Lectures.findOne({lectureCode: lectureCode});
-        if(lecture) {
+      interval = setInterval(function() {
+        var foundLecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
+
+        if (foundLecture) {
           clearInterval(interval);
           done();
         }
@@ -86,7 +94,7 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('setTitle',lectureCode, newLectureTitle, function(error, result) {
+      Meteor.call('setTitleOfLecture', lectureCode, newLectureTitle, function(error) {
         callError = error;
         done();
       });
@@ -97,10 +105,8 @@ describe('setTitle', function() {
     });
 
     it('changes the name of the lecture in the db', function() {
-      var lecture = Lectures.findOne({lectureCode: lectureCode});
+      var lecture = App.Lectures.Collection.findOne({lectureCode: lectureCode});
       expect(lecture.title).toEqual(newLectureTitle);
     });
-
   });
-
 });

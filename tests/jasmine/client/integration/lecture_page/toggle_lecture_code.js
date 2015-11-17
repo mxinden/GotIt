@@ -1,3 +1,5 @@
+"use strict";
+
 describe('Toggle lecture code', function() {
   var lectureCode = 'AAAAA';
 

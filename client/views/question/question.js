@@ -1,73 +1,61 @@
+"use strict";
+
 Template.question.helpers({
   votedByMe: function() {
-    return Votes.findOne({
+    return App.Votes.Collection.findOne({
       author: Meteor.userId(),
       questionId: this._id
     }) !== undefined;
   },
 
   numberOfVotes: function() {
-    return Votes.find({
+    return App.Votes.Collection.find({
       questionId: this._id
     }).count();
   },
 
-  numberOfMembersInLecture: function() {
-    return getNumberOfMembersInLecture(this.lectureCode);
+  numberOfStudentsInLecture: function() {
+    return App.Lectures.getNumberOfStudents(this.lectureCode);
   },
 
   percentageOfUsersWhoVoted: function() {
-    var questionCount = Votes.find({questionId: this._id}).count();
-    var memberCount = getNumberOfMembersInLecture(this.lectureCode);
+    var questionCount = App.Votes.Collection.find({questionId: this._id}).count();
+    var studentCount = App.Lectures.getNumberOfStudents(this.lectureCode);
     var percent;
 
-    if(memberCount == 0) {
+    if (studentCount === 0) {
       return 0;
     }
 
-    percent = (questionCount / memberCount) * 100;
+    percent = questionCount / studentCount * 100;
     return Math.round(percent);
   },
 
-  isAuthor: function() {
-    var lecture = Lectures.findOne({lectureCode: this.lectureCode}, {author: true});
-
-    return lecture.author == Meteor.userId();
+  isLecturer: function() {
+    return App.Lectures.isLecturer(this.lectureCode);
   }
 });
 
 Template.question.events({
-  'click .btn-vote': function () {
+  'click .btn-vote': function() {
     var vote = {
       questionId: this._id,
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('insertVote', vote, function(error, result) {
-      if (error) {
-        return alert(error.reason);
-      }
-    });
+    Meteor.call('insertVote', vote);
   },
 
-  'click .btn-unvote': function () {
-    Meteor.call('deleteVote', this._id, function(error, result) {
-      if(error) {
-        return alert(error.reason);
-      }
-    });
+  'click .btn-unvote': function() {
+    Meteor.call('deleteVote', this._id);
   },
 
-  'click .btn-delete-question': function () {
+  'click .btn-delete-question': function() {
     var questionDeleteParams = {
       questionId: this._id,
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('deleteQuestion', questionDeleteParams, function(error, result) {
-      if (error) {
-        return alert(error.reason);
-      }
-    });
+    Meteor.call('deleteQuestion', questionDeleteParams);
   }
 });

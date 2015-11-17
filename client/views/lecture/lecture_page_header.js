@@ -1,3 +1,5 @@
+"use strict";
+
 Template.lecturePageHeader.helpers({
   isChangingTitle: function() {
     return Session.get('landingPage.changingTitle');
@@ -8,16 +10,16 @@ Template.lecturePageHeader.helpers({
 });
 
 Template.lecturePageHeader.events({
-  //Handle Click event
-  'click #title': function(e) {
-    if (this.author == Meteor.userId()) {
+  // Handle Click event
+  'click #title': function() {
+    if (this.lecturer === Meteor.userId()) {
       Session.set('landingPage.changingTitle', true);
     }
   },
-  //Handle the <RETURN> key event
+  // Handle the <RETURN> key event
   'keypress #title-input': function(e) {
-    if (e.which == 13) {
-      Meteor.call('setTitle', this.lectureCode, $('#title-input').val());
+    if (e.which === 13) {
+      Meteor.call('setTitleOfLecture', this.lectureCode, $('#title-input').val());
       Session.set('landingPage.changingTitle', false);
     }
   },
@@ -26,29 +28,30 @@ Template.lecturePageHeader.events({
     Session.set('landingPage.changingTitle', false);
   },
   'click #back-button': function() {
-    leaveLecture(); //see lecture_page.js
+    // see lecture_page.js
+    App.Lectures.leaveLecture(this.lectureCode);
   },
   'click #show-lecture-code': function() {
     Session.set('lecturePage.isLectureCodeVisible', true);
     Tracker.afterFlush(function() {
-      updateNavbarCSS();
+      App.updateNavbarCSS();
     });
   },
   'click #hide-lecture-code': function() {
     Session.set('lecturePage.isLectureCodeVisible', false);
-    updateNavbarCSS();
+    App.updateNavbarCSS();
   }
 });
 
 Template.lecturePageHeaderTitle.helpers({
-  isAuthor: function() {
-    return (this.author == Meteor.userId());
+  isLecturer: function() {
+    return App.Lectures.isLecturer(this.lectureCode);
   },
-  numberOfMembers: function() {
-    var number = getNumberOfMembersInLecture(this.lectureCode);
-    var result = number + ' member';
+  numberOfStudents: function() {
+    var number = this.students.length;
+    var result = number + ' student';
 
-    if (number > 1) {
+    if (number !== 1) {
       result += 's';
     }
 
@@ -58,9 +61,9 @@ Template.lecturePageHeaderTitle.helpers({
 
 Template.lecturePageHeaderTitleChange.rendered = function() {
   $('#title-input').focus();
-  updateNavbarCSS();
+  App.updateNavbarCSS();
 };
 
 Template.lecturePageHeaderTitle.rendered = function() {
-  updateNavbarCSS();
+  App.updateNavbarCSS();
 };
