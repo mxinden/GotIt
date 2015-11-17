@@ -1,6 +1,6 @@
 "use strict";
 
-describe('setTitle', function() {
+describe('setTitleOfLecture', function() {
   var oldLectureTitle = 'Old lecture title';
   var newLectureTitle = 'New lecture title';
 
@@ -30,7 +30,7 @@ describe('setTitle', function() {
           lectureCode = result;
         }),
 
-        Meteor.call('setTitle', lectureCode, newLectureTitle, function(error) {
+        Meteor.call('setTitleOfLecture', lectureCode, newLectureTitle, function(error) {
           callError = error;
         }),
 
@@ -94,7 +94,7 @@ describe('setTitle', function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('setTitle', lectureCode, newLectureTitle, function(error) {
+      Meteor.call('setTitleOfLecture', lectureCode, newLectureTitle, function(error) {
         callError = error;
         done();
       });
