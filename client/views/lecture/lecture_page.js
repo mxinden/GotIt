@@ -91,7 +91,7 @@ Template.lecturePage.rendered = function() {
 Meteor.startup(function() {
   $(window).bind('beforeunload', function() {
     if (Router.current().route.getName() === 'lecturePage') {
-      App.Lectures.leaveLecture(this.lectureCode);
+      App.Lectures.leaveLecture(Router.current().data().lectureCode);
     }
   });
 
