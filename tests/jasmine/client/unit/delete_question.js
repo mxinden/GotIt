@@ -16,9 +16,11 @@ describe("deleteQuestion", function() {
     };
 
     beforeAll(function(done) {
-      Meteor.subscribe('lecture', lecture.lectureCode);
-      Meteor.subscribe('questions', lecture.lectureCode);
-      done();
+      Meteor.subscribe('lecture', lecture.lectureCode, done);
+    });
+
+    beforeAll(function(done) {
+      Meteor.subscribe('questions', lecture.lectureCode, done);
     });
 
     beforeAll(function(done) {
