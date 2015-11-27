@@ -18,3 +18,4 @@ fixtures
 fortawesome:fontawesome
 peerlibrary:async
 browser-policy
+audit-argument-checks

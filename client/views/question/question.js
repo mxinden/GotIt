@@ -51,11 +51,9 @@ Template.question.events({
   },
 
   'click .btn-delete-question': function() {
-    var questionDeleteParams = {
-      questionId: this._id,
-      lectureCode: this.lectureCode
-    };
+    var lectureCode = this.lectureCode;
+    var questionId = this._id;
 
-    Meteor.call('deleteQuestion', questionDeleteParams);
+    Meteor.call('deleteQuestion', lectureCode, questionId);
   }
 });

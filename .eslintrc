@@ -71,7 +71,7 @@
       "no-octal": 2,              // disallow use of octal literals
       "no-octal-escape": 2,       // disallow use of octal escape sequences in string literals, such as var foo = "Copyright \251";
       "no-param-reassign": 2,     // disallow reassignment of function parameters
-      "no-process-env": 2,        // disallow use of process.env (off by default)
+      //"no-process-env": 2,        // disallow use of process.env (off by default)
       "no-proto": 2,              // disallow usage of __proto__ property
       "no-redeclare": 2,          // disallow declaring the same variable more then once
       "no-return-assign": 2,      // disallow use of assignment in return statement
@@ -200,10 +200,8 @@
     "extends": "eslint:recommended",
     "globals": {
       "App": true,
-      "Lectures": false,
-      "Questions": false,
-      "Votes": false,
-      "getNumberOfMembersInLecture": true,
+      "BrowserPolicy": false,
+      "process.env": false,
       "Fixtures": true,
       "waitForElement": false,
       "waitForRouter": false,
