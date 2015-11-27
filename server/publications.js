@@ -5,7 +5,7 @@ Meteor.publish('lecture', function(lectureCode) {
 });
 
 Meteor.publish('lecturesOnlyLectureCode', function() {
-  return App.Lectures.Collection.find({}, {lectureCode: 1});
+  return App.Lectures.Collection.find({}, {fields: {lectureCode: 1}});
 });
 
 Meteor.publish('questions', function(lectureCode) {

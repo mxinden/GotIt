@@ -33,6 +33,14 @@ describe("Leaving the lecture", function() {
     waitForElement("#landing-page", done);
   });
 
+  beforeAll(function(done) {
+    Meteor.subscribe('lecture', lectureCode, done);
+  });
+
+  beforeAll(function(done) {
+    Meteor.subscribe('votes', lectureCode, done);
+  });
+
   it("deletes all votes from user from lecture in the MongoDB", function() {
     var amountVotesAfter = App.Votes.Collection.find({lectureCode: lectureCode}).count();
 
