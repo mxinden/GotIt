@@ -1,6 +1,6 @@
 "use strict";
 
-describe("Change class room title", function() {
+describe("Change lecture title", function() {
   beforeAll(function(done) {
     Fixtures.clearDB(done);
   });

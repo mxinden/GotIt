@@ -21,15 +21,15 @@ describe("landingPage", function() {
       expect(Router.current().route.getName()).toEqual('landingPage');
     });
 
-    it("shows the 'Classroom Code' input field", function() {
+    it("shows the 'Lecture Code' input field", function() {
       expect($('input#lecture-code-input')).toExist();
     });
 
-    it("shows the 'Enter Class' button", function() {
+    it("shows the 'Enter Lecture' button", function() {
       expect($('button#btn-enter-lecture')).toExist();
     });
 
-    it("shows the 'Create Classroom' button", function() {
+    it("shows the 'Create Lecture' button", function() {
       expect($('button#create-lecture')).toExist();
     });
   });
