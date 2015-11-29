@@ -1,59 +1,86 @@
-if (Meteor.isServer && process.env.IS_MIRROR) {
+/* eslint-disable strict, no-unused-expressions */
+
+Fixtures = {
+  clearDB: function(callback) {
+    Meteor.call('clearDB', callback);
+  },
+  createLecture: function(changes, callback) {
+    Meteor.call('createLecture', changes, callback);
+  },
+  createQuestion: function(changes, callback) {
+    Meteor.call('createQuestion', changes, callback);
+  },
+  createVote: function(changes, callback) {
+    Meteor.call('createVote', changes, callback);
+  },
+  createUser: function(changes, callback) {
+    Meteor.call('createTestUser', changes, callback);
+  }
+};
+
+"use strict";
+
+if (Meteor.isServer) {
   Meteor.methods({
-    'loadFixtures': function(){
-      console.log('Loading default fixtures');
-
-      Lectures.insert({
-        lectureCode: '00000',
-        title: 'OpenSource150904'
-      });
-      Lectures.insert({
-        lectureCode: '00001', 
-        title: 'OpenSource151024'
-      });
-      Lectures.insert({
-        lectureCode: 'sortQuestions',
-        title: 'Questions should sort themselves'
-      });
-      Questions.insert({
-        lectureCode: "00000",
-        questionText: "What is a monolithic kernel?",
-        author: "arrizdwR4Y57H8HFP",
-        submitted: new Date("2015-09-10T14:37:23.036Z")
-      });
-
-      console.log('Finished loading default fixtures');
+    createTestUser: function(changes) {
+      var user, userId;
+      check(changes, Match.Any);
+      user = {
+        _id: '00000000000000000',
+        createdAt: new Date()
+      };
+      _.extend(user, changes);
+      userId = Meteor.users.insert(user);
+      return userId;
     },
 
-    'clearDB': function(){
-      console.log('Clear DB');
+    createLecture: function(changes) {
+      var lecture;
+      check(changes, Match.Any);
+      lecture = {
+        lectureCode: '00000',
+        title: 'Example lecture title',
+        lecturer: '00000000000000000',
+        students: []
+      };
+      _.extend(lecture, changes);
+      App.Lectures.Collection.insert(lecture);
+      return lecture.lectureCode;
+    },
 
-      var collectionsRemoved = 0;
-      var db = Meteor.users.find()._mongo.db;
-      db.collections(function (err, collections) {
+    createQuestion: function(changes) {
+      var question, questionId;
+      check(changes, Match.Any);
+      question = {
+        _id: '00000000000000000',
+        lectureCode: '00000',
+        questionText: 'Example question text',
+        author: '00000000000000000',
+        submited: new Date()
+      };
+      _.extend(question, changes);
+      questionId = App.Questions.Collection.insert(question);
+      return questionId;
+    },
 
-        var appCollections = _.reject(collections, function (col) {
-          return col.collectionName.indexOf('velocity') === 0 ||
-            col.collectionName === 'system.indexes';
-        });
+    createVote: function(changes) {
+      var vote, voteId;
+      check(changes, Match.Any);
+      vote = {
+        _id: '00000000000000000',
+        questionId: '00000000000000000',
+        lectureCode: '00000',
+        author: '00000000000000000'
+      };
+      _.extend(vote, changes);
+      voteId = App.Votes.Collection.insert(vote);
+      return voteId;
+    },
 
-        _.each(appCollections, function (appCollection) {
-          appCollection.remove(function (e) {
-            if (e) {
-              console.error('Failed removing collection', e);
-              fut.return('fail: ' + e);
-            }
-            collectionsRemoved++;
-            console.log('Removed collection');
-            if (appCollections.length === collectionsRemoved) {
-              console.log('Finished resetting database');
-            }
-          });
-        });
-
-      });
-
-      console.log('Finished clearing');
+    clearDB: function() {
+      App.Lectures.Collection.remove({});
+      App.Questions.Collection.remove({});
+      App.Votes.Collection.remove({});
     }
   });
 }

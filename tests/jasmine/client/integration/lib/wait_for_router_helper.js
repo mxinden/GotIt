@@ -1,9 +1,10 @@
+"use strict";
 
-(function (Meteor, Tracker, Router) {
+(function(Meteor, Tracker, Router) {
   var isRouterReady = false;
   var callbacks = [];
 
-  window.waitForRouter = function (callback) {
+  window.waitForRouter = function(callback) {
     if (isRouterReady) {
       callback();
     } else {
@@ -11,24 +12,24 @@
     }
   };
 
-  Router.onAfterAction(function () {
+  Router.onAfterAction(function() {
     if (!isRouterReady && this.ready()) {
-      Tracker.afterFlush(function () {
+      Tracker.afterFlush(function() {
         isRouterReady = true;
-        callbacks.forEach(function (callback) {
+        callbacks.forEach(function(callback) {
           callback();
         });
-        callbacks = []
-      })
+        callbacks = [];
+      });
     }
   });
 
-  Router.onRerun(function () {
+  Router.onRerun(function() {
     isRouterReady = false;
     this.next();
   });
 
-  Router.onStop(function () {
+  Router.onStop(function() {
     isRouterReady = false;
     if (this.next) {
       this.next();

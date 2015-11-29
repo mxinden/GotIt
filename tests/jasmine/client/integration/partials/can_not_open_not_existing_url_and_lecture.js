@@ -1,6 +1,11 @@
-describe("Routing to a not existing url", function() {
+"use strict";
 
-  beforeAll(function() {  
+describe("Routing to a not existing url", function() {
+  beforeAll(function(done) {
+    Fixtures.clearDB(done);
+  });
+
+  beforeAll(function() {
     Router.go('/invalidURL');
   });
 
@@ -13,7 +18,6 @@ describe("Routing to a not existing url", function() {
   it("routes to the notFound template", function() {
     expect($('div#not-found-template')).toExist();
   });
-
 });
 
 describe("Routing to a not existing lecture", function() {

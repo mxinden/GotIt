@@ -1,38 +1,36 @@
+"use strict";
+
+var possibleLecture;
+
 Template.landingPage.events({
 
-  /** Go to lecture page */
-  'submit form': function(e) {
+  'submit form#enter-lecture': function(e) {
+    var lectureCode;
     e.preventDefault();
     lectureCode = $(e.target).find('#lecture-code-input').val();
-    if(possibleLecture(lectureCode)){
+    if (possibleLecture(lectureCode)) {
       Router.go('lecturePage', {lectureCode: lectureCode});
     }
   },
 
-  /** Create new lecture */
-  'click #create-lecture': function (event) {
+  'click #create-lecture': function(event) {
     event.preventDefault();
 
-    Meteor.call('lectureInsert', function(error, result){
-      //Display error
-      if(error)
-        return alert(error.reason);
-
+    Meteor.call('insertLecture', function(error, result) {
       Router.go('lecturePage', {lectureCode: result.lectureCode});
     });
   },
 
   /** Make enter button turn green on right lecture code input */
-  'keyup #lecture-code-input' : function() {
+  'keyup #lecture-code-input': function() {
     var lectureCode = $('#lecture-code-input').val();
     var pLecture = possibleLecture(lectureCode);
-    if(pLecture){
-      $('#btn-enter-class').addClass('btn-success');
-      $('#btn-enter-class').removeClass('disabled');
-    }
-    else {
-      $('#btn-enter-class').removeClass('btn-success');
-      $('#btn-enter-class').addClass('disabled');
+    if (pLecture) {
+      $('#btn-enter-lecture').addClass('btn-success');
+      $('#btn-enter-lecture').removeClass('disabled');
+    } else {
+      $('#btn-enter-lecture').removeClass('btn-success');
+      $('#btn-enter-lecture').addClass('disabled');
     }
   }
 
@@ -45,6 +43,6 @@ Template.landingPage.rendered = function() {
 };
 
 /** Check weather a lecture with this lecture code exists in the Lectures collection */
-var possibleLecture = function(lectureCode) { 
-  return Lectures.findOne({lectureCode: lectureCode});
+possibleLecture = function(lectureCode) {
+  return App.Lectures.Collection.findOne({lectureCode: lectureCode});
 };

@@ -1,51 +1,59 @@
+"use strict";
+
 Template.question.helpers({
   votedByMe: function() {
-    return Votes.findOne({
+    return App.Votes.Collection.findOne({
       author: Meteor.userId(),
-      questionId: this._id,
+      questionId: this._id
     }) !== undefined;
   },
 
   numberOfVotes: function() {
-    return Votes.find({
+    return App.Votes.Collection.find({
       questionId: this._id
     }).count();
   },
 
-  numberMembers: function() {
-   return getNumberOfMembersInLecture(this.lectureCode);
+  numberOfStudentsInLecture: function() {
+    return App.Lectures.getNumberOfStudents(this.lectureCode);
   },
 
-  /** Return percentage of users in the current classroom who have voted on this question */ 
-  percentageUserVote: function() {
-    var questionCount = Votes.find({questionId: this._id}).count();
-    var memberCount = getNumberOfMembersInLecture(this.lectureCode);
-    var percent = (questionCount / memberCount) * 100;
+  percentageOfUsersWhoVoted: function() {
+    var questionCount = App.Votes.Collection.find({questionId: this._id}).count();
+    var studentCount = App.Lectures.getNumberOfStudents(this.lectureCode);
+    var percent;
+
+    if (studentCount === 0) {
+      return 0;
+    }
+
+    percent = questionCount / studentCount * 100;
     return Math.round(percent);
+  },
+
+  isLecturer: function() {
+    return App.Lectures.isLecturer(this.lectureCode);
   }
 });
 
 Template.question.events({
-  /** Vote a question */
-  'click .btn-vote': function () {
+  'click .btn-vote': function() {
     var vote = {
       questionId: this._id,
       lectureCode: this.lectureCode
     };
 
-    Meteor.call('voteInsert', vote, function(error, result){
-      /** Display error */
-      if(error)
-        return alert(error.reason);
-    });
+    Meteor.call('insertVote', vote);
   },
 
-  /** Unvote a question */
-  'click .btn-unvote': function () {
-    Meteor.call('voteDelete', this._id, function(error, result){
-      /** Display error */
-      if(error)
-        return alert(error.reason);
-    });
+  'click .btn-unvote': function() {
+    Meteor.call('deleteVote', this._id);
+  },
+
+  'click .btn-delete-question': function() {
+    var lectureCode = this.lectureCode;
+    var questionId = this._id;
+
+    Meteor.call('deleteQuestion', lectureCode, questionId);
   }
 });

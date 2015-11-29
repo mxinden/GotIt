@@ -1,20 +1,20 @@
+"use strict";
+
 Meteor.publish('lecture', function(lectureCode) {
-  return Lectures.find({lectureCode: lectureCode});
+  check(lectureCode, String);
+  return App.Lectures.Collection.find({lectureCode: lectureCode});
 });
 
 Meteor.publish('lecturesOnlyLectureCode', function() {
-  return Lectures.find({}, {lectureCode: 1});
+  return App.Lectures.Collection.find({}, {fields: {lectureCode: 1}});
 });
 
 Meteor.publish('questions', function(lectureCode) {
-  return Questions.find({lectureCode: lectureCode});
+  check(lectureCode, String);
+  return App.Questions.Collection.find({lectureCode: lectureCode});
 });
 
 Meteor.publish('votes', function(lectureCode) {
-  return Votes.find({lectureCode: lectureCode});
-});
-
-/** Publish which user is present in the current lecture */
-Meteor.publish('presences', function(lectureCode) {
-  return Presences.find({'state.currentLectureCode': lectureCode});
+  check(lectureCode, String);
+  return App.Votes.Collection.find({lectureCode: lectureCode});
 });

@@ -1,36 +1,42 @@
+"use strict";
+
 Template.lecturePageFooter.events({
 
-  /** Create new question */
-  'submit form': function (event) {
+  'submit form#create-question': function(event) {
     var lectureCode = this.lectureCode;
-    var question = {
-      lectureCode: lectureCode,
-      questionText: $(event.target).find('#question-text').val()
-    };
+    var questionText = $(event.target).find('#question-text').val();
 
     event.preventDefault();
 
-    if(question.questionText.replace(/\s/g, '') == ""){
+    if (questionText.replace(/\s/g, '') === "") {
       return;
     }
 
-    Meteor.call('questionInsertAddVote', question, function(error, result){
-      if(error)
-        return alert(error);
-    });
+    Meteor.call('insertQuestion', lectureCode, questionText, function(error, result) {
+      var vote;
+      var questionId = result;
 
+      if (App.Lectures.isLecturer(lectureCode)) {
+        return;
+      }
+
+      vote = {
+        questionId: questionId,
+        lectureCode: lectureCode
+      };
+
+      Meteor.call('insertVote', vote);
+    });
     event.target.reset();
   },
 
-
-  'keyup #question-text' : function() {
+  'keyup #question-text': function() {
     var questionText = $('#question-text').val();
 
-    if(questionText.replace(/\s/g, '') == ""){
-      $('#create-question').addClass('disabled');
-    }
-    else {
-      $('#create-question').removeClass('disabled');
+    if (questionText.replace(/\s/g, '') === "") {
+      $('#btn-create-question').addClass('disabled');
+    } else {
+      $('#btn-create-question').removeClass('disabled');
     }
   }
 

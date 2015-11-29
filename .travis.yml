@@ -9,4 +9,7 @@ before_script:
     - export DISPLAY=:99.0
     - sh -e /etc/init.d/xvfb start
 script:
-    - meteor --test --release velocity:METEOR@1.1.0.2_2
+    - meteor --test
+
+after_script:
+    - tail .meteor/local/log/jasmine-client-integration.log

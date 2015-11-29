@@ -1,9 +1,10 @@
 <template name="landingPage">
   <div class="site-wrapper" id="landing-page">
     <nav class="navbar navbar-fixed-top" id="landing-page-header">
+      <a class="fa fa-github navbar-right hidden-xs" id="btn-github" href="https://github.com/minden/GotIt"> </a>
       <div class="container">
         <img alt="Brand" class="pull-left" id="application-logo" src="logo/logo.png">
-        <button class="btn btn-warning pull-right" id="create-lecture">Create Classroom</button>
+        <button class="btn btn-warning pull-right" id="create-lecture">Create Lecture</button>
       </div>
     </nav>
 
@@ -12,12 +13,12 @@
         <div class="row">
           <div id="enter-form-group" class="col-xs-offset-1 col-xs-10 col-sm-offset-0 col-sm-4 col-sm-push-7 col-md-offset-0 col-md-3 col-md-push-7">
             <h1>Got it?!</h1>
-            <form>
+            <form id="enter-lecture">
               <div class="form-group">
-                <input class="form-control text-center" id="lecture-code-input" placeholder="Classroom Code" required autofocus autocomplete="off">
+                <input class="form-control text-center" id="lecture-code-input" placeholder="Lecture Code" required autofocus autocomplete="off">
               </div>
               <div class="form-group">
-                <button id="btn-enter-class" class="btn btn-primary form-control disabled" type="submit">Enter Class</button>
+                <button id="btn-enter-lecture" class="btn btn-primary form-control disabled" type="submit">Enter Lecture</button>
               </div>
             </form>
           </div>
@@ -39,5 +40,6 @@
         </div>
       </div>
     </div>
+    {{> landingPageLegalFooter}}
   </div>
 </template>

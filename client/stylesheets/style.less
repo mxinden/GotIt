@@ -1,4 +1,5 @@
 @background-color: #fafafb;
+@gotit-orange: #ec971f;
 
 html, body {
   height: 100%;
@@ -27,8 +28,20 @@ body {
     width: 125px;
     margin-top: 7px;
   }
-}
 
+  #btn-github {
+    color: #FFF;
+    background-color: transparent;
+    border: 0;
+    font-size: 40px;
+    margin-top: 6px;
+    margin-right: 10px;
+    margin-left: 10px;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
 
 /**
  *-----------------------------------------------------------------------------
@@ -79,10 +92,19 @@ body {
       border-radius: 5px;
     }
 
-    #btn-enter-class.disabled {
+    #btn-enter-lecture.disabled {
       opacity: 1;
       background-color: #969696;
       border-color: #969696;
+    }
+  }
+
+  #landing-page-legal-footer {
+    min-height: 25px;
+    a {
+      color: grey;
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
 }
@@ -93,17 +115,132 @@ body {
  * Lecture page
  *-----------------------------------------------------------------------------
  */
+
 #lecture-page {
   @minimum-width: 300px;
   min-width: @minimum-width;
 
   #lecture-page-header {
+    min-width: @minimum-width;
+
+    h4 {
+      color: #fff;
+      margin-top: 15px;
+    }
+
+    #title-input {
+      font-weight: bold;
+      margin-top: 7px;
+      text-align: center;
+    }
+
+    #title {
+      &.changeable:hover {
+        cursor: pointer;
+      }
+    }
+
     #back-button {
       background-color: transparent;
       border: 0;
       color: #FFF;
       font-size: 40px;
       margin-top: 3px;
+    }
+
+    #col-github-logo {
+      padding-right: 0;
+    }
+
+    #col-angle-left {
+      padding-left: 0;
+    }
+
+    #col-show-lecture-code {
+      text-align: center;
+
+      &.enabled {
+        background-color: @gotit-orange;
+      }
+    }
+
+    #navbar-glyphicon-barcode {
+      color: #fff;
+      margin: 12px auto;
+    }
+  }
+
+  .question {
+    border: 1px solid #edeeee;
+    position: relative;
+
+    &.animate{
+      -webkit-transition: all 300ms 0ms;
+      -moz-transition: all 300ms 0ms ease-in;
+      -o-transition: all 300ms 0ms ease-in;
+      transition: all 300ms 0ms ease-in;
+    }
+
+    .panel-body {
+      padding: 8px 8px 8px 8px;
+
+      .container-fluid {
+        padding-right: 0px;
+        padding-left: 0px;
+
+        .question-text {
+          margin-bottom: 0px;
+          padding: 7px;
+        }
+
+        .votes-badge {
+          font-size: 15px;
+          position: absolute;
+          right: -15px;
+          top: -9px;
+          z-index: 999;
+        }
+
+        @media (max-width: 768px) {
+          .col-vote-button {
+            padding: 0;
+            margin-top: 6px;
+          }
+        }
+      }
+    }
+
+    .progress {
+      margin-bottom: 0px;
+      border-top-left-radius: 0px;
+      -moz-border-top-left-radius: 0px;
+      -webkit-border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+      -moz-border-top-right-radius: 0px;
+      -webkit-border-top-right-radius: 0px;
+    }
+  }
+
+  #lecture-page-navbar-lecture-code {
+    background-color: @gotit-orange;
+    color: #fff;
+    margin: auto 0;
+
+    .container {
+      min-width: @minimum-width;
+
+      .col-xs-12 {
+        span {
+          vertical-align: middle;
+          color: #fff;
+          line-height: 47px;
+        }
+
+        #glyphicon-barcode-inline {
+          margin: 0 8px;
+          vertical-align: middle;
+        }
+      }
     }
   }
 
@@ -126,56 +263,5 @@ body {
       }
     }
 
-    .question {
-      border: 1px solid #edeeee;
-      position: relative;
-
-      .panel-body {
-        padding: 8px 8px 8px 8px;
-
-        .container-fluid {
-          padding-right: 0px;
-          padding-left: 0px;
-
-          .question-text {
-            margin-bottom: 0px;
-            padding: 7px;
-          }
-
-          .votes-badge {
-            font-size: 15px;
-            position: absolute;
-            right: 2px;
-            top: -5px;
-            z-index: 999;
-          }
-
-          @media (max-width: 768px) {
-            .col-vote-button {
-              padding: 0;
-              margin-top: 6px;
-            }
-          }
-        }
-      }
-
-      .progress {
-        margin-bottom: 0px;
-        border-top-left-radius: 0px;
-        -moz-border-top-left-radius: 0px;
-        -webkit-border-top-left-radius: 0px;
-        border-top-right-radius: 0px;
-        -moz-border-top-right-radius: 0px;
-        -webkit-border-top-right-radius: 0px;
-
-      }
-
-      .question.animate{
-        -webkit-transition: all 300ms 0ms;
-        -moz-transition: all 300ms 0ms ease-in;
-        -o-transition: all 300ms 0ms ease-in;
-        transition: all 300ms 0ms ease-in;
-      }
-    }
   }
 }
