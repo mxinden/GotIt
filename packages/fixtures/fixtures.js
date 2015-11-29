@@ -23,8 +23,9 @@ Fixtures = {
 if (Meteor.isServer) {
   Meteor.methods({
     createTestUser: function(changes) {
-      var userId;
-      var user = {
+      var user, userId;
+      check(changes, Match.Any);
+      user = {
         _id: '00000000000000000',
         createdAt: new Date()
       };
@@ -34,7 +35,9 @@ if (Meteor.isServer) {
     },
 
     createLecture: function(changes) {
-      var lecture = {
+      var lecture;
+      check(changes, Match.Any);
+      lecture = {
         lectureCode: '00000',
         title: 'Example lecture title',
         lecturer: '00000000000000000',
@@ -46,8 +49,9 @@ if (Meteor.isServer) {
     },
 
     createQuestion: function(changes) {
-      var questionId;
-      var question = {
+      var question, questionId;
+      check(changes, Match.Any);
+      question = {
         _id: '00000000000000000',
         lectureCode: '00000',
         questionText: 'Example question text',
@@ -60,8 +64,9 @@ if (Meteor.isServer) {
     },
 
     createVote: function(changes) {
-      var voteId;
-      var vote = {
+      var vote, voteId;
+      check(changes, Match.Any);
+      vote = {
         _id: '00000000000000000',
         questionId: '00000000000000000',
         lectureCode: '00000',

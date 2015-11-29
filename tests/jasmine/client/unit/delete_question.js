@@ -36,7 +36,7 @@ describe("deleteQuestion", function() {
 
     beforeAll(function(done) {
       amountQuestionsBefore = App.Questions.Collection.find().count();
-      Meteor.call('deleteQuestion', question, function(error) {
+      Meteor.call('deleteQuestion', question.lectureCode, question.questionId, function(error) {
         callError = error;
         done();
       });
@@ -90,7 +90,7 @@ describe("deleteQuestion", function() {
     });
 
     beforeAll(function(done) {
-      Meteor.call('deleteQuestion', question, function(error) {
+      Meteor.call('deleteQuestion', question.lectureCode, question.questionId, function(error) {
         callError = error;
         done();
       });
