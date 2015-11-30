@@ -139,11 +139,11 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    factoryWomanInsert: function(collectionName, attr) {
-      return FactoryWoman._collections[collectionName].insert(attr);
+    factoryWomanInsert: function(collection_name, attr) {
+      return FactoryWoman._collections[collection_name].insert(attr);
     },
-    factoryWomanUpdate: function(id, collectionName, attr) {
-      return FactoryWoman._collections[collectionName].update({_id: id}, {$set: attr});
+    factoryWomanUpdate: function(id, collection_name, attr) {
+      return FactoryWoman._collections[collection_name].update({_id: id}, {$set: attr});
     }
   });
 }
