@@ -6,7 +6,8 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.2');
   api.use(['underscore', 'lai:collection-extensions']);
-  api.addFiles('factorywoman.js');
+  api.addFiles(['client/factorywoman.js', 'client/factoryclosure.js', 'client/factory.js'], 'client');
+  api.addFiles(['server/factorywoman.js'], 'server');
   api.export('FactoryWoman');
 });
 
