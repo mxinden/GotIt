@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 if (Meteor.isClient) {
   var Factory, FactoryClosure;
@@ -9,7 +9,7 @@ if (Meteor.isClient) {
       new FactoryClosure(func, callback, func_count);
     },
     create: function(name, changes, traits) {
-      // this refering to a FactoryClosure object
+      // 'this' refering to a FactoryClosure object
       var self = this;
       var result, factory;
 
