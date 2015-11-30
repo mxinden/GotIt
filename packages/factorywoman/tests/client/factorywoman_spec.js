@@ -83,9 +83,11 @@ describe('FactoryWoman', function() {
   });
 
   describe('traits', function() {
+    var userObject;
+
     beforeEach(function(done) {
       FactoryWoman.begin(function() {
-        this.create('user1', {}, 'with animals');
+        userObject = this.create('user1', {}, 'with animals');
       }, done, 1);
     });
 
@@ -111,6 +113,34 @@ describe('FactoryWoman', function() {
       expect(user.animals[0]._id).toEqual(animal1._id);
       expect(user.animals[1]._id).toEqual(animal2._id);
       expect(user.animals[0].weight).toEqual(317);
+    });
+
+    it('returns the correct object directly', function() {
+      var user = User.findOne({name: 'Chuck'});
+      var animal1 = Animal.findOne({type: 'Lion'});
+      var animal2 = Animal.findOne({type: 'Turkey'});
+
+      expect(userObject).toEqual({
+        _id: user._id,
+        name: 'Chuck',
+        lastName: 'Testa',
+        city: 'Ojai Valley',
+        animals:
+        [
+          {
+            _id: animal1._id,
+            type: 'Lion',
+            weight: 317,
+            owner: user._id
+          },
+          {
+            _id: animal2._id,
+            type: 'Turkey',
+            weight: 4,
+            owner: user._id
+          }
+        ]
+      });
     });
   });
 });
