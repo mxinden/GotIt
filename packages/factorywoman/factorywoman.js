@@ -15,8 +15,7 @@ if (Meteor.isClient) {
 
       factory = FactoryWoman._factories[name];
       if (factory === undefined) {
-        console.error('Factory ' + name + ' is not defined.');
-        return;
+        throw new Error('Factory ' + name + ' is not defined.');
       }
 
       result = _.clone(factory._attr);
@@ -24,9 +23,8 @@ if (Meteor.isClient) {
 
       Meteor.call('factoryWomanInsert', factory._collection, result, function(error, insertResult) {
         if (error) {
-          console.error('Error creating factory ' + name + '.');
           self._counter++;
-          return;
+          throw new Error('Error creating factory ' + name + '.');
         }
 
         result._id = insertResult;
@@ -61,7 +59,7 @@ if (Meteor.isClient) {
         this._factories[name] = factory;
       } else {
         factory = new Factory('', {});
-        console.error('Factory ' + name + ' already defined.');
+        throw new Error('Factory ' + name + ' already defined.');
       }
 
       return factory;
@@ -102,7 +100,7 @@ if (Meteor.isClient) {
         this._trait_counter++;
         Meteor.call('factoryWomanUpdate', obj.result._id, obj.collection, obj.attr, function(error) {
           if (error)
-            console.error('Error updating trait');
+            throw new Error('Error updating trait');
 
           _.extend(obj.result, obj.attr);
           self._trait_counter--;
@@ -128,7 +126,7 @@ if (Meteor.isClient) {
     if (this._traits[name] === undefined)
       this._traits[name] = func;
     else
-      console.error('Trait ' + name + ' already defined.');
+      throw new Error('Trait ' + name + ' already defined.');
 
     return this;
   };
