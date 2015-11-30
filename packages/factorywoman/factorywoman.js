@@ -1,124 +1,148 @@
+"use strict";
+
 if (Meteor.isClient) {
-  var Factories, Factory;
+  var Factory, FactoryClosure;
 
-  Factories = function() {
-    this._factories = {};
-    this._createCalls = 0;
-    this._running = false;
-    this._done = null;
-  };
+  FactoryWoman = {
+    self: this,
 
-  Factories.prototype.begin = function(func, done) {
-    if (this._running)
-      return console.error('Another begin block of FactoryWoman is already running.');
+    _factories: {},
+    begin: function(func, callback, func_count) {
+      new FactoryClosure(func, callback, func_count);
+    },
+    create: function(name, changes, traits) {
+      var result, factory;
 
-    this._createCalls = 0;
-    this._running = true;
-    this._done = done;
+      factory = FactoryWoman._factories[name];
+      if (factory === undefined) {
+        console.error('Factory ' + name + ' is not defined.');
+        return;
+      }
 
-    func();
-  };
+      result = factory._attr;
+      result._id = null;
+      _.extend(result, changes);
 
-  Factories.prototype._factoryExists = function(name) {
-    return this._factories[name] !== undefined;
-  };
+      Meteor.call('factoryWomanInsert', factory._collection, factory._attr, function(error, result) {
+        if (error) {
+          console.error('Error creating factory ' + name + '.');
+          this._counter++;
+          return;
+        }
 
-  Factories.prototype._checkIfDone = function() {
-    if (this._createCalls <= 0) {
-      this._running = false;
-      this._done();
+        result._id = result;
+
+        if (traits === undefined)
+          return;
+        else if (typeof traits === 'string')
+          traits = [traits];
+
+        _.each(traits, function(trait) {
+          // this refering to a FactoryClosure object
+          this._stack.push({
+            collection: factory._collection,
+            attr: result
+          });
+          _.extend(result, trait.call(this, result));
+        });
+
+        // this refering to a FactoryClosure object
+        this._counter++;
+      });
+
+      return result;
+    },
+    define: function(name, collection, attr) {
+      var factory;
+
+      if (this._factories[name] === undefined) {
+        factory = new Factory(collection, attr);
+        this._factories[name] = factory;
+      } else {
+        factory = new Factory('', {});
+        console.error('Factory ' + name + ' already defined.');
+      }
+
+      return factory;
     }
   };
 
-  Factories.prototype.define = function(name, collection, attr) {
-    if (this._factories[name])
-      return console.error('Factory ' + name + ' already exists.');
-
-    this._factories[name] = new Factory(name, collection, attr);
-    return this._factories[name];
-  };
-
-  Factories.prototype.create = function(name, changes) {
+  FactoryClosure = function(func, callback, func_count) {
     var self = this;
-    var result = {_id: undefined};
-    var factory = this._factories[name];
-    var traits = [];
-    var attr;
 
-    if (!factory)
-      return console.error('Factory ' + name + ' does not exist.');
+    this._callback = callback;
+    this._func_count = func_count;
+    this._counter = 0;
+    this._trait_counter = 0;
+    this._stack = [];
+    this._interval = setInterval(function() {
+      self.closureWorker();
+    }, 50);
 
-    for (var i = 2; i < arguments.length; i++)
-      traits.push(arguments[i]);
-
-    attr = _.clone(factory._attr);
-    attr = _.extend(attr, changes);
-    result = _.extend(result, attr);
-
-    this._createCalls++;
-    Meteor.call('factoryInsert', factory._collection, attr, function(error, insertResult) {
-      result._id = insertResult;
-
-      _.each(traits, function(trait) {
-        if (!factory._traitExists(trait))
-          return console.error('Trait ' + trait + ' does not exist.');
-
-        _.extend(result, factory._traits[trait](result));
-
-        self._createCalls++;
-        Meteor.call('factoryUpdate', insertResult, factory._collection, result, function() {
-          self._createCalls--;
-          self._checkIfDone();
-        });
-      });
-      self._createCalls--;
-      self._checkIfDone();
-    });
-
-    return result;
+    func.call(this);
   };
 
-  FactoryWoman = new Factories();
+  FactoryClosure.prototype.create = function(name, changes, traits) {
+    FactoryWoman.create.call(this, name, changes, traits);
+  };
 
-  Factory = function(name, collection, attr) {
-    this._name = name;
+  FactoryClosure.prototype.closureWorker = function() {
+    if (this._counter === this._func_count) {
+      // we got all functions running, time to check the stack
+      if (this._stack.length > 0) {
+        var obj = this._stack.pop();
+
+        if (obj.attr._id === undefined) {
+          this._stack.push(obj);
+          return;
+        }
+
+        this._trait_counter++;
+        Meteor.call('factoryWomanUpdate', obj.attr._id, obj.collection, obj.attr, function(error) {
+          if (error)
+            console.error('Error updating trait');
+
+          this._trait_counter--;
+        });
+      }
+    }
+
+    if ((this._counter === this._func_count) && (this._trait_counter === 0) && (this._stack === [])) {
+      clearInterval(this._interval);
+      this._callback();
+    };
+  };
+
+  Factory = function(collection, attr) {
     this._collection = collection;
     this._attr = attr;
     this._traits = {};
   };
 
-  Factory.prototype._traitExists = function(name) {
-    return this._traits[name] !== undefined;
-  };
-
   Factory.prototype.trait = function(name, func) {
-    if (this._traitExists(name)) {
-      console.error('Trait ' + name + ' already exists.');
-      return this;
-    }
+    if (this._traits[name] === undefined)
+      this._traits[name] = func;
+    else
+      console.error('Trait ' + name + ' already defined.');
 
-    this._traits[name] = func;
     return this;
   };
-
 };
 
 if (Meteor.isServer) {
-  var Factories = function() {
-    this._collections = {};
+  FactoryWoman = {
+    _collections: {}
   };
-
-  FactoryWoman = new Factories();
 
   Meteor.addCollectionExtension(function(collection) {
     FactoryWoman._collections[collection._name] = collection;
   });
 
   Meteor.methods({
-    factoryInsert: function(collectionName, attr) {
+    factoryWomanInsert: function(collectionName, attr) {
       return FactoryWoman._collections[collectionName].insert(attr);
     },
-    factoryUpdate: function(id, collectionName, attr) {
+    factoryWomanUpdate: function(id, collectionName, attr) {
       return FactoryWoman._collections[collectionName].update({_id: id}, {$set: attr});
     }
   });
