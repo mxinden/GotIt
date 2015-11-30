@@ -6,8 +6,8 @@ describe('FactoryWoman', function() {
   }).trait('with animals', function(user) {
     return {
       animals: [
-        FactoryWoman.create('animal1', {owner: user._id}, 'special lion'),
-        FactoryWoman.create('animal2', {owner: user._id})
+        this.create('animal1', {owner: user._id}, 'special lion'),
+        this.create('animal2', {owner: user._id})
       ]
     };
   });
@@ -35,8 +35,8 @@ describe('FactoryWoman', function() {
   describe('basic functionality', function() {
     beforeEach(function(done) {
       FactoryWoman.begin(function() {
-        FactoryWoman.create('user1');
-      }, done);
+        this.create('user1');
+      }, done, 1);
     });
 
     it('inserts data in the database', function() {
@@ -58,12 +58,12 @@ describe('FactoryWoman', function() {
   describe('changing default values', function() {
     beforeEach(function(done) {
       FactoryWoman.begin(function() {
-        FactoryWoman.create('user1', {
+        this.create('user1', {
           city: 'Nopetown',
           zip: '48149',
           age: 55
         });
-      }, done);
+      }, done, 1);
     });
 
     it('overwrites existing values', function() {
@@ -85,8 +85,8 @@ describe('FactoryWoman', function() {
   describe('traits', function() {
     beforeEach(function(done) {
       FactoryWoman.begin(function() {
-        FactoryWoman.create('user1', {}, 'with animals');
-      }, done);
+        this.create('user1', {}, 'with animals');
+      }, done, 1);
     });
 
     it('handles the trait', function() {
@@ -99,9 +99,7 @@ describe('FactoryWoman', function() {
       expect(animal2).toBeDefined();
     });
 
-    xit('properly handles sub traits', function() {
-      // Pending
-      // TODO Make this spec work
+    it('properly handles sub traits', function() {
       var user = User.findOne({name: 'Chuck'});
       var animal1 = Animal.findOne({type: 'Lion'});
       var animal2 = Animal.findOne({type: 'Turkey'});
