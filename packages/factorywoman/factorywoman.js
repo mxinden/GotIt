@@ -5,8 +5,8 @@ if (Meteor.isClient) {
 
   FactoryWoman = {
     _factories: {},
-    begin: function(func, callback, func_count) {
-      new FactoryClosure(func, callback, func_count);
+    begin: function(func, callback, funcCount) {
+      new FactoryClosure(func, callback, funcCount);
     },
     create: function(name, changes, traits) {
       // 'this' refering to a FactoryClosure object
@@ -66,13 +66,13 @@ if (Meteor.isClient) {
     }
   };
 
-  FactoryClosure = function(func, callback, func_count) {
+  FactoryClosure = function(func, callback, funcCount) {
     var self = this;
 
     this._callback = callback;
-    this._func_count = func_count;
+    this._funcCount = funcCount;
     this._counter = 0;
-    this._trait_counter = 0;
+    this._traitCounter = 0;
     this._stack = [];
     this._interval = setInterval(function() {
       self.closureWorker();
@@ -87,7 +87,7 @@ if (Meteor.isClient) {
 
   FactoryClosure.prototype.closureWorker = function() {
     var self = this;
-    if (this._counter >= this._func_count) {
+    if (this._counter >= this._funcCount) {
       // we got all functions running, time to check the stack
       if (this._stack.length > 0) {
         var obj = this._stack.pop();
@@ -97,19 +97,19 @@ if (Meteor.isClient) {
           return;
         }
 
-        this._trait_counter++;
+        this._traitCounter++;
         Meteor.call('factoryWomanUpdate', obj.result._id, obj.collection, obj.attr, function(error) {
           if (error)
             throw new Error('Error updating trait');
 
           _.extend(obj.result, obj.attr);
-          self._trait_counter--;
+          self._traitCounter--;
         });
       }
     }
 
-    if ((this._counter >= this._func_count)
-        && (this._trait_counter === 0)
+    if ((this._counter >= this._funcCount)
+        && (this._traitCounter === 0)
         && (this._stack.length === 0)) {
       clearInterval(this._interval);
       this._callback();
@@ -142,11 +142,11 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    factoryWomanInsert: function(collection_name, attr) {
-      return FactoryWoman._collections[collection_name].insert(attr);
+    factoryWomanInsert: function(collectionName, attr) {
+      return FactoryWoman._collections[collectionName].insert(attr);
     },
-    factoryWomanUpdate: function(id, collection_name, attr) {
-      return FactoryWoman._collections[collection_name].update({_id: id}, {$set: attr});
+    factoryWomanUpdate: function(id, collectionName, attr) {
+      return FactoryWoman._collections[collectionName].update({_id: id}, {$set: attr});
     }
   });
 }
