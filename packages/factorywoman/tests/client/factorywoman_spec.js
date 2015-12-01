@@ -5,10 +5,15 @@ describe('FactoryWoman', function() {
     city: 'Ojai Valley'
   }).trait('with animals', function(user) {
     return {
-      animals: [
+      animals:
+      [
         this.create('animal1', {owner: user._id}, 'special lion'),
         this.create('animal2', {owner: user._id})
       ]
+    };
+  }).trait('with hungry animal', function(user) {
+    return {
+      animals: [this.create('animal1', {owner: user._id}, ['special lion', 'hungry lion'])]
     };
   });
 
@@ -18,7 +23,11 @@ describe('FactoryWoman', function() {
   }).trait('special lion', function(lion) {
     return {
       weight: lion.weight + 50
-    }
+    };
+  }).trait('hungry lion', function(lion) {
+    return {
+      food: this.create('animal2')
+    };
   });
 
   FactoryWoman.define('animal2', 'animals', {
@@ -128,7 +137,53 @@ describe('FactoryWoman', function() {
       expect(animal2).toBeDefined();
     });
 
-    it('properly handles sub traits', function() {
+    it('properly handles nested traits', function() {
+      var user = User.findOne({name: 'Chuck'});
+
+      sharedExample(user);
+    });
+
+    it('returns the correct object directly', function() {
+      sharedExample(userObject);
+    });
+  });
+
+  describe('nested traits with create', function() {
+    var userObject;
+    var sharedExample = function(arg) {
+      var user = User.findOne({name: 'Chuck'});
+      var animal1 = Animal.findOne({type: 'Lion'});
+      var animal2 = Animal.findOne({type: 'Turkey'});
+
+      expect(arg).toEqual({
+        _id: user._id,
+        name: 'Chuck',
+        lastName: 'Testa',
+        city: 'Ojai Valley',
+        animals:
+        [
+          {
+            _id: animal1._id,
+            type: 'Lion',
+            weight: 317,
+            owner: user._id,
+            food: {
+              _id: animal2._id,
+              type: 'Turkey',
+              weight: 4
+            }
+          }
+        ],
+      });
+    };
+
+    beforeEach(function(done) {
+      FactoryWoman.begin(function() {
+        userObject = this.create('user1', {}, 'with hungry animal');
+      }, done, 1);
+    });
+
+    it('properly handles nested traits', function() {
       var user = User.findOne({name: 'Chuck'});
 
       sharedExample(user);
