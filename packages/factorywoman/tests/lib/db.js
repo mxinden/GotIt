@@ -3,11 +3,9 @@ Animals = new Meteor.Collection('animals');
 
 'use strict';
 
-if (Meteor.isServer) {
-  Meteor.methods({
-    resetDatabase: function() {
-      User.remove({});
-      Animal.remove({});
-    }
-  });
-}
+Meteor.methods({
+  resetDatabase: function() {
+    Users.remove({});
+    Animals.remove({});
+  }
+});
