@@ -84,43 +84,12 @@ describe('FactoryWoman', function() {
 
   describe('traits', function() {
     var userObject;
-
-    beforeEach(function(done) {
-      FactoryWoman.begin(function() {
-        userObject = this.create('user1', {}, 'with animals');
-      }, done, 1);
-    });
-
-    it('handles the trait', function() {
+    var sharedExample = function(arg) {
       var user = User.findOne({name: 'Chuck'});
       var animal1 = Animal.findOne({type: 'Lion'});
       var animal2 = Animal.findOne({type: 'Turkey'});
 
-      expect(user).toBeDefined();
-      expect(animal1).toBeDefined();
-      expect(animal2).toBeDefined();
-    });
-
-    it('properly handles sub traits', function() {
-      var user = User.findOne({name: 'Chuck'});
-      var animal1 = Animal.findOne({type: 'Lion'});
-      var animal2 = Animal.findOne({type: 'Turkey'});
-
-      expect(user.animals).toBeDefined();
-      expect(user.animals.length).toEqual(2);
-      expect(user.animals[0].type).toEqual('Lion');
-      expect(user.animals[1].type).toEqual('Turkey');
-      expect(user.animals[0]._id).toEqual(animal1._id);
-      expect(user.animals[1]._id).toEqual(animal2._id);
-      expect(user.animals[0].weight).toEqual(317);
-    });
-
-    it('returns the correct object directly', function() {
-      var user = User.findOne({name: 'Chuck'});
-      var animal1 = Animal.findOne({type: 'Lion'});
-      var animal2 = Animal.findOne({type: 'Turkey'});
-
-      expect(userObject).toEqual({
+      expect(arg).toEqual({
         _id: user._id,
         name: 'Chuck',
         lastName: 'Testa',
@@ -141,6 +110,32 @@ describe('FactoryWoman', function() {
           }
         ]
       });
+    };
+
+    beforeEach(function(done) {
+      FactoryWoman.begin(function() {
+        userObject = this.create('user1', {}, 'with animals');
+      }, done, 1);
+    });
+
+    it('handles the trait', function() {
+      var user = User.findOne({name: 'Chuck'});
+      var animal1 = Animal.findOne({type: 'Lion'});
+      var animal2 = Animal.findOne({type: 'Turkey'});
+
+      expect(user).toBeDefined();
+      expect(animal1).toBeDefined();
+      expect(animal2).toBeDefined();
+    });
+
+    it('properly handles sub traits', function() {
+      var user = User.findOne({name: 'Chuck'});
+
+      sharedExample(user);
+    });
+
+    it('returns the correct object directly', function() {
+      sharedExample(userObject);
     });
   });
 });
