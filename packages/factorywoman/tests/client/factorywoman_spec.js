@@ -37,6 +37,11 @@ describe('FactoryWoman', function() {
     weight: 4
   });
 
+  beforeAll(function() {
+    Meteor.subscribe('users');
+    Meteor.subscribe('animals');
+  });
+
   beforeEach(function(done) {
     Meteor.call('resetDatabase', function() {
       done();
