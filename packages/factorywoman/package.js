@@ -12,7 +12,7 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use(['sanjo:jasmine@0.18.0', 'lai:collection-extensions', 'factorywoman']);
+  api.use(['sanjo:jasmine@0.18.0', 'factorywoman']);
   api.addFiles('tests/client/factorywoman_spec.js', 'client');
   api.addFiles('tests/lib/db.js', ['client', 'server']);
 });
