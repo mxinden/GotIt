@@ -51,7 +51,7 @@ describe('FactoryWoman', function() {
     });
 
     it('inserts data in the database', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       expect(user).toBeDefined();
       expect(user.name).toEqual('Chuck');
@@ -60,7 +60,7 @@ describe('FactoryWoman', function() {
     });
 
     it('includes the returned id of the set of data', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       expect(user._id).toBeDefined();
     });
@@ -78,7 +78,7 @@ describe('FactoryWoman', function() {
     });
 
     it('overwrites existing values', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       expect(user.name).toEqual('Chuck');
       expect(user.lastName).toEqual('Testa');
@@ -86,7 +86,7 @@ describe('FactoryWoman', function() {
     });
 
     it('adds new values', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       expect(user.zip).toEqual('48149');
       expect(user.age).toEqual(55);
@@ -96,9 +96,9 @@ describe('FactoryWoman', function() {
   describe('traits', function() {
     var userObject;
     var sharedExample = function(arg) {
-      var user = User.findOne({name: 'Chuck'});
-      var animal1 = Animal.findOne({type: 'Lion'});
-      var animal2 = Animal.findOne({type: 'Turkey'});
+      var user = Users.findOne({name: 'Chuck'});
+      var animal1 = Animals.findOne({type: 'Lion'});
+      var animal2 = Animals.findOne({type: 'Turkey'});
 
       expect(arg).toEqual({
         _id: user._id,
@@ -130,9 +130,9 @@ describe('FactoryWoman', function() {
     });
 
     it('handles the trait', function() {
-      var user = User.findOne({name: 'Chuck'});
-      var animal1 = Animal.findOne({type: 'Lion'});
-      var animal2 = Animal.findOne({type: 'Turkey'});
+      var user = Users.findOne({name: 'Chuck'});
+      var animal1 = Animals.findOne({type: 'Lion'});
+      var animal2 = Animals.findOne({type: 'Turkey'});
 
       expect(user).toBeDefined();
       expect(animal1).toBeDefined();
@@ -140,7 +140,7 @@ describe('FactoryWoman', function() {
     });
 
     it('properly handles nested traits', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       sharedExample(user);
     });
@@ -153,9 +153,9 @@ describe('FactoryWoman', function() {
   describe('nested traits with create', function() {
     var userObject;
     var sharedExample = function(arg) {
-      var user = User.findOne({name: 'Chuck'});
-      var animal1 = Animal.findOne({type: 'Lion'});
-      var animal2 = Animal.findOne({type: 'Turkey'});
+      var user = Users.findOne({name: 'Chuck'});
+      var animal1 = Animals.findOne({type: 'Lion'});
+      var animal2 = Animals.findOne({type: 'Turkey'});
 
       expect(arg).toEqual({
         _id: user._id,
@@ -186,7 +186,7 @@ describe('FactoryWoman', function() {
     });
 
     it('properly handles nested traits', function() {
-      var user = User.findOne({name: 'Chuck'});
+      var user = Users.findOne({name: 'Chuck'});
 
       sharedExample(user);
     });

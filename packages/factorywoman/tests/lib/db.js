@@ -1,5 +1,5 @@
-User = new Meteor.Collection('users');
-Animal = new Meteor.Collection('animals');
+Users = new Meteor.Collection('users');
+Animals = new Meteor.Collection('animals');
 
 'use strict';
 
