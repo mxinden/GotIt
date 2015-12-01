@@ -181,7 +181,7 @@ describe('FactoryWoman', function() {
     beforeEach(function(done) {
       FactoryWoman.begin(function() {
         userObject = this.create('user1', {}, 'with hungry animal');
-      }, done, 1);
+      }, done, 3);
     });
 
     it('properly handles nested traits', function() {

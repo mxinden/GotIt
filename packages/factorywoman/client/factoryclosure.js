@@ -22,11 +22,13 @@ FactoryClosure.prototype.create = function(name, changes, traits) {
 };
 
 FactoryClosure.prototype.closureWorker = function() {
+  var obj;
   var self = this;
+
   if (this._counter >= this._funcCount) {
     // we got all functions running, time to check the stack
     if (this._stack.length > 0) {
-      var obj = this._stack.pop();
+      obj = this._stack.pop();
 
       if (obj.result._id === undefined) {
         this._stack.push(obj);
