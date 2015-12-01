@@ -14,22 +14,16 @@ describe('FactoryWoman', function() {
       ]
     };
   }).trait('with hungry animal', function(user) {
-    return {
-      animals: [this.create('lion', {owner: user._id}, ['special lion', 'hungry lion'])]
-    };
+    return {animals: [this.create('lion', {owner: user._id}, ['special lion', 'hungry lion'])]};
   });
 
   FactoryWoman.define('lion', 'animals', {
     type: 'Lion',
     weight: 267
   }).trait('special lion', function(lion) {
-    return {
-      weight: lion.weight + 50
-    };
+    return {weight: lion.weight + 50};
   }).trait('hungry lion', function(lion) {
-    return {
-      food: this.create('turkey')
-    };
+    return {food: this.create('turkey')};
   });
 
   FactoryWoman.define('turkey', 'animals', {
