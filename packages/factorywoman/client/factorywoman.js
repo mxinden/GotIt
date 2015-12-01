@@ -34,9 +34,8 @@ FactoryWoman = {
         traits = [traits];
 
       _.each(traits, function(trait) {
-        var traitReturn;
+        var traitReturn = factory._traits[trait].call(self, result);
 
-        traitReturn = factory._traits[trait].call(self, result);
         _.extend(result, traitReturn);
         self._stack.push({
           collection: factory._collection,
