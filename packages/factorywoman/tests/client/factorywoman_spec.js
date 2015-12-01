@@ -9,17 +9,17 @@ describe('FactoryWoman', function() {
     return {
       animals:
       [
-        this.create('animal1', {owner: user._id}, 'special lion'),
-        this.create('animal2', {owner: user._id})
+        this.create('lion', {owner: user._id}, 'special lion'),
+        this.create('turkey', {owner: user._id})
       ]
     };
   }).trait('with hungry animal', function(user) {
     return {
-      animals: [this.create('animal1', {owner: user._id}, ['special lion', 'hungry lion'])]
+      animals: [this.create('lion', {owner: user._id}, ['special lion', 'hungry lion'])]
     };
   });
 
-  FactoryWoman.define('animal1', 'animals', {
+  FactoryWoman.define('lion', 'animals', {
     type: 'Lion',
     weight: 267
   }).trait('special lion', function(lion) {
@@ -28,11 +28,11 @@ describe('FactoryWoman', function() {
     };
   }).trait('hungry lion', function(lion) {
     return {
-      food: this.create('animal2')
+      food: this.create('turkey')
     };
   });
 
-  FactoryWoman.define('animal2', 'animals', {
+  FactoryWoman.define('turkey', 'animals', {
     type: 'Turkey',
     weight: 4
   });
@@ -102,8 +102,8 @@ describe('FactoryWoman', function() {
     var userObject;
     var sharedExample = function(arg) {
       var user = Users.findOne({name: 'Chuck'});
-      var animal1 = Animals.findOne({type: 'Lion'});
-      var animal2 = Animals.findOne({type: 'Turkey'});
+      var lion = Animals.findOne({type: 'Lion'});
+      var turkey = Animals.findOne({type: 'Turkey'});
 
       expect(arg).toEqual({
         _id: user._id,
@@ -113,13 +113,13 @@ describe('FactoryWoman', function() {
         animals:
         [
           {
-            _id: animal1._id,
+            _id: lion._id,
             type: 'Lion',
             weight: 317,
             owner: user._id
           },
           {
-            _id: animal2._id,
+            _id: turkey._id,
             type: 'Turkey',
             weight: 4,
             owner: user._id
@@ -136,12 +136,12 @@ describe('FactoryWoman', function() {
 
     it('handles the trait', function() {
       var user = Users.findOne({name: 'Chuck'});
-      var animal1 = Animals.findOne({type: 'Lion'});
-      var animal2 = Animals.findOne({type: 'Turkey'});
+      var lion = Animals.findOne({type: 'Lion'});
+      var turkey = Animals.findOne({type: 'Turkey'});
 
       expect(user).toBeDefined();
-      expect(animal1).toBeDefined();
-      expect(animal2).toBeDefined();
+      expect(lion).toBeDefined();
+      expect(turkey).toBeDefined();
     });
 
     it('properly handles nested traits', function() {
@@ -159,8 +159,8 @@ describe('FactoryWoman', function() {
     var userObject;
     var sharedExample = function(arg) {
       var user = Users.findOne({name: 'Chuck'});
-      var animal1 = Animals.findOne({type: 'Lion'});
-      var animal2 = Animals.findOne({type: 'Turkey'});
+      var lion = Animals.findOne({type: 'Lion'});
+      var turkey = Animals.findOne({type: 'Turkey'});
 
       expect(arg).toEqual({
         _id: user._id,
@@ -170,12 +170,12 @@ describe('FactoryWoman', function() {
         animals:
         [
           {
-            _id: animal1._id,
+            _id: lion._id,
             type: 'Lion',
             weight: 317,
             owner: user._id,
             food: {
-              _id: animal2._id,
+              _id: turkey._id,
               type: 'Turkey',
               weight: 4
             }
