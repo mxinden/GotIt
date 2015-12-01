@@ -1,3 +1,7 @@
+FactoryClosure = {};
+
+'use strict';
+
 FactoryClosure = function(func, callback, funcCount) {
   var self = this;
 

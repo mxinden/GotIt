@@ -1,3 +1,7 @@
+FactoryWoman = {};
+
+'use strict';
+
 FactoryWoman = {
   _collections: {}
 };

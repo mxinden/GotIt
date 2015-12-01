@@ -1,3 +1,7 @@
+FactoryWoman = {};
+
+'use strict';
+
 FactoryWoman = {
   _factories: {},
   begin: function(func, callback, funcCount) {

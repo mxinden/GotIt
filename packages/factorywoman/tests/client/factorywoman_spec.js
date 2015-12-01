@@ -1,3 +1,5 @@
+'use strict';
+
 describe('FactoryWoman', function() {
   FactoryWoman.define('user1', 'users', {
     name: 'Chuck',

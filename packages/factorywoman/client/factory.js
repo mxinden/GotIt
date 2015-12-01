@@ -1,3 +1,7 @@
+Factory = {};
+
+'use strict';
+
 Factory = function(collection, attr) {
   this._collection = collection;
   this._attr = attr;
